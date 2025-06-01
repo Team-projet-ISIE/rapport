@@ -1,0 +1,13 @@
+[package]
+name = "lib"
+version = "1.0.0"
+entrypoint = "lib.typ"
+authors = ["Guilhem Fauré"]
+license = "GPL-3.0-only"
+description = "My simple Typst components"
+homepage = "https://gitlab.com/gfauredev/typst-lib"
+repository = "https://gitlab.com/gfauredev/typst-lib"
+keywords = ["library", "simple"]
+categories = ["components"]
+disciplines = []
+compiler = "0.12.0"

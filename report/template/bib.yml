@@ -1,0 +1,22 @@
+typst-doc:
+  type: reference
+  language: en
+  title: Typst documentation
+  author: Typst team
+  url: https://typst.app/docs
+  date: 2024-03-18
+
+typst-univ:
+  type: reference
+  language: en
+  title: Typst Universe
+  author: Typst community
+  url: https://typst.app/universe
+
+lorem-wiki:
+  type: reference
+  language: en
+  title: Lorem ipsum Wikipedia page
+  author: Wikipedia
+  url: https://en.wikipedia.org/wiki/Lorem_ipsum
+  date: 2024-03-18

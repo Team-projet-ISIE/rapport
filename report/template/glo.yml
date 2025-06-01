@@ -1,0 +1,19 @@
+- key: lorem
+  short: lorem ipsum
+  description: Random latin text to test layout
+
+- key: typst
+  short: Typst
+  description: An amazing, modern typesetting system
+
+- key: glossarium
+  short: Glossarium
+  long: manage glossaries
+
+- key: codly
+  short: Codly
+  long: present code
+
+- key: fletcher
+  short: Fletcher
+  long: draw diagrams

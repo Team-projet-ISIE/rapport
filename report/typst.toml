@@ -1,0 +1,18 @@
+[package]
+name = "report"
+version = "0.0.0"
+entrypoint = "report.typ"
+authors = ["Guilhem Fauré"]
+license = "GPL-3.0-only"
+description = "My simple template for reports"
+homepage = "https://gitlab.com/gfauredev/typst-report"
+repository = "https://gitlab.com/gfauredev/typst-report"
+keywords = ["report", "simple"]
+categories = ["report", "office", "professional", "academic"]
+disciplines = []
+compiler = "0.13.0"
+
+[template]
+path = "template"
+entrypoint = "report.typ"
+thumbnail = "thumbnail.webp"
