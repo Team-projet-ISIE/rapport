@@ -53,7 +53,7 @@
 #register-glossary(yaml("glo.yml")) // Initialise le glossaire
 // LTeX: enabled=true // Réactive la correction orthographique
 
-Introduction, résumé…
+Résumé…
 
 = Exemples Typst
 
@@ -93,3 +93,119 @@ Référence glossaire @typst et bibliographie @typst-doc (définitions dans fich
   pagebreak(weak: true)
   bibliography("bib.yml") // Typst’s bibliography
 })
+
+= Introduction
+
+== Contexte général
+
+== Problématiques à résoudre
+
+== Objectifs du projet
+
+== Plan
+
+= Analyse Fonctionnelle et Cahier des Charges
+
+== Analyse du besoin
+
+Bête à cornes, matrice MOSCOW.
+
+== Schémas fonctionnels
+
+SFN1, SF1D, SF2D…
+
+== Description des fonctions
+
+== Description des signaux
+
+== Cahier des Charges Fonctionnel ?
+
+== Performances attendues ?
+
+== Contraintes
+
+= Étude de l'Existant et Veille Technologique
+
+== Solutions existantes
+
+== Veille technologique
+
+== Capteurs
+
+== Microcontrôleurs
+
+== Actionneurs
+
+== Protocoles de communication
+
+= Conception du Système
+
+== Architecture globale
+
+Schéma bloc
+
+== Conception matérielle
+
+Hard
+
+=== Choix des composants
+
+=== Schéma électronique
+
+=== Conception du circuit imprimé
+
+== Conception logicielle
+
+Soft
+
+=== Algorithme de régulation
+
+=== Logique de programmation temporelle
+
+=== Architecture logicielle
+
+=== Interface Homme-Machine
+
+= Réalisation et Intégration
+
+== Prototypage
+
+== Développement du code
+
+== Intégration
+
+= Test et Validation
+
+== Protocoles de test
+
+=== Tests unitaires
+
+Test fonctions code
+
+=== Test d’intégration
+
+Test de l’ensemble du système
+
+=== Test de performance
+
+Efficacité
+
+== Résultats
+
+== Analyse et Interprétation
+
+= Conclusion
+
+== Bilan
+
+== Synthèse des résultats
+
+== Perspectives et améliorations futures
+
+#heading(numbering: none)[Annexes]
+
+Code source.
+
+Datasheets ?
+
+…
