@@ -55,6 +55,9 @@
 
 Résumé…
 
+#toc() // Table des matières
+#tof() // Table des figures (et tableaux et codes)
+
 = Exemples Typst
 
 #fig(image("polytech.png", width: 50%))[Une figure avec légende]
@@ -85,14 +88,6 @@ Référence glossaire @typst et bibliographie @typst-doc (définitions dans fich
     plot.add(((0, 0), (3, 3), (6, 1.5), (12, 9)))
   })
 }))[Légende du graphique]
-
-// Glossaire et Bibliographie
-#fullpage({
-  align(center, text(font: meta.sans, 2em, weight: "bold", i18n("glossary")))
-  print-glossary(yaml("glo.yml")) // Glossarium glossary
-  pagebreak(weak: true)
-  bibliography("bib.yml") // Typst’s bibliography
-})
 
 = Introduction
 
@@ -209,3 +204,11 @@ Code source.
 Datasheets ?
 
 …
+
+// Glossaire et Bibliographie
+#fullpage({
+  heading(numbering: none, i18n("glossary"))
+  print-glossary(yaml("glo.yml")) // Glossarium glossary
+  pagebreak(weak: true)
+  bibliography("bib.yml") // Typst’s bibliography
+})
