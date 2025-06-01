@@ -50,10 +50,11 @@
 // })
 
 #show: make-glossary // Initialise le glossaire
-#register-glossary(yaml("glo.yml")) // Initialise le glossaire
+// Initialise le glossaire (nécessaire dans chaque fichier)
+#register-glossary(yaml("glo.yml"))
 // LTeX: enabled=true // Réactive la correction orthographique
 
-Résumé…
+#include "./0abstract.typ"
 
 #toc() // Table des matières
 #tof() // Table des figures (et tableaux et codes)
@@ -89,121 +90,21 @@ Référence glossaire @typst et bibliographie @typst-doc (définitions dans fich
   })
 }))[Légende du graphique]
 
-= Introduction
+#include "./1intro.typ"
 
-== Contexte général
+#include "./2analyse.typ"
 
-== Problématiques à résoudre
+#include "./3etude.typ"
 
-== Objectifs du projet
+#include "./4conception.typ"
 
-== Plan
+#include "./5realisation.typ"
 
-= Analyse Fonctionnelle et Cahier des Charges
+#include "./6test.typ"
 
-== Analyse du besoin
+#include "./7conclusion.typ"
 
-Bête à cornes, matrice MOSCOW.
-
-== Schémas fonctionnels
-
-SFN1, SF1D, SF2D…
-
-== Description des fonctions
-
-== Description des signaux
-
-== Cahier des Charges Fonctionnel ?
-
-== Performances attendues ?
-
-== Contraintes
-
-= Étude de l'Existant et Veille Technologique
-
-== Solutions existantes
-
-== Veille technologique
-
-== Capteurs
-
-== Microcontrôleurs
-
-== Actionneurs
-
-== Protocoles de communication
-
-= Conception du Système
-
-== Architecture globale
-
-Schéma bloc
-
-== Conception matérielle
-
-Hard
-
-=== Choix des composants
-
-=== Schéma électronique
-
-=== Conception du circuit imprimé
-
-== Conception logicielle
-
-Soft
-
-=== Algorithme de régulation
-
-=== Logique de programmation temporelle
-
-=== Architecture logicielle
-
-=== Interface Homme-Machine
-
-= Réalisation et Intégration
-
-== Prototypage
-
-== Développement du code
-
-== Intégration
-
-= Test et Validation
-
-== Protocoles de test
-
-=== Tests unitaires
-
-Test fonctions code
-
-=== Test d’intégration
-
-Test de l’ensemble du système
-
-=== Test de performance
-
-Efficacité
-
-== Résultats
-
-== Analyse et Interprétation
-
-= Conclusion
-
-== Bilan
-
-== Synthèse des résultats
-
-== Perspectives et améliorations futures
-
-#heading(numbering: none)[Annexes]
-
-Code source.
-
-Datasheets ?
-
-…
+#include "./8annexes.typ"
 
 // Glossaire et Bibliographie
 #fullpage({
