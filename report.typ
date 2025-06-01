@@ -1,21 +1,23 @@
+// LTeX: enabled=false // Désactive la correction orthographique
 #import "report/report.typ": * // Import all report symbols
 // Set global metadata (merge with default one) and apply template
 // @typstyle off // Ugly dict addition formatting
 #let meta = default_meta + (
-  lang: "fr",
+  lang: "fr", // Français
   titles: (
-    [Projet déclencheur d’aération],
+    [Projet électronique 3A],
+    [Déclencheur d’aération sur commande en température],
     [Informatique et Systèmes Intelligents Embarqués par apprentissage],
   ),
-  date: date(), // Set date of the document to today
+  authors: ("Fankam Jisèle", "Fauré Guilhem", ),
+  date: date(2025, 6, 12), // Date de la soutenance
 )
 #show: template.with(
-  meta, // Global metadata
+  meta, // Métadonnées (paramètres)
 )
+#let accent = "#009EE0" // Bleu du logo Polytech, peut être utile
 
-#let accent = "#009EE0" // TODO apply color (h1, h2, table headers…)
-
-// Title (and cover) pages
+// Page de titre
 #fullpage({
   set image(height: 6em)
   set par(justify: false)
@@ -39,66 +41,55 @@
   })
   v(1fr)
   info()
-  // coll[
-  //   #meta.authors.at(0)
-  //   / Promotion : 2024 - 2027
-  // ][
-  //   / Entreprise: ...
-  //   / Tuteur universitaire: ...
-  //   / Tuteur professionnel: ...
-  // ]
 })
-// #fullpage([]) // Empty page
+// #fullpage([]) // Page vide
+// Page de remerciements ?
+// #fullpage({
+//   heading(numbering: none, level: 2, i18n("thanks"))
+//   [Nous remercions…]
+// })
 
-#show: make-glossary // Initialise glossary
-#register-glossary(yaml("glo.yml")) // Initialise glossary
+#show: make-glossary // Initialise le glossaire
+#register-glossary(yaml("glo.yml")) // Initialise le glossaire
+// LTeX: enabled=true // Réactive la correction orthographique
 
-#lorem(50)
+Introduction, résumé…
 
-= Rapport d’électronique
+= Exemples Typst
 
-#coll(lorem(42), fig(image("polytech.png", width: 50%))[Une figure])
+#fig(image("polytech.png", width: 50%))[Une figure avec légende]
 
-== Liens
-
-#link("https://gitlab.com/gfauredev/typst-lib")[Dépôt GitLab].
-
-Documentation @typst @typst-doc.
-
-== Un #strike[tableau]
+#link("https://gitlab.com/gfauredev/typst-lib")[Lien] du dépôt GitLab.
 
 #fig(table(
-  columns: 3, // Number of columns
-  table.header[*#lorem(3)*][*#lorem(4)*][*#lorem(2)*], // Columns headers
-  [#lorem(8)], [#lorem(4)], [], // First row
-  [#lorem(6)], none, [#lorem(8)], // Second row
-  [#lorem(5)], [#lorem(4)], [Great table isn’t it ?], // Third row
-))[A #lorem(2) table]
+  columns: 2,
+  table.header[Un][tableau],
+  [Gras], [*gras*],
+  [Italique], [_italique_],
+  [Barré], strike[texte],
+))[Légende]
 
-== Bloc de code
+Référence glossaire @typst et bibliographie @typst-doc (définitions dans fichier YAML).
 
 #fig()[```Python
   my_string = """
-  Hello, world !
-  My Python is better than yours.
+    Bloc de code (Python)
   """
   for i in range(42):
       print("{} - Hello, world !".format(i))
   ```][Python]
 
-== Un graphique
-
-#align(center, cetz.canvas({
+#fig(cetz.canvas({
   import cetz.draw: *
   plot.plot(size: (6, 6), x-tick-step: none, y-tick-step: none, {
     plot.add(((0, 0), (3, 3), (6, 1.5), (12, 9)))
   })
-}))
+}))[Légende du graphique]
 
-// Glossary and bibliography without header and footer
+// Glossaire et Bibliographie
 #fullpage({
   align(center, text(font: meta.sans, 2em, weight: "bold", i18n("glossary")))
   print-glossary(yaml("glo.yml")) // Glossarium glossary
-  pagebreak(weak: true) // TODO Fit them in one page if possible
+  pagebreak(weak: true)
   bibliography("bib.yml") // Typst’s bibliography
 })
