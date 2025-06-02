@@ -67,13 +67,14 @@
 
 #fig(table(
   columns: 2,
-  table.header[Un][tableau],
+  table.header([Un], [tableau]),
   [Gras], [*gras*],
   [Italique], [_italique_],
   [Barré], strike[texte],
 ))[Légende]
 
-Référence glossaire @typst et bibliographie @typst-doc (définitions dans fichier YAML).
+Référence glossaire @typst et bibliographie @typst-doc (définitions dans fichier
+YAML).
 
 #fig()[```Python
   my_string = """
