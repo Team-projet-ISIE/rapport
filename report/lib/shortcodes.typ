@@ -1,3 +1,4 @@
+// LTeX: enabled=false // Désactive la correction orthographique
 // Simple two collumns layout
 #let coll(cols: (1fr, 1fr), col1, col2) = {
   grid(columns: cols, col1, col2, gutter: .5em)
