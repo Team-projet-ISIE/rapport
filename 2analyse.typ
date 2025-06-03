@@ -31,57 +31,42 @@ surface, tous nos composants sont sélectionnés montables en trou-traversant (o
 connectables tel qu’en Grove). Cela sera d’autant plus simple pour tester sur
 breadboard.
 
+#set page(flipped: true)
+
 == Matrice MOSCOW (portée du projet)
 
-#figure(
-  align(center)[#table(
-      columns: (50%, 50%),
-      align: (auto, auto),
-      table.header(
-        table.cell(align: center)[#strong[Must (à faire absolument, objectifs de
-            la v1.0.0)];],
-        table.cell(align: center)[#strong[Should (devrait être fait, objectifs
-            de sous-versions v1.x.x)];],
-      ),
-      table.hline(),
-      [
-        - Mode hiver (chauffage)~: Aérer si la pièce cible est plus froide que
-          la pièce de référence
-
-        - Mode été (refroidissement)~: Aérer si la pièce cible est plus chaude
-          que la pièce de référence
-
-        - Choix entre un des deux modes ci-dessous avec un commutateur physique
-
-      ],
-      [
-        - Fonctionnement sur batterie du module ne pilotant pas l’aérateur
-
-      ],
-      table.cell(align: center)[#strong[Could (pourrait être fait, objectifs de
-          versions majeures ultérieures)];],
-      table.cell(align: center)[#strong[Wont (ne va pas être fait, hors
-          sujet)];],
-      [
-        - Affichage de la température actuelle de la pièce cible
-
-        - Affichage de la température actuelle de la pièce de référence
-
-        - Réglage de la température seuil par l’utilisateur
-
-      ],
-      [
-        - Compatibilité avec les standards de domotique, intégrations dans des
-          systèmes domotiques plus larges
-
-        - Fonctionnement avec plus de deux modules, deux pièces
-
-      ],
-    )],
-  kind: table,
-)
-
-#set page(flipped: true)
+#figure(align(center)[#table(
+    columns: (50%, 50%),
+    align: (left, left),
+    table.header(
+      align(center, strong[Must (à faire absolument, objectifs de la v1.0.0)]),
+      align(center, strong[Should (devrait être fait, objectifs de sous-versions
+        v1.x.x)]),
+    ),
+    [
+      - Mode hiver (chauffage)~: Aérer si la pièce cible est plus froide que la
+        pièce de référence
+      - Mode été (refroidissement)~: Aérer si la pièce cible est plus chaude que
+        la pièce de référence
+      - Choix entre un des deux modes ci-dessous avec un commutateur physique
+    ],
+    [
+      - Fonctionnement sur batterie du module ne pilotant pas l’aérateur
+    ],
+    table.cell(align: center, strong[Could (pourrait être fait, objectifs de
+      versions majeures ultérieures)]),
+    table.cell(align: center, strong[Wont (ne va pas être fait, hors sujet)]),
+    [
+      - Affichage de la température actuelle de la pièce cible
+      - Affichage de la température actuelle de la pièce de référence
+      - Réglage de la température seuil par l’utilisateur
+    ],
+    [
+      - Compatibilité avec les standards de domotique, intégrations dans des
+        systèmes domotiques plus larges
+      - Fonctionnement avec plus de deux modules, deux pièces
+    ],
+  )])
 
 == Schéma Fonctionnel de Premier Degré
 
