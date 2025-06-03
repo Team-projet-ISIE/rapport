@@ -1,3 +1,4 @@
+#import "report/report.typ": * // Import all report symbols
 #show figure: set block(breakable: true)
 
 = Analyse Fonctionnelle et Cahier des Charges
@@ -33,279 +34,248 @@ breadboard.
 
 #set page(flipped: true)
 
-== Matrice MOSCOW (portée du projet)
+== Analyse du besoin
 
-#figure(align(center)[#table(
-    columns: (50%, 50%),
-    align: (left, left),
-    table.header(
-      align(center, strong[Must (à faire absolument, objectifs de la v1.0.0)]),
-      align(center, strong[Should (devrait être fait, objectifs de sous-versions
-        v1.x.x)]),
-    ),
-    [
-      - Mode hiver (chauffage)~: Aérer si la pièce cible est plus froide que la
-        pièce de référence
-      - Mode été (refroidissement)~: Aérer si la pièce cible est plus chaude que
-        la pièce de référence
-      - Choix entre un des deux modes ci-dessous avec un commutateur physique
-    ],
-    [
-      - Fonctionnement sur batterie du module ne pilotant pas l’aérateur
-    ],
-    table.cell(align: center, strong[Could (pourrait être fait, objectifs de
-      versions majeures ultérieures)]),
-    table.cell(align: center, strong[Wont (ne va pas être fait, hors sujet)]),
-    [
-      - Affichage de la température actuelle de la pièce cible
-      - Affichage de la température actuelle de la pièce de référence
-      - Réglage de la température seuil par l’utilisateur
-    ],
-    [
-      - Compatibilité avec les standards de domotique, intégrations dans des
-        systèmes domotiques plus larges
-      - Fonctionnement avec plus de deux modules, deux pièces
-    ],
-  )])
+=== Bête à cornes
 
-== Schéma Fonctionnel de Premier Degré
+=== Matrice MOSCOW // Portée du projet
+
+#fig(table(
+  columns: 2,
+  align: (left, left),
+  table.header(
+    align(center, strong[Must (à faire absolument, objectifs de la v1.0.0)]),
+    align(center, strong[Should ( objectifs de sous-versions v1.x.x)]),
+  ),
+  [
+    - Mode hiver (chauffage)~: Aérer si la pièce cible est plus froide que la
+      pièce de référence
+    - Mode été (refroidissement)~: Aérer si la pièce cible est plus chaude que
+      la pièce de référence
+    - Choix entre un des deux modes ci-dessous avec un commutateur physique
+  ],
+  [
+    - Fonctionnement sur batterie du module ne pilotant pas l’aérateur
+  ],
+  table.cell(align: center, strong[Could (objectifs de versions majeures
+    ultérieures)]),
+  table.cell(align: center, strong[Wont (ne va pas être fait, hors sujet)]),
+  [
+    - Affichage de la température actuelle de la pièce cible
+    - Affichage de la température actuelle de la pièce de référence
+    - Réglage de la température seuil par l’utilisateur
+  ],
+  [
+    - Compatibilité avec les standards de domotique, intégrations dans des
+      systèmes domotiques plus larges
+    - Fonctionnement avec plus de deux modules, deux pièces
+  ],
+))[Première matrice MOSCOW]
+
+#pagebreak()
+
+== Schémas fonctionnels
+
+=== Niveau 1 (SFN1)
+
+=== Premier degré (SF1D)
 
 Schéma.
+
+=== Second degré (SF2D)
+
+#pagebreak()
 
 == Description des fonctions et références de composants
 
 === Fonctions Principales
 
-#figure(
-  align(center)[#table(
-      columns: (18%, 28.79%, 53.21%),
-      align: (auto, auto, auto),
-      table.header(
-        [Fonction Principale 0],
-        [Traitements numériques côté référence],
-        [Microcontrôleur 16~bit, trou traversant, basse consommation],
-      ),
-      table.hline(),
-      [Description / rôle],
-      table.cell(colspan: 2)[Déclencher ou stopper l’aération si les conditions
-        sont réunies, selon les données rapportées par le module côté cible et
-        la température de la pièce référence.],
-      [Références envisagées],
-      table.cell(colspan: 2)[
-        - PIC24FJ256GA702-I/SP 28 broches #link(
-            "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24FJ256GA702-I-SP/6562000",
-          )[chez DigiKey];.
+#fig(
+  table(
+    columns: 3,
+    align: (center + horizon, left),
+    table.header(
+      [*Fonction Principale 0*],
+      [*Traitements numériques côté référence*],
+      [*Microcontrôleur 16~bit, trou traversant,\ basse consommation*],
+    ),
+    [Description / rôle],
+    table.cell(colspan: 2)[Déclencher ou stopper l’aération si les conditions
+      sont réunies, selon les données rapportées par le module côté cible et la
+      température de la pièce référence.],
+    [Références envisagées],
+    table.cell(colspan: 2)[
+      - PIC24FJ256GA702-I/SP 28 broches #link(
+          "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24FJ256GA702-I-SP/6562000",
+        )[chez DigiKey];.
+      - PIC24F08KL301-I/P-ND 20 broches #link(
+          "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24F08KL301-I-P/2835112ç",
+        )[chez DigiKey];.
+      - PIC24F04KL100-I/P #link(
+          "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24F04KL100-I-P/2835099",
+        )[chez DigiKey];.
+      - PIC24F04KL100-I/P #link(
+          "https://www.mouser.fr/ProductDetail/Microchip-Technology/PIC24F04KL100-I-P?qs=%252Bg1Dl%2FaibpHsewcuwRJLng%3D%3D",
+        )[chez Mouser];.
+      - Références PIC24 #link(
+          "https://www.digikey.fr/fr/products/filter/embarqués/microcontrôleurs/685?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9CYOHUQgUkDDgLEyIAAzNJIALQU5CpXkIlI5AExwArOv2Fz5qzUb3HNGiFdW45rYR2%2B0PJQ-ACuKqbkVlraMHICACZcOmDqEGyckCCeIOwAnqy4XOjYKOLiQA",
+        )[chez DigiKey];.
+      - Références PIC24 #link(
+          "https://www.mouser.fr/c/semiconductors/embedded-processors-controllers/microcontrollers-mcu/16-bit-microcontrollers-mcu/?core=PIC24E~~PIC24H&mounting%20style=Through%20Hole&active=y&rp=semiconductors%2Fembedded-processors-controllers%2Fmicrocontrollers-mcu%2F16-bit-microcontrollers-mcu|~Core|~Mounting%20Style",
+        )[chez Mouser];.
+      - Références #link(
+          "https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/16-bit-mcus/pic24f-ga",
+        )[PIC24F GA] et #link(
+          "https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/16-bit-mcus/pic24f-gu-gl-gp",
+        )[PIC24 GU/GP] site Microchip.
+    ],
+    [Signaux d’entrée],
+    table.cell(colspan: 2)[
+      - TempRef
+      - RxRF
+    ],
+    [Signaux de sortie],
+    table.cell(colspan: 2)[
+      - TxRF
+      - CmdAeration
+    ],
+  ),
+)[FP0]
 
-        - PIC24F08KL301-I/P-ND 20 broches #link(
-            "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24F08KL301-I-P/2835112ç",
-          )[chez DigiKey];.
+#fig(table(
+  columns: 3,
+  align: (center + horizon, left),
+  table.header(
+    [*Fonction Principale 1*],
+    [*Traitements numériques côté cible*],
+    [*Microcontrôleur 16~bit, trou traversant, basse consommation*],
+  ),
+  [Description / rôle],
+  table.cell(colspan: 2)[Réceptionner la température de la pièce cible et le
+    choix du mode par l’utilisateur, piloter l’émission sans-fil de ces
+    informations vers le module côté référence.],
+  [Références envisagées],
+  table.cell(colspan: 2)[
+    - Pour l’instant les références sont les mêmes que pour la Fonction
+      Principale 1
+  ],
+  [Signaux d\'entrée],
+  table.cell(colspan: 2)[
+    - TempCib
+    - Mode
+    - RxRF
+  ],
+  [Signaux de sortie],
+  table.cell(colspan: 2)[
+    - TxRF
+  ],
+))[FP1]
 
-        - PIC24F04KL100-I/P #link(
-            "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24F04KL100-I-P/2835099",
-          )[chez DigiKey];.
+#fig(
+  table(
+    columns: 3,
+    align: (center + horizon, left),
+    table.header(
+      [*Fonction Principale 2*],
+      [*Captage température*],
+      [*Capteur de température, minimum capté ⩽ −~10~°C, maximum capté ⩾
+        50~°C*],
+    ),
+    [Description / rôle],
+    table.cell(colspan: 2)[Capter la température des pièces (référence qui est
+      climatisée et cible pour la comparer).],
+    [Références envisagées],
+    table.cell(colspan: 2)[
+      - Gravity AHC20 #link(
+          "https://www.mouser.fr/ProductDetail/DFRobot/SEN0528?qs=Jm2GQyTW%2FbgFUSAl1tK%252BEQ%3D%3D",
+        )[chez Mouser] (+ humidité).
+      - Seeed DHT22 #link(
+          "https://www.digikey.fr/fr/products/detail/seeed-technology-co-ltd/101020932/14552870",
+        )[chez DigiKey] (+ humidité).
+      - TC74A0-3.3VAT-ND #link(
+          "https://www.digikey.fr/fr/products/detail/microchip-technology/TC74A0-3-3VAT/442720",
+        )[chez DigiKey];.
+      - Références avec humidité #link(
+          "https://www.digikey.fr/fr/products/filter/capteurs-d-humidité/529?s=N4IgjCBcoCwdIDGUBmBDANgZwKYBoQB7KAbRAGYBWANgE4wAOEAgdkoCZywZmQ324tXgwAM7SjGogAugQAOAFyggAygoBOASwB2AcxABfAnSihkkdNnxFSIOI1osZ8pZFUad%2Bo%2BFoMhCc0tcAmJIMhEZAyigA",
+        )[chez DigiKey];.
+      - Références avec humidité chez #link(
+          "https://www.mouser.fr/c/embedded-solutions/sensor-modules/multiple-function-sensor-modules/?interface%20type=I2C~~I2C%2C%20SPI|~I2C%2C%20UART|~UART&type=Barometer%2C%20Humidity%20Sensor%20and%20Temperature%20Sensor|~CO2%2C%20Humidity%2C%20and%20Temperature%20Sensor~~CO2%2C%20Temperature%20and%20Humidity%20Sensor|~Data%20Logger%2C%20Accelerometer%2C%20Magnetometer%2C%20Humidity%2C%20Temperature%2C%20Pressure%2C%20Microphone%2C%20UV%20and%20Light%20Sensor|~Gas%2C%20Humidity%2C%20Pressure%2C%20Temperature|~Humidity%2C%20Light%2C%20Magnetic%20Flux%2C%20Temperature~~Humidity%20and%20Temperature%20Sensor|~Motion%2C%20Light%2C%20Temperature%2C%20Humidity~~Motion%2C%20Light%2C%20Temperature%2C%20Humidity%2C%20Sound&active=y&rp=embedded-solutions%2Fsensor-modules%2Fmultiple-function-sensor-modules|~Interface%20Type|~Type",
+        )[Mouser];.
+      - Références #link(
+          "https://www.digikey.fr/fr/products/filter/capteurs-de-température/sortie-analogique-et-numérique/518?s=N4IgjCBcoCwdIDGUBmBDANgZwKYBoQB7KAbRAA4AGAJkoGYYQCrqBWGOpim%2B1ru1gDYAnGHJcA7K2oxKfAlOp0wjZjzri1bGIwC6BAA4AXKCADKRgE4BLAHYBzEAF8CIqKGSR02fEVIg4MWEJEH0QY1MLGwdnAjBhcmF3JFRMXAJiSDJKUKc8oA",
+        )[chez DigiKey];.
+      - Références #link(
+          "https://www.seeedstudio.com/Grove-AHT20-I2C-Industrial-grade-temperature-and-humidity-sensor-p-4497.html",
+        )[Grove] Seeed Studio.
+    ],
+    [Signaux d’entrée],
+    table.cell(colspan: 2)[
+      - Température ambiante de la pièce (référence/cible)
+    ],
+    [Signaux de sortie],
+    table.cell(colspan: 2)[
+      - TempRef / TempCib
+    ],
+  ),
+)[FP2]
 
-        - PIC24F04KL100-I/P #link(
-            "https://www.mouser.fr/ProductDetail/Microchip-Technology/PIC24F04KL100-I-P?qs=%252Bg1Dl%2FaibpHsewcuwRJLng%3D%3D",
-          )[chez Mouser];.
-
-        - Références PIC24 #link(
-            "https://www.digikey.fr/fr/products/filter/embarqués/microcontrôleurs/685?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9CYOHUQgUkDDgLEyIAAzNJIALQU5CpXkIlI5AExwArOv2Fz5qzUb3HNGiFdW45rYR2%2B0PJQ-ACuKqbkVlraMHICACZcOmDqEGyckCCeIOwAnqy4XOjYKOLiQA",
-          )[chez DigiKey];.
-
-        - Références PIC24 #link(
-            "https://www.mouser.fr/c/semiconductors/embedded-processors-controllers/microcontrollers-mcu/16-bit-microcontrollers-mcu/?core=PIC24E~~PIC24H&mounting%20style=Through%20Hole&active=y&rp=semiconductors%2Fembedded-processors-controllers%2Fmicrocontrollers-mcu%2F16-bit-microcontrollers-mcu|~Core|~Mounting%20Style",
-          )[chez Mouser];.
-
-        - Références #link(
-            "https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/16-bit-mcus/pic24f-ga",
-          )[PIC24F GA] et #link(
-            "https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/16-bit-mcus/pic24f-gu-gl-gp",
-          )[PIC24 GU/GP] site Microchip.
-
-      ],
-      [Signaux d\'entrée],
-      table.cell(colspan: 2)[
-        - TempRef
-
-        - RxRF
-
-      ],
-      [Signaux de sortie],
-      table.cell(colspan: 2)[
-        - TxRF
-
-        - CmdAeration
-
-      ],
-    )],
-  kind: table,
-)
-
-#figure(
-  align(center)[#table(
-      columns: (18%, 28.43%, 53.57%),
-      align: (auto, auto, auto),
-      table.header(
-        [Fonction Principale 1],
-        [Traitements numériques côté cible],
-        [Microcontrôleur 16~bit, trou traversant, basse consommation],
-      ),
-      table.hline(),
-      [Description / rôle],
-      table.cell(colspan: 2)[Réceptionner la température de la pièce cible et le
-        choix du mode par l’utilisateur, piloter l’émission sans-fil de ces
-        informations vers le module côté référence.],
-      [Références envisagées],
-      table.cell(colspan: 2)[
-        - Pour l’instant les références sont les mêmes que pour la Fonction
-          Principale 1
-
-      ],
-      [Signaux d\'entrée],
-      table.cell(colspan: 2)[
-        - TempCib
-
-        - Mode
-
-        - RxRF
-
-      ],
-      [Signaux de sortie],
-      table.cell(colspan: 2)[
-        - TxRF
-
-      ],
-    )],
-  kind: table,
-)
-
-#figure(
-  align(center)[#table(
-      columns: (18%, 23.81%, 58.19%),
-      align: (auto, auto, auto),
-      table.header(
-        [Fonction Principale 2],
-        [Captage température],
-        [Capteur de température, minimum capté ⩽ −~10~°C, maximum capté ⩾
-          50~°C],
-      ),
-      table.hline(),
-      [Description / rôle],
-      table.cell(colspan: 2)[Capter la température des pièces (référence qui est
-        climatisée et cible pour la comparer).],
-      [Références envisagées],
-      table.cell(colspan: 2)[
-        - Gravity AHC20 #link(
-            "https://www.mouser.fr/ProductDetail/DFRobot/SEN0528?qs=Jm2GQyTW%2FbgFUSAl1tK%252BEQ%3D%3D",
-          )[chez Mouser] (+ humidité).
-
-        - Seeed DHT22 #link(
-            "https://www.digikey.fr/fr/products/detail/seeed-technology-co-ltd/101020932/14552870",
-          )[chez DigiKey] (+ humidité).
-
-        - TC74A0-3.3VAT-ND #link(
-            "https://www.digikey.fr/fr/products/detail/microchip-technology/TC74A0-3-3VAT/442720",
-          )[chez DigiKey];.
-
-        - Références avec humidité #link(
-            "https://www.digikey.fr/fr/products/filter/capteurs-d-humidité/529?s=N4IgjCBcoCwdIDGUBmBDANgZwKYBoQB7KAbRAGYBWANgE4wAOEAgdkoCZywZmQ324tXgwAM7SjGogAugQAOAFyggAygoBOASwB2AcxABfAnSihkkdNnxFSIOI1osZ8pZFUad%2Bo%2BFoMhCc0tcAmJIMhEZAyigA",
-          )[chez DigiKey];.
-
-        - Références avec humidité chez #link(
-            "https://www.mouser.fr/c/embedded-solutions/sensor-modules/multiple-function-sensor-modules/?interface%20type=I2C~~I2C%2C%20SPI|~I2C%2C%20UART|~UART&type=Barometer%2C%20Humidity%20Sensor%20and%20Temperature%20Sensor|~CO2%2C%20Humidity%2C%20and%20Temperature%20Sensor~~CO2%2C%20Temperature%20and%20Humidity%20Sensor|~Data%20Logger%2C%20Accelerometer%2C%20Magnetometer%2C%20Humidity%2C%20Temperature%2C%20Pressure%2C%20Microphone%2C%20UV%20and%20Light%20Sensor|~Gas%2C%20Humidity%2C%20Pressure%2C%20Temperature|~Humidity%2C%20Light%2C%20Magnetic%20Flux%2C%20Temperature~~Humidity%20and%20Temperature%20Sensor|~Motion%2C%20Light%2C%20Temperature%2C%20Humidity~~Motion%2C%20Light%2C%20Temperature%2C%20Humidity%2C%20Sound&active=y&rp=embedded-solutions%2Fsensor-modules%2Fmultiple-function-sensor-modules|~Interface%20Type|~Type",
-          )[Mouser];.
-
-        - Références #link(
-            "https://www.digikey.fr/fr/products/filter/capteurs-de-température/sortie-analogique-et-numérique/518?s=N4IgjCBcoCwdIDGUBmBDANgZwKYBoQB7KAbRAA4AGAJkoGYYQCrqBWGOpim%2B1ru1gDYAnGHJcA7K2oxKfAlOp0wjZjzri1bGIwC6BAA4AXKCADKRgE4BLAHYBzEAF8CIqKGSR02fEVIg4MWEJEH0QY1MLGwdnAjBhcmF3JFRMXAJiSDJKUKc8oA",
-          )[chez DigiKey];.
-
-        - Références #link(
-            "https://www.seeedstudio.com/Grove-AHT20-I2C-Industrial-grade-temperature-and-humidity-sensor-p-4497.html",
-          )[Grove] Seeed Studio.
-
-      ],
-      [Signaux d\'entrée],
-      table.cell(colspan: 2)[
-        - Température ambiante de la pièce (référence/cible)
-
-      ],
-      [Signaux de sortie],
-      table.cell(colspan: 2)[
-        - TempRef / TempCib
-
-      ],
-    )],
-  kind: table,
-)
-
-#figure(
-  align(center)[#table(
-      columns: (18%, 13%, 69%),
-      align: (auto, auto, auto),
-      table.header(
-        [Fonction Principale 3],
-        table.cell(align: left)[Interfaçage RF],
-        [Communication sans-fil basse consommation (802.15.4 et dérivés,
-          Bluetooth LE)],
-      ),
-      table.hline(),
-      [Description / rôle],
-      table.cell(colspan: 2)[Communiquer sans-fil les informations du module de
-        la pièce cible au module de la pièce référence.],
-      [Références envisagées],
-      table.cell(colspan: 2)[
-        - XB3-24Z8PT-J #link(
-            "https://www.digikey.fr/fr/products/detail/digi/XB3-24Z8PT-J/8130934",
-          )[chez DigiKey];, antenne intégrée, ZigBee 3, 802.15.4, I2C, SPI, UART
-          ≃ 24~€
-
-        - XB24CDMSIT-001 chez #link(
-            "https://www.mouser.fr/ProductDetail/Digi/XB24CDMSIT-001?qs=XmMZR4xR0DDHBWHJZQYv7A%3D%3D",
-          )[Mouser];, 802.15.4, Zigbee, SPI/UART ≃ 28~€
-
-        - WRL-22630 #link(
-            "https://www.digikey.fr/fr/products/detail/sparkfun-electronics/WRL-22630/22321047",
-          )[chez DigiKey];, Bluetooth v4.2, Bluetooth v5.0, Zigbee, SPI/UART ≃
-          29~€
-
-        - Références modules RF #link(
-            "https://www.digikey.fr/fr/products/filter/modems-et-modules-d-émetteurs-récepteurs-rf/872?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9CcGAFZEIFJAw4CxMiADMMuGBlzCWnTJjM2nSD37Cxk8DRob5i5XkIlI5AEw0Y9eyEJvX2lTEA4uXkFRCUJaGgonNCxXNQ8QeJl6MAAGAPTPGE8NBEJ6OBowDQhS8o0qPLKabI1PBvLs6gaZTyoTQgps7Pp6XP7smBy%2BynHdavSKGRp6VtLMmAdQ8ItI6xjwcoRoBSSVN3VcpnEroA",
-          )[chez DigiKey];.
-
-        - Références modules #link(
-            "https://fr.digi.com/products/embedded-systems/digi-xbee/rf-modules",
-          )[Digri XBee] site constructeur.
-
-      ],
-      [Signaux d\'entrée],
-      table.cell(colspan: 2)[
-        - TxRF
-
-      ],
-      [Signaux de sortie],
-      table.cell(colspan: 2)[
-        - RxRF
-
-      ],
-      [Signaux E/S],
-      table.cell(colspan: 2)[
-        - Ondes RF
-
-      ],
-    )],
-  kind: table,
-)
+#fig(
+  table(
+    columns: 3,
+    align: (center + horizon, left),
+    table.header(
+      [*Fonction Principale 3*],
+      [*Interfaçage RF*],
+      [*Communication sans-fil basse consommation (802.15.4 et dérivés,
+        Bluetooth LE)*],
+    ),
+    [Description / rôle],
+    table.cell(colspan: 2)[Communiquer sans-fil les informations du module de la
+      pièce cible au module de la pièce référence.],
+    [Références envisagées],
+    table.cell(colspan: 2)[
+      - XB3-24Z8PT-J #link(
+          "https://www.digikey.fr/fr/products/detail/digi/XB3-24Z8PT-J/8130934",
+        )[chez DigiKey];, antenne intégrée, ZigBee 3, 802.15.4, I2C, SPI, UART ≃
+        24~€
+      - XB24CDMSIT-001 chez #link(
+          "https://www.mouser.fr/ProductDetail/Digi/XB24CDMSIT-001?qs=XmMZR4xR0DDHBWHJZQYv7A%3D%3D",
+        )[Mouser];, 802.15.4, Zigbee, SPI/UART ≃ 28~€
+      - WRL-22630 #link(
+          "https://www.digikey.fr/fr/products/detail/sparkfun-electronics/WRL-22630/22321047",
+        )[chez DigiKey];, Bluetooth v4.2, Bluetooth v5.0, Zigbee, SPI/UART ≃
+        29~€
+      - Références modules RF #link(
+          "https://www.digikey.fr/fr/products/filter/modems-et-modules-d-émetteurs-récepteurs-rf/872?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9CcGAFZEIFJAw4CxMiADMMuGBlzCWnTJjM2nSD37Cxk8DRob5i5XkIlI5AEw0Y9eyEJvX2lTEA4uXkFRCUJaGgonNCxXNQ8QeJl6MAAGAPTPGE8NBEJ6OBowDQhS8o0qPLKabI1PBvLs6gaZTyoTQgps7Pp6XP7smBy%2BynHdavSKGRp6VtLMmAdQ8ItI6xjwcoRoBSSVN3VcpnEroA",
+        )[chez DigiKey];.
+      - Références modules #link(
+          "https://fr.digi.com/products/embedded-systems/digi-xbee/rf-modules",
+        )[Digri XBee] site constructeur.
+    ],
+    [Signaux d’entrée],
+    table.cell(colspan: 2)[
+      - TxRF
+    ],
+    [Signaux de sortie],
+    table.cell(colspan: 2)[
+      - RxRF
+    ],
+    [Signaux E/S],
+    table.cell(colspan: 2)[
+      - Ondes RF
+    ],
+  ),
+)[FP3]
 
 #figure(
   align(center)[#table(
-      columns: (18%, 22.13%, 59.87%),
-      align: (auto, auto, auto),
+      columns: 3,
+      align: (center + horizon, left),
       table.header(
         [Fonction Principale 4],
         [Interfaçage humain-machine],
         [Interrupteur/commutateur (allumé/éteint)],
       ),
-      table.hline(),
       [Description / rôle],
       table.cell(colspan: 2)[Choix binaire entre le mode été (refroidissement)
         et le mode hiver (chauffage). Dois indiquer clairement le mode
@@ -342,10 +312,8 @@ Schéma.
       [Signaux de sortie],
       table.cell(colspan: 2)[
         - Mode
-
       ],
     )],
-  kind: table,
 )
 
 QUESTION~: N’étant pas qualifiés pour manipuler du courant d’aussi haute tension
@@ -355,14 +323,13 @@ pouvons aussi faire l’essai avec un relais, mais qui ne sera pas connecté.
 
 #figure(
   align(center)[#table(
-      columns: (18%, 24.74%, 57.26%),
-      align: (auto, auto, auto),
+      columns: 3,
+      align: (center + horizon, left),
       table.header(
         [Fonction Principale 5],
         [Commande aérateur en puissance],
         [Driver moteur CC supportant jusqu’à environ 15~V],
       ),
-      table.hline(),
       [Description / rôle],
       table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
         (alternatif 230~V) de l’aérateur à partir du système en 3.3~V piloté par
@@ -376,64 +343,51 @@ pouvons aussi faire l’essai avec un relais, mais qui ne sera pas connecté.
         - Références #link(
             "https://www.digikey.fr/fr/products/filter/gestion-de-l-alimentation-pmic/contrôleurs-variateurs-moteur/744?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9C9egCZEIFJAw4CxMiBoAGAMxwArJpCEa9GhT1HwFbVu2WZ2%2BtooJCumDIqX6e6RUOEMmB62poWgTY%2BASBB2jAGzGyckDz8wmKS4DAwXtAKaFh4hCSQ5DTaQTQwlhXOmtG1-jQ1Dv6uII2ajCwgHFy8gqIShGBwdPKKykVqpSCGTJkAtHJ5ivwArqol5BYLmdV5AgAmXItgmhBJXJbsAJ6suFzo2Cji4kA",
           )[chez DigiKey];.
-
       ],
       [Signaux d\'entrée],
       table.cell(colspan: 2)[
         - CmdAeration
-
         - Valim (≃12~V)
-
       ],
       [Signaux de sortie],
       table.cell(colspan: 2)[
         - IAeration
-
       ],
     )],
-  kind: table,
 )
+
+#figure(align(center)[#table(
+    columns: 3,
+    align: (center + horizon, left),
+    table.header(
+      [Fonction Principale 5 bis],
+      [Commande aérateur en puissance],
+      [Relais ou MOSFET piloté en CC 3.3~V pour contrôler du CC 12~V],
+    ),
+    [Description / rôle],
+    table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
+      (alternatif 230~V) de l’aérateur à partir du système en 3.3~V piloté par
+      le microcontrôleur.],
+    [Signaux d\'entrée],
+    table.cell(colspan: 2)[
+      - CmdAeration
+      - Valim (5~V à 25~V)
+    ],
+    [Signaux de sortie],
+    table.cell(colspan: 2)[
+      - IAeration
+    ],
+  )])
 
 #figure(
   align(center)[#table(
-      columns: (18%, 24.74%, 57.26%),
-      align: (auto, auto, auto),
-      table.header(
-        [Fonction Principale 5 bis],
-        [Commande aérateur en puissance],
-        [Relais ou MOSFET piloté en CC 3.3~V pour contrôler du CC 12~V],
-      ),
-      table.hline(),
-      [Description / rôle],
-      table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
-        (alternatif 230~V) de l’aérateur à partir du système en 3.3~V piloté par
-        le microcontrôleur.],
-      [Signaux d\'entrée],
-      table.cell(colspan: 2)[
-        - CmdAeration
-
-        - Valim (5~V à 25~V)
-
-      ],
-      [Signaux de sortie],
-      table.cell(colspan: 2)[
-        - IAeration
-
-      ],
-    )],
-  kind: table,
-)
-
-#figure(
-  align(center)[#table(
-      columns: (18%, 24.74%, 57.26%),
-      align: (auto, auto, auto),
+      columns: 3,
+      align: (center + horizon, left),
       table.header(
         [Fonction Principale 5 bis],
         [Commande aérateur en puissance],
         [Relais piloté en CC basse tension pour contrôler du CA 230~V],
       ),
-      table.hline(),
       [Description / rôle],
       table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
         (alternatif 230~V) de l’aérateur à partir du système en 3.3~V piloté par
@@ -443,31 +397,26 @@ pouvons aussi faire l’essai avec un relais, mais qui ne sera pas connecté.
         - TC209R #link(
             "https://www.digikey.fr/fr/products/detail/bright-toward-industrial-co-ltd/TC209R/13556942",
           )[chez Digikey];.
-
       ],
       [Signaux d\'entrée],
       table.cell(colspan: 2)[
         - CmdAeration
-
         - Valim (230~V secteur)
-
       ],
       [Signaux de sortie],
       table.cell(colspan: 2)[IAeration],
     )],
-  kind: table,
 )
 
 #figure(
   align(center)[#table(
-      columns: (18%, 24.24%, 57.76%),
-      align: (auto, auto, auto),
+      columns: 3,
+      align: (center + horizon, left),
       table.header(
         [Fonction Principale 6],
         [Aération],
         [Aérateur encastrable pour gaine 125~mm],
       ),
-      table.hline(),
       [Description / rôle],
       table.cell(colspan: 2)[Forcer l’air de la pièce de référence à aller dans
         la pièce cible pour harmoniser leurs températures, si activé par le
@@ -541,32 +490,27 @@ pouvons aussi faire l’essai avec un relais, mais qui ne sera pas connecté.
         - #link(
             "https://www.idealo.fr/cat/28660/ventilateurs-de-salle-de-bains.html",
           )[Agrégation] ventilateurs salle de bains.
-
       ],
       [Signaux d\'entrée],
       table.cell(colspan: 2)[
         - IAeration
-
       ],
       [Signaux de sortie],
       table.cell(colspan: 2)[
         - Flux thermique (déplacement de l’air)
-
       ],
     )],
-  kind: table,
 )
 
 #figure(
   align(center)[#table(
-      columns: (18%, 24.24%, 57.76%),
-      align: (auto, auto, auto),
+      columns: 3,
+      align: (center + horizon, left),
       table.header(
         [Fonction Principale],
         [Affichage température],
         [Écran 7 segments minimum 4 chiffres],
       ),
-      table.hline(),
       [Description / rôle],
       table.cell(colspan: 2)[Forcer l’air de la pièce de référence à aller dans
         la pièce cible pour harmoniser leurs températures, si activé par le
@@ -593,21 +537,19 @@ pouvons aussi faire l’essai avec un relais, mais qui ne sera pas connecté.
 
       ],
     )],
-  kind: table,
 )
 
 === Fonctions Annexes
 
 #figure(
   align(center)[#table(
-      columns: (18%, 21.93%, 60.07%),
-      align: (auto, auto, auto),
+      columns: 3,
+      align: (center + horizon, left),
       table.header(
         [Fonction Annexe 0],
         [Alimentation générique],
         [Alimentation 3,3~V à partir d’une alimentation plus générique],
       ),
-      table.hline(),
       [Description / rôle],
       table.cell(colspan: 2)[Fournir un courant continu de 3,3~V au circuit de
         contrôle, incluant le microcontrôleur, à partir d’une alimentation
@@ -638,68 +580,59 @@ pouvons aussi faire l’essai avec un relais, mais qui ne sera pas connecté.
 
       ],
     )],
-  kind: table,
 )
 
-#figure(
-  align(center)[#table(
-      columns: (18%, 21.93%, 60.07%),
-      align: (auto, left, left),
-      table.header(
-        [Fonction Annexe 1],
-        [Alimentation sur batterie],
-        [Alimentation 3,3~V à partir d’une batterie ou pile],
-      ),
-      table.hline(),
-      [Description / rôle],
-      table.cell(align: left, colspan: 2)[QUESTION~: Vraiment nécessaire~? Ou
-        utiliser FA0 pour le module côté cible également~?
+#figure(align(center)[#table(
+    columns: 3,
+    align: (auto, left, left),
+    table.header(
+      [Fonction Annexe 1],
+      [Alimentation sur batterie],
+      [Alimentation 3,3~V à partir d’une batterie ou pile],
+    ),
+    [Description / rôle],
+    table.cell(align: left, colspan: 2)[QUESTION~: Vraiment nécessaire~? Ou
+      utiliser FA0 pour le module côté cible également~?
 
-        Fournir un courant continu de 3,3~V au circuit de contrôle, incluant le
-        microcontrôleur, à partir d’une solution d’alimentation autonome
-        (batterie, pile).
+      Fournir un courant continu de 3,3~V au circuit de contrôle, incluant le
+      microcontrôleur, à partir d’une solution d’alimentation autonome
+      (batterie, pile).
 
-      ],
-      [Signaux d\'entrée],
-      table.cell(colspan: 2)[
-        - Batterie
+    ],
+    [Signaux d\'entrée],
+    table.cell(colspan: 2)[
+      - Batterie
 
-      ],
-      [Signaux de sortie],
-      table.cell(colspan: 2)[
-        - Vcc33
+    ],
+    [Signaux de sortie],
+    table.cell(colspan: 2)[
+      - Vcc33
 
-      ],
-    )],
-  kind: table,
-)
+    ],
+  )])
 
-#figure(
-  align(center)[#table(
-      columns: (18%, 19.41%, 62.59%),
-      align: (auto, auto, auto),
-      table.header(
-        [Fonction Annexe 2],
-        [Programmation in-situ],
-        [Programmeur pour le(s) microcontrôleur(s) utilisé(s)],
-      ),
-      table.hline(),
-      [Description / rôle],
-      table.cell(colspan: 2)[Programmer le microcontrôleur sans le retirer du
-        circuit.],
-      [Signaux d\'entrée],
-      table.cell(colspan: 2)[
-        - Communication USB avec ordinateur
+#figure(align(center)[#table(
+    columns: 3,
+    align: (center + horizon, left),
+    table.header(
+      [Fonction Annexe 2],
+      [Programmation in-situ],
+      [Programmeur pour le(s) microcontrôleur(s) utilisé(s)],
+    ),
+    [Description / rôle],
+    table.cell(colspan: 2)[Programmer le microcontrôleur sans le retirer du
+      circuit.],
+    [Signaux d\'entrée],
+    table.cell(colspan: 2)[
+      - Communication USB avec ordinateur
 
-      ],
-      [Signaux de sortie],
-      table.cell(colspan: 2)[
-        - Signaux électriques de programmation
+    ],
+    [Signaux de sortie],
+    table.cell(colspan: 2)[
+      - Signaux électriques de programmation
 
-      ],
-    )],
-  kind: table,
-)
+    ],
+  )])
 
 == Description des signaux
 
@@ -885,18 +818,6 @@ pouvons aussi faire l’essai avec un relais, mais qui ne sera pas connecté.
   table.cell(colspan: 9)[Flux d’air entrainé par l’aérateur depuis la pièce
     référence vers la pièce cible.],
 ))
-
-== Analyse du besoin
-
-Bête à cornes, matrice MOSCOW.
-
-== Schémas fonctionnels
-
-SFN1, SF1D, SF2D…
-
-== Description des fonctions
-
-== Description des signaux
 
 #set page(flipped: false)
 
