@@ -1,5 +1,5 @@
 #import "report/report.typ": * // Import all report symbols
-#show figure: set block(breakable: true)
+// #show figure: set block(breakable: true)
 
 = Analyse fonctionnelle // et cahier des charges
 
@@ -33,6 +33,7 @@ connectables tel qu’en Grove). Cela sera d’autant plus simple pour tester su
 breadboard.
 
 #set page(flipped: true)
+#context page.margin
 
 == Analyse du besoin
 
@@ -77,12 +78,15 @@ breadboard.
 == Schémas fonctionnels
 
 === Niveau 1 (SFN1)
+#fig(image("SF1D.svg"))[SFN1] // TODO actual sfn1
 
+#pagebreak()
 === Premier degré (SF1D)
 
-Schéma.
+#fig(image("SF1D.svg"))[SF1D]
 
 === Second degré (SF2D)
+#fig(image("SF1D.svg"))[SF2D] // TODO actual sf2d
 
 #pagebreak()
 
@@ -267,94 +271,88 @@ Schéma.
   ),
 )[FP3]
 
-#figure(
-  align(center)[#table(
-      columns: 3,
-      align: (center + horizon, left),
-      table.header(
-        [Fonction Principale 4],
-        [Interfaçage humain-machine],
-        [Interrupteur/commutateur (allumé/éteint)],
-      ),
-      [Description / rôle],
-      table.cell(colspan: 2)[Choix binaire entre le mode été (refroidissement)
-        et le mode hiver (chauffage). Dois indiquer clairement le mode
-        actuellement choisi par sa position physique (bascule haut/bas,
-        glissière gauche/droite…)],
-      [Références envisagées],
-      table.cell(colspan: 2)[
-        - Commutateur à glissière OS102011MS2QN1 chez #link(
-            "https://www.digikey.fr/fr/products/detail/c-k/OS102011MS2QN1/411602",
-          )[DigiKey];.
+#fig(
+  table(
+    columns: 3,
+    align: (center + horizon, left),
+    table.header(
+      [*Fonction Principale 4*],
+      [*Interfaçage humain-machine*],
+      [*Interrupteur/commutateur (allumé/éteint)*],
+    ),
+    [Description / rôle],
+    table.cell(colspan: 2)[Choix binaire entre le mode été (refroidissement) et
+      le mode hiver (chauffage). Dois indiquer clairement le mode actuellement
+      choisi par sa position physique (bascule haut/bas, glissière
+      gauche/droite…)],
+    [Références envisagées],
+    table.cell(colspan: 2)[
+      - Commutateur à glissière OS102011MS2QN1 chez #link(
+          "https://www.digikey.fr/fr/products/detail/c-k/OS102011MS2QN1/411602",
+        )[DigiKey];.
+      - Commutateur à bascule A107SYCQ04 #link(
+          "https://www.mouser.fr/ProductDetail/TE-Connectivity-AMP/A107SYCQ04?qs=9WkjXeXHXGz78jldEjGFKg%3D%3D",
+        )[chez Mouser];.
+      - Références interrupteurs glissière #link(
+          "https://www.digikey.fr/fr/products/filter/interrupteurs-à-glissière/213?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIhVYcATBM9ewKwgC6hAA4AXKCADKIgE4BLAHYBzEAF9CrOohApIGHAWJkQABgFqQAWjZadMgK4GSkcn34r3QA",
+        )[DigiKey];.
+      - Références interrupteurs bascule #link(
+          "https://www.mouser.fr/c/electromechanical/switches/rocker-switches/?instock=y&active=y",
+        )[Mouser];.
 
-        - Commutateur à bascule A107SYCQ04 #link(
-            "https://www.mouser.fr/ProductDetail/TE-Connectivity-AMP/A107SYCQ04?qs=9WkjXeXHXGz78jldEjGFKg%3D%3D",
-          )[chez Mouser];.
+      - Références glissière #link(
+          "https://www.mouser.fr/c/electromechanical/switches/slide-switches/?mounting%20style=Through%20Hole~~Through%20Hole%2C%20Right%20Angle&active=y&rp=electromechanical%2Fswitches%2Fslide-switches|~Mounting%20Style",
+        )[Mouser];.
+    ],
+    [Signaux d\'entrée],
+    table.cell(colspan: 2)[
+      - Choix du mode par l’utilisateur (position haut ou bas)
+    ],
+    [Signaux de sortie],
+    table.cell(colspan: 2)[
+      - Mode
+    ],
+  ),
+)[FP4]
 
-        - Références interrupteurs glissière #link(
-            "https://www.digikey.fr/fr/products/filter/interrupteurs-à-glissière/213?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIhVYcATBM9ewKwgC6hAA4AXKCADKIgE4BLAHYBzEAF9CrOohApIGHAWJkQABgFqQAWjZadMgK4GSkcn34r3QA",
-          )[DigiKey];.
+// WARN N’étant pas qualifiés pour manipuler du courant d’aussi haute tension
+// que celui secteur, n’est-ce pas préférable de réaliser ce projet avec un
+// ventilateur en courant continu 12 V (type ventilateur d’ordinateur) ? Nous
+// pouvons aussi faire l’essai avec un relais, mais qui ne sera pas connecté.
 
-        - Références interrupteurs bascule #link(
-            "https://www.mouser.fr/c/electromechanical/switches/rocker-switches/?instock=y&active=y",
-          )[Mouser];.
-
-        - Références glissière #link(
-            "https://www.mouser.fr/c/electromechanical/switches/slide-switches/?mounting%20style=Through%20Hole~~Through%20Hole%2C%20Right%20Angle&active=y&rp=electromechanical%2Fswitches%2Fslide-switches|~Mounting%20Style",
-          )[Mouser];.
-
-      ],
-      [Signaux d\'entrée],
-      table.cell(colspan: 2)[
-        - Choix du mode par l’utilisateur (position haut ou bas)
-
-      ],
-      [Signaux de sortie],
-      table.cell(colspan: 2)[
-        - Mode
-      ],
-    )],
-)
-
-QUESTION~: N’étant pas qualifiés pour manipuler du courant d’aussi haute tension
-que celui secteur, n’est-ce pas préférable de réaliser ce projet avec un
-ventilateur en courant continu 12~V (type ventilateur d’ordinateur)~? Nous
-pouvons aussi faire l’essai avec un relais, mais qui ne sera pas connecté.
-
-#figure(
-  align(center)[#table(
-      columns: 3,
-      align: (center + horizon, left),
-      table.header(
-        [Fonction Principale 5],
-        [Commande aérateur en puissance],
-        [Driver moteur CC supportant jusqu’à environ 15~V],
-      ),
-      [Description / rôle],
-      table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
-        (alternatif 230~V) de l’aérateur à partir du système en 3.3~V piloté par
-        le microcontrôleur.],
-      [Références envisagées],
-      table.cell(colspan: 2)[
-        - Driver 1528-4489-ND #link(
-            "https://www.digikey.fr/fr/products/detail/adafruit-industries-llc/4489/11594498",
-          )[chez DigiKey];.
-
-        - Références #link(
-            "https://www.digikey.fr/fr/products/filter/gestion-de-l-alimentation-pmic/contrôleurs-variateurs-moteur/744?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9C9egCZEIFJAw4CxMiBoAGAMxwArJpCEa9GhT1HwFbVu2WZ2%2BtooJCumDIqX6e6RUOEMmB62poWgTY%2BASBB2jAGzGyckDz8wmKS4DAwXtAKaFh4hCSQ5DTaQTQwlhXOmtG1-jQ1Dv6uII2ajCwgHFy8gqIShGBwdPKKykVqpSCGTJkAtHJ5ivwArqol5BYLmdV5AgAmXItgmhBJXJbsAJ6suFzo2Cji4kA",
-          )[chez DigiKey];.
-      ],
-      [Signaux d\'entrée],
-      table.cell(colspan: 2)[
-        - CmdAeration
-        - Valim (≃12~V)
-      ],
-      [Signaux de sortie],
-      table.cell(colspan: 2)[
-        - IAeration
-      ],
-    )],
-)
+#fig(
+  table(
+    columns: 3,
+    align: (center + horizon, left),
+    table.header(
+      [*Fonction Principale 5*],
+      [*Commande aérateur en puissance*],
+      [*Driver moteur CC supportant jusqu’à environ 15~V*],
+    ),
+    [Description / rôle],
+    table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
+      (alternatif 230~V) de l’aérateur à partir du système en 3.3~V piloté par
+      le microcontrôleur.],
+    [Références envisagées],
+    table.cell(colspan: 2)[
+      - Driver 1528-4489-ND #link(
+          "https://www.digikey.fr/fr/products/detail/adafruit-industries-llc/4489/11594498",
+        )[chez DigiKey];.
+      - Références #link(
+          "https://www.digikey.fr/fr/products/filter/gestion-de-l-alimentation-pmic/contrôleurs-variateurs-moteur/744?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9C9egCZEIFJAw4CxMiBoAGAMxwArJpCEa9GhT1HwFbVu2WZ2%2BtooJCumDIqX6e6RUOEMmB62poWgTY%2BASBB2jAGzGyckDz8wmKS4DAwXtAKaFh4hCSQ5DTaQTQwlhXOmtG1-jQ1Dv6uII2ajCwgHFy8gqIShGBwdPKKykVqpSCGTJkAtHJ5ivwArqol5BYLmdV5AgAmXItgmhBJXJbsAJ6suFzo2Cji4kA",
+        )[chez DigiKey];.
+    ],
+    [Signaux d\'entrée],
+    table.cell(colspan: 2)[
+      - CmdAeration
+      - Valim (≃12~V)
+    ],
+    [Signaux de sortie],
+    table.cell(colspan: 2)[
+      - IAeration
+    ],
+  ),
+)[FP5]
 
 #figure(align(center)[#table(
     columns: 3,
@@ -636,20 +634,20 @@ pouvons aussi faire l’essai avec un relais, mais qui ne sera pas connecté.
 
 == Description des signaux
 
-#figure(table(
+#fig(table(
   columns: 10,
   table.header(
-    table.cell(rowspan: 2)[Signal],
-    [Fonctions concernées],
-    [Nature du signal (A/N/GP)],
-    [Taille entité],
-    [Grandeur et unité (U, I…)],
-    [Plage de variation - Niveaux],
-    [Excursion en fréquence],
-    [Valeur au repos],
-    [Contraintes temporelles],
-    [Conformité à une norme],
-    table.cell(colspan: 9)[Description],
+    table.cell(rowspan: 2)[*Signal*],
+    [*Fonctions concernées*],
+    [*Nature du signal (A/N/GP)*],
+    [*Taille entité*],
+    [*Grandeur et unité (U, I…)*],
+    [*Plage de variation - Niveaux*],
+    [*Excursion en fréquence*],
+    [*Valeur au repos*],
+    [*Contraintes temporelles*],
+    [*Conformité à une norme*],
+    table.cell(colspan: 9)[*Description*],
   ),
   table.cell(rowspan: 2)[TempRef],
   [FP2→FP0],
@@ -736,6 +734,23 @@ pouvons aussi faire l’essai avec un relais, mais qui ne sera pas connecté.
   [],
   table.cell(colspan: 9)[Puissance nécessaire pour actionner le mouvement de
     l’aérateur.],
+))
+
+#fig(table(
+  columns: 10,
+  table.header(
+    table.cell(rowspan: 2)[*Signal*],
+    [*Fonctions concernées*],
+    [*Nature du signal (A/N/GP)*],
+    [*Taille entité*],
+    [*Grandeur et unité (U, I…)*],
+    [*Plage de variation - Niveaux*],
+    [*Excursion en fréquence*],
+    [*Valeur au repos*],
+    [*Contraintes temporelles*],
+    [*Conformité à une norme*],
+    table.cell(colspan: 9)[*Description*],
+  ),
   table.cell(rowspan: 2)[Vcc33],
   [FA0→FP0\ FA0→FP1],
   [A],
