@@ -32,8 +32,8 @@ surface, tous nos composants sont sélectionnés montables en trou-traversant (o
 connectables tel qu’en Grove). Cela sera d’autant plus simple pour tester sur
 breadboard.
 
-#set page(flipped: true)
-#context page.margin
+#set page(flipped: true, margin: (x: 1cm)) // Pages en paysage
+#set par(justify: false) // Ne pas justifier les paragraphes, moche dans tables
 
 == Analyse du besoin
 
@@ -97,7 +97,7 @@ breadboard.
 #fig(
   table(
     columns: 3,
-    align: (center + horizon, left),
+    align: (center + horizon, left + horizon),
     table.header(
       [*Fonction Principale 0*],
       [*Traitements numériques côté référence*],
@@ -148,7 +148,7 @@ breadboard.
 
 #fig(table(
   columns: 3,
-  align: (center + horizon, left),
+  align: (center + horizon, left + horizon),
   table.header(
     [*Fonction Principale 1*],
     [*Traitements numériques côté cible*],
@@ -163,7 +163,7 @@ breadboard.
     - Pour l’instant les références sont les mêmes que pour la Fonction
       Principale 1
   ],
-  [Signaux d\'entrée],
+  [Signaux d’entrée],
   table.cell(colspan: 2)[
     - TempCib
     - Mode
@@ -178,7 +178,7 @@ breadboard.
 #fig(
   table(
     columns: 3,
-    align: (center + horizon, left),
+    align: (center + horizon, left + horizon),
     table.header(
       [*Fonction Principale 2*],
       [*Captage température*],
@@ -226,7 +226,7 @@ breadboard.
 #fig(
   table(
     columns: 3,
-    align: (center + horizon, left),
+    align: (center + horizon, left + horizon),
     table.header(
       [*Fonction Principale 3*],
       [*Interfaçage RF*],
@@ -274,7 +274,7 @@ breadboard.
 #fig(
   table(
     columns: 3,
-    align: (center + horizon, left),
+    align: (center + horizon, left + horizon),
     table.header(
       [*Fonction Principale 4*],
       [*Interfaçage humain-machine*],
@@ -304,7 +304,7 @@ breadboard.
           "https://www.mouser.fr/c/electromechanical/switches/slide-switches/?mounting%20style=Through%20Hole~~Through%20Hole%2C%20Right%20Angle&active=y&rp=electromechanical%2Fswitches%2Fslide-switches|~Mounting%20Style",
         )[Mouser];.
     ],
-    [Signaux d\'entrée],
+    [Signaux d’entrée],
     table.cell(colspan: 2)[
       - Choix du mode par l’utilisateur (position haut ou bas)
     ],
@@ -323,7 +323,7 @@ breadboard.
 #fig(
   table(
     columns: 3,
-    align: (center + horizon, left),
+    align: (center + horizon, left + horizon),
     table.header(
       [*Fonction Principale 5*],
       [*Commande aérateur en puissance*],
@@ -342,7 +342,7 @@ breadboard.
           "https://www.digikey.fr/fr/products/filter/gestion-de-l-alimentation-pmic/contrôleurs-variateurs-moteur/744?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9C9egCZEIFJAw4CxMiBoAGAMxwArJpCEa9GhT1HwFbVu2WZ2%2BtooJCumDIqX6e6RUOEMmB62poWgTY%2BASBB2jAGzGyckDz8wmKS4DAwXtAKaFh4hCSQ5DTaQTQwlhXOmtG1-jQ1Dv6uII2ajCwgHFy8gqIShGBwdPKKykVqpSCGTJkAtHJ5ivwArqol5BYLmdV5AgAmXItgmhBJXJbsAJ6suFzo2Cji4kA",
         )[chez DigiKey];.
     ],
-    [Signaux d\'entrée],
+    [Signaux d’entrée],
     table.cell(colspan: 2)[
       - CmdAeration
       - Valim (≃12~V)
@@ -354,294 +354,266 @@ breadboard.
   ),
 )[FP5]
 
-#figure(align(center)[#table(
+#fig(table(
+  columns: 3,
+  align: (center + horizon, left + horizon),
+  table.header(
+    [*Fonction Principale 5 bis*],
+    [*Commande aérateur en puissance*],
+    [*Relais ou MOSFET piloté en CC 3.3~V pour contrôler du CC 12~V*],
+  ),
+  [Description / rôle],
+  table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
+    (alternatif 230~V) de l’aérateur à partir du système en 3.3~V piloté par le
+    microcontrôleur.],
+  [Signaux d’entrée],
+  table.cell(colspan: 2)[
+    - CmdAeration
+    - Valim (5~V à 25~V)
+  ],
+  [Signaux de sortie],
+  table.cell(colspan: 2)[
+    - IAeration
+  ],
+))[FP5~bis]
+
+#fig(
+  table(
     columns: 3,
-    align: (center + horizon, left),
+    align: (center + horizon, left + horizon),
     table.header(
-      [Fonction Principale 5 bis],
-      [Commande aérateur en puissance],
-      [Relais ou MOSFET piloté en CC 3.3~V pour contrôler du CC 12~V],
+      [*Fonction Principale 5 bis*],
+      [*Commande aérateur en puissance*],
+      [*Relais piloté en CC basse tension pour contrôler du CA 230~V*],
     ),
     [Description / rôle],
     table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
       (alternatif 230~V) de l’aérateur à partir du système en 3.3~V piloté par
       le microcontrôleur.],
-    [Signaux d\'entrée],
+    [Références envisagées],
+    table.cell(colspan: 2)[
+      - TC209R #link(
+          "https://www.digikey.fr/fr/products/detail/bright-toward-industrial-co-ltd/TC209R/13556942",
+        )[chez Digikey];.
+    ],
+    [Signaux d’entrée],
     table.cell(colspan: 2)[
       - CmdAeration
+      - Valim (230~V secteur)
+    ],
+    [Signaux de sortie],
+    table.cell(colspan: 2)[IAeration],
+  ),
+)[FP5~bis]
+
+#fig(
+  table(
+    columns: 3,
+    align: (center + horizon, left + horizon),
+    table.header(
+      [*Fonction Principale 6*],
+      [*Aération*],
+      [*Aérateur encastrable pour gaine 125~mm*],
+    ),
+    [Description / rôle],
+    table.cell(colspan: 2)[Forcer l’air de la pièce de référence à aller dans la
+      pièce cible pour harmoniser leurs températures, si activé par le
+      microcontrôleur.],
+    [Références envisagées],
+    table.cell(colspan: 2)[
+      - Ventilateur MEC0251V3-000U-A99 120~mm 12~V DC 2 fils #link(
+          "https://www.digikey.fr/fr/products/detail/sunon-fans/MEC0251V3-000U-A99/2021100",
+        )[chez DigiKey];.
+      - Ventilateur 603-1212-ND 120~mm 12~V DC 4 fils (PWM) #link(
+          "https://www.digikey.fr/fr/products/detail/delta-electronics/AFB1212HHE-TP02/2034815",
+        )[chez DigiKey];.
+      - Aérateur 125~mm #link(
+          "https://www.titan-cd.com/fr/product/TTC-SC32(A).html",
+        )[TTC-SC32(A)];, DC 12~V.
+      - Phanteks 120~mm, DC 12~V PWM, référence #link(
+          "https://www.reichelt.com/fr/fr/shop/produit/ventilateur_phanteks_m25_gen2_120mm_noir-401616?utm_source=psuma&utm_medium=idealo.fr&PROVID=2842",
+        )[reichelt] ≃ 6~€
+      - Arctic P12, 120~mm, DC 12~V PWM, référence #link(
+          "https://www.reichelt.com/fr/fr/shop/produit/ventilateur_pour_boitier_arctic_p12_max_120_mm-344145?utm_source=psuma&utm_medium=idealo.fr&PROVID=2842",
+        )[reichelt] ≃ 8~€
+      - Manrose #link(
+          "https://www.pureventilation.com.au/buy/manrose-selv-12v-ceiling-wall-exhaust-fan-125mm/",
+        )[SELV];, AC 12~V ≃ 180~€
+      - Sygonix #link(
+          "https://www.conrad.fr/fr/p/sygonix-sy-5233250-ventilateur-tubulaire-encastrable-230-v-ac-240-m-h-125-mm-2616625.html",
+        )[SY-5233248] 240 m³/h, AC 230~V ≃ 20~€
+      - Airope Axial #link(
+          "https://www.manomano.fr/p/airope-inline-125-mmextracteur-dair-silencieux190-m3-h16-wconduit-en-ligneaxial-de-la-gainconome-en-nergiepour-le-bainwctoilettetenteserrecuisinebureaugaragegarantie-5-ans-66851732?model_id=70287817",
+        )[inline 125mm] 190 m³/h, AC 230~V ≃ 27~€
+      - Références 12~V DC PWM #link(
+          "https://www.digikey.fr/fr/products/filter/ventilateurs/ventilateurs-cc-sans-balais-bldc/217?s=N4IgjCBcoKxaBjKAzAhgGwM4FMA0IB7KAbRAGYyAWAJmonzIE4wAGGOB5tgDhE9YBsLPuS4D65AQJgDKIsmAEB2AbwaKVjEUpiMWZAfI0wyIALr4ADgBcoIAMrWATgEsAdgHMQAX3xg50CBIkGhYeIQkINSUjDDchvjcSvG8FiA2do6unj74lIaBwaE4%2BESQpJQsqpUildUSddyUpnksSrTCre10tW201L3dLSBKLCzc8fKMyfm91Rwgld1yaRmQDs7uXr7gjNxahSgYJRHlIMJm3ldAA",
+        )[DigiKey];.
+      - Références 12~V DC #link(
+          "https://www.digikey.fr/fr/products/filter/ventilateurs/ventilateurs-cc-sans-balais-bldc/217?s=N4IgjCBcpgLFoDGUBmBDANgZwKYBoQB7KAbRACZYBOAVgA4A2EAugdkbpAF0CAHAFyggAyvwBOASwB2AcxABfArCbQQySOmz4ipELAAMDOgeZ7DxiEvOwAzKYOty5fff2Pyls%2B-Kv3dgqz6%2BnSMpjZU7MquRrA0vk7wPCACQqKSsgoE9FQIaqiYuATEkGR0YDTO8ARgTuQ2TNW1NqymNR76cY1OYBBJKZAi4tJyiuBUdDmq6pqFOiUgLlzyy0A",
+        )[DigiKey];.
+      - Références #link(
+          "https://www.conrad.fr/fr/o/ventilateurs-tubulaires-encastres-0812001.html?tfo_ATT_PRODSPEC_0649=125%20mm~~~12.5%20cm",
+        )[Conrad];.
+      - Références aérateurs #link(
+          "https://www.leroymerlin.fr/produits/chauffage-et-ventilation/vmc-et-extracteur-air/extracteur-air/?p=1&filters={\"attribute-10854\"%3A\"120%2F125%23|125\"%7d",
+        )[Leroy Merlin];.
+      - Références aérateurs 125~mm #link(
+          "https://www.manomano.fr/aerateur-1627?cat_attr_14840[min]=12&cat_attr_14840[max]=13&ls_filter=false",
+        )[ManoMano];.
+      - Références bouche VMC #link(
+          "https://www.manomano.fr/bouche-vmc-2277?cat_attr_14840[min]=12&cat_attr_14840[max]=13&ls_filter=false",
+        )[ManoMano];.
+      - Références 12~V #link(
+          "https://www.manomano.fr/cat/extracteur+air+12v?cat_attr_2[min]=12&cat_attr_2[max]=13&ls_filter=false",
+        )[ManoMano];.
+      - #link(
+          "https://www.idealo.fr/cat/5155F2124519/ventilateurs-pour-pc.html",
+        )[Agrégation] ventilateurs PC 120~mm.
+      - #link(
+          "https://www.idealo.fr/cat/28660/ventilateurs-de-salle-de-bains.html",
+        )[Agrégation] ventilateurs salle de bains.
+    ],
+    [Signaux d’entrée],
+    table.cell(colspan: 2)[
+      - IAeration
+    ],
+    [Signaux de sortie],
+    table.cell(colspan: 2)[
+      - Flux thermique (déplacement de l’air)
+    ],
+  ),
+)[FP6]
+
+#fig(
+  table(
+    columns: 3,
+    align: (center + horizon, left + horizon),
+    table.header(
+      [*Fonction Principale 7*],
+      [*Affichage température*],
+      [*Écran 7 segments minimum 4 chiffres*],
+    ),
+    [Description / rôle],
+    table.cell(colspan: 2)[Forcer l’air de la pièce de référence à aller dans la
+      pièce cible pour harmoniser leurs températures, si activé par le
+      microcontrôleur.],
+    [Références envisagées],
+    table.cell(colspan: 2)[
+      - Afficheur LCD 4411-CN0295D-ND #link(
+          "https://www.digikey.fr/fr/products/detail/sunfounder/CN0295D/18668612",
+        )[DigiKey];.
+      - Références afficheurs LCD #link(
+          "https://www.digikey.fr/fr/products/filter/lcd-oled-alphanumériques/99?s=N4IgjCBcpgrALFUBjKAzAhgGwM4FMAaEAeygG0QBmWANgE4wAOEIgdlgCZKxE3PuOLEKzqtGdWCAC6RAA4AXKCADK8gE4BLAHYBzEAF8iYOuKQhUkTLkIlyIAAzT9hkDTMaAJkoC0YexDlFSBAheQBPWTwlDBxUZyA",
+        )[chez DigiKey];.
+    ],
+    [Signaux d’entrée],
+    table.cell(colspan: 2)[
+      - IAeration
+    ],
+    [Signaux de sortie],
+    table.cell(colspan: 2)[
+      - Informations visuelles
+    ],
+  ),
+)[FP7]
+
+=== Fonctions Annexes
+
+#fig(
+  table(
+    columns: 3,
+    align: (center + horizon, left + horizon),
+    table.header(
+      [*Fonction Annexe 0*],
+      [*Alimentation générique*],
+      [*Alimentation 3,3~V à partir d’une alimentation plus générique*],
+    ),
+    [Description / rôle],
+    table.cell(colspan: 2)[Fournir un courant continu de 3,3~V au circuit de
+      contrôle, incluant le microcontrôleur, à partir d’une alimentation
+      générique fournissant du courant continu entre 5 et 25~V.],
+    [Références envisagées],
+    table.cell(colspan: 2)[
+      - Régulateur de tension linéaire LM1086CT-3.3/NOPB-ND #link(
+          "https://www.digikey.fr/fr/products/detail/texas-instruments/LM1086CT-3-3-NOPB/363571",
+        )[chez DigiKey];.
+      - IRM-10-3.3 #link(
+          "https://www.digikey.fr/fr/products/detail/mean-well-usa-inc/IRM-10-3-3/7704656",
+        )[chez DigiKey];.
+      - Références régulateurs de tension linéaires #link(
+          "https://www.digikey.fr/fr/products/filter/régulateurs-de-tension-linéaires/699?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9CYevQTQQKSBhwFiZcPSpgArCCmawAJgAMzNp0g9%2BwsZPBw6iBWix5CJSOVNNxvoA",
+        )[chez DigiKey];.
+    ],
+    [Signaux d’entrée],
+    table.cell(colspan: 2)[
       - Valim (5~V à 25~V)
     ],
     [Signaux de sortie],
     table.cell(colspan: 2)[
-      - IAeration
-    ],
-  )])
-
-#figure(
-  align(center)[#table(
-      columns: 3,
-      align: (center + horizon, left),
-      table.header(
-        [Fonction Principale 5 bis],
-        [Commande aérateur en puissance],
-        [Relais piloté en CC basse tension pour contrôler du CA 230~V],
-      ),
-      [Description / rôle],
-      table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
-        (alternatif 230~V) de l’aérateur à partir du système en 3.3~V piloté par
-        le microcontrôleur.],
-      [Références envisagées],
-      table.cell(colspan: 2)[
-        - TC209R #link(
-            "https://www.digikey.fr/fr/products/detail/bright-toward-industrial-co-ltd/TC209R/13556942",
-          )[chez Digikey];.
-      ],
-      [Signaux d\'entrée],
-      table.cell(colspan: 2)[
-        - CmdAeration
-        - Valim (230~V secteur)
-      ],
-      [Signaux de sortie],
-      table.cell(colspan: 2)[IAeration],
-    )],
-)
-
-#figure(
-  align(center)[#table(
-      columns: 3,
-      align: (center + horizon, left),
-      table.header(
-        [Fonction Principale 6],
-        [Aération],
-        [Aérateur encastrable pour gaine 125~mm],
-      ),
-      [Description / rôle],
-      table.cell(colspan: 2)[Forcer l’air de la pièce de référence à aller dans
-        la pièce cible pour harmoniser leurs températures, si activé par le
-        microcontrôleur.],
-      [Références envisagées],
-      table.cell(colspan: 2)[
-        - Ventilateur MEC0251V3-000U-A99 120~mm 12~V DC 2 fils #link(
-            "https://www.digikey.fr/fr/products/detail/sunon-fans/MEC0251V3-000U-A99/2021100",
-          )[chez DigiKey];.
-
-        - Ventilateur 603-1212-ND 120~mm 12~V DC 4 fils (PWM) #link(
-            "https://www.digikey.fr/fr/products/detail/delta-electronics/AFB1212HHE-TP02/2034815",
-          )[chez DigiKey];.
-
-        - Aérateur 125~mm #link(
-            "https://www.titan-cd.com/fr/product/TTC-SC32(A).html",
-          )[TTC-SC32(A)];, DC 12~V.
-
-        - Phanteks 120~mm, DC 12~V PWM, référence #link(
-            "https://www.reichelt.com/fr/fr/shop/produit/ventilateur_phanteks_m25_gen2_120mm_noir-401616?utm_source=psuma&utm_medium=idealo.fr&PROVID=2842",
-          )[reichelt] ≃ 6~€
-
-        - Arctic P12, 120~mm, DC 12~V PWM, référence #link(
-            "https://www.reichelt.com/fr/fr/shop/produit/ventilateur_pour_boitier_arctic_p12_max_120_mm-344145?utm_source=psuma&utm_medium=idealo.fr&PROVID=2842",
-          )[reichelt] ≃ 8~€
-
-        - Manrose #link(
-            "https://www.pureventilation.com.au/buy/manrose-selv-12v-ceiling-wall-exhaust-fan-125mm/",
-          )[SELV];, AC 12~V ≃ 180~€
-
-        - Sygonix #link(
-            "https://www.conrad.fr/fr/p/sygonix-sy-5233250-ventilateur-tubulaire-encastrable-230-v-ac-240-m-h-125-mm-2616625.html",
-          )[SY-5233248] 240 m³/h, AC 230~V ≃ 20~€
-
-        - Airope Axial #link(
-            "https://www.manomano.fr/p/airope-inline-125-mmextracteur-dair-silencieux190-m3-h16-wconduit-en-ligneaxial-de-la-gainconome-en-nergiepour-le-bainwctoilettetenteserrecuisinebureaugaragegarantie-5-ans-66851732?model_id=70287817",
-          )[inline 125mm] 190 m³/h, AC 230~V ≃ 27~€
-
-        - Références 12~V DC PWM #link(
-            "https://www.digikey.fr/fr/products/filter/ventilateurs/ventilateurs-cc-sans-balais-bldc/217?s=N4IgjCBcoKxaBjKAzAhgGwM4FMA0IB7KAbRAGYyAWAJmonzIE4wAGGOB5tgDhE9YBsLPuS4D65AQJgDKIsmAEB2AbwaKVjEUpiMWZAfI0wyIALr4ADgBcoIAMrWATgEsAdgHMQAX3xg50CBIkGhYeIQkINSUjDDchvjcSvG8FiA2do6unj74lIaBwaE4%2BESQpJQsqpUildUSddyUpnksSrTCre10tW201L3dLSBKLCzc8fKMyfm91Rwgld1yaRmQDs7uXr7gjNxahSgYJRHlIMJm3ldAA",
-          )[DigiKey];.
-
-        - Références 12~V DC #link(
-            "https://www.digikey.fr/fr/products/filter/ventilateurs/ventilateurs-cc-sans-balais-bldc/217?s=N4IgjCBcpgLFoDGUBmBDANgZwKYBoQB7KAbRACZYBOAVgA4A2EAugdkbpAF0CAHAFyggAyvwBOASwB2AcxABfArCbQQySOmz4ipELAAMDOgeZ7DxiEvOwAzKYOty5fff2Pyls%2B-Kv3dgqz6%2BnSMpjZU7MquRrA0vk7wPCACQqKSsgoE9FQIaqiYuATEkGR0YDTO8ARgTuQ2TNW1NqymNR76cY1OYBBJKZAi4tJyiuBUdDmq6pqFOiUgLlzyy0A",
-          )[DigiKey];.
-
-        - Références #link(
-            "https://www.conrad.fr/fr/o/ventilateurs-tubulaires-encastres-0812001.html?tfo_ATT_PRODSPEC_0649=125%20mm~~~12.5%20cm",
-          )[Conrad];.
-
-        - Références aérateurs #link(
-            "https://www.leroymerlin.fr/produits/chauffage-et-ventilation/vmc-et-extracteur-air/extracteur-air/?p=1&filters={\"attribute-10854\"%3A\"120%2F125%23|125\"%7d",
-          )[Leroy Merlin];.
-
-        - Références aérateurs 125~mm #link(
-            "https://www.manomano.fr/aerateur-1627?cat_attr_14840[min]=12&cat_attr_14840[max]=13&ls_filter=false",
-          )[ManoMano];.
-
-        - Références bouche VMC #link(
-            "https://www.manomano.fr/bouche-vmc-2277?cat_attr_14840[min]=12&cat_attr_14840[max]=13&ls_filter=false",
-          )[ManoMano];.
-
-        - Références 12~V #link(
-            "https://www.manomano.fr/cat/extracteur+air+12v?cat_attr_2[min]=12&cat_attr_2[max]=13&ls_filter=false",
-          )[ManoMano];.
-
-        - #link(
-            "https://www.idealo.fr/cat/5155F2124519/ventilateurs-pour-pc.html",
-          )[Agrégation] ventilateurs PC 120~mm.
-
-        - #link(
-            "https://www.idealo.fr/cat/28660/ventilateurs-de-salle-de-bains.html",
-          )[Agrégation] ventilateurs salle de bains.
-      ],
-      [Signaux d\'entrée],
-      table.cell(colspan: 2)[
-        - IAeration
-      ],
-      [Signaux de sortie],
-      table.cell(colspan: 2)[
-        - Flux thermique (déplacement de l’air)
-      ],
-    )],
-)
-
-#figure(
-  align(center)[#table(
-      columns: 3,
-      align: (center + horizon, left),
-      table.header(
-        [Fonction Principale],
-        [Affichage température],
-        [Écran 7 segments minimum 4 chiffres],
-      ),
-      [Description / rôle],
-      table.cell(colspan: 2)[Forcer l’air de la pièce de référence à aller dans
-        la pièce cible pour harmoniser leurs températures, si activé par le
-        microcontrôleur.],
-      [Références envisagées],
-      table.cell(colspan: 2)[
-        - Afficheur LCD 4411-CN0295D-ND #link(
-            "https://www.digikey.fr/fr/products/detail/sunfounder/CN0295D/18668612",
-          )[DigiKey];.
-
-        - Références afficheurs LCD #link(
-            "https://www.digikey.fr/fr/products/filter/lcd-oled-alphanumériques/99?s=N4IgjCBcpgrALFUBjKAzAhgGwM4FMAaEAeygG0QBmWANgE4wAOEIgdlgCZKxE3PuOLEKzqtGdWCAC6RAA4AXKCADK8gE4BLAHYBzEAF8iYOuKQhUkTLkIlyIAAzT9hkDTMaAJkoC0YexDlFSBAheQBPWTwlDBxUZyA",
-          )[chez DigiKey];.
-
-      ],
-      [Signaux d\'entrée],
-      table.cell(colspan: 2)[
-        - IAeration
-
-      ],
-      [Signaux de sortie],
-      table.cell(colspan: 2)[
-        - Informations visuelles
-
-      ],
-    )],
-)
-
-=== Fonctions Annexes
-
-#figure(
-  align(center)[#table(
-      columns: 3,
-      align: (center + horizon, left),
-      table.header(
-        [Fonction Annexe 0],
-        [Alimentation générique],
-        [Alimentation 3,3~V à partir d’une alimentation plus générique],
-      ),
-      [Description / rôle],
-      table.cell(colspan: 2)[Fournir un courant continu de 3,3~V au circuit de
-        contrôle, incluant le microcontrôleur, à partir d’une alimentation
-        générique fournissant du courant continu entre 5 et 25~V.],
-      [Références envisagées],
-      table.cell(colspan: 2)[
-        - Régulateur de tension linéaire LM1086CT-3.3/NOPB-ND #link(
-            "https://www.digikey.fr/fr/products/detail/texas-instruments/LM1086CT-3-3-NOPB/363571",
-          )[chez DigiKey];.
-
-        - IRM-10-3.3 #link(
-            "https://www.digikey.fr/fr/products/detail/mean-well-usa-inc/IRM-10-3-3/7704656",
-          )[chez DigiKey];.
-
-        - Références régulateurs de tension linéaires #link(
-            "https://www.digikey.fr/fr/products/filter/régulateurs-de-tension-linéaires/699?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9CYevQTQQKSBhwFiZcPSpgArCCmawAJgAMzNp0g9%2BwsZPBw6iBWix5CJSOVNNxvoA",
-          )[chez DigiKey];.
-
-      ],
-      [Signaux d\'entrée],
-      table.cell(colspan: 2)[
-        - Valim (5~V à 25~V)
-
-      ],
-      [Signaux de sortie],
-      table.cell(colspan: 2)[
-        - Vcc33
-
-      ],
-    )],
-)
-
-#figure(align(center)[#table(
-    columns: 3,
-    align: (auto, left, left),
-    table.header(
-      [Fonction Annexe 1],
-      [Alimentation sur batterie],
-      [Alimentation 3,3~V à partir d’une batterie ou pile],
-    ),
-    [Description / rôle],
-    table.cell(align: left, colspan: 2)[QUESTION~: Vraiment nécessaire~? Ou
-      utiliser FA0 pour le module côté cible également~?
-
-      Fournir un courant continu de 3,3~V au circuit de contrôle, incluant le
-      microcontrôleur, à partir d’une solution d’alimentation autonome
-      (batterie, pile).
-
-    ],
-    [Signaux d\'entrée],
-    table.cell(colspan: 2)[
-      - Batterie
-
-    ],
-    [Signaux de sortie],
-    table.cell(colspan: 2)[
       - Vcc33
-
     ],
-  )])
+  ),
+)[FA0]
 
-#figure(align(center)[#table(
-    columns: 3,
-    align: (center + horizon, left),
-    table.header(
-      [Fonction Annexe 2],
-      [Programmation in-situ],
-      [Programmeur pour le(s) microcontrôleur(s) utilisé(s)],
-    ),
-    [Description / rôle],
-    table.cell(colspan: 2)[Programmer le microcontrôleur sans le retirer du
-      circuit.],
-    [Signaux d\'entrée],
-    table.cell(colspan: 2)[
-      - Communication USB avec ordinateur
+#fig(table(
+  columns: 3,
+  align: (center + horizon, left + horizon),
+  table.header(
+    [*Fonction Annexe 1*],
+    [*Alimentation sur batterie*],
+    [*Alimentation 3,3~V à partir d’une batterie ou pile*],
+  ),
+  [Description / rôle],
+  table.cell(align: left, colspan: 2)[
+    // WARN Vraiment nécessaire?
+    // Ou utiliser FA0 pour le module côté cible également~?
 
-    ],
-    [Signaux de sortie],
-    table.cell(colspan: 2)[
-      - Signaux électriques de programmation
+    Fournir un courant continu de 3,3~V au circuit de contrôle, incluant le
+    microcontrôleur, à partir d’une solution d’alimentation autonome (batterie,
+    pile).
+  ],
+  [Signaux d’entrée],
+  table.cell(colspan: 2)[
+    - Batterie
+  ],
+  [Signaux de sortie],
+  table.cell(colspan: 2)[
+    - Vcc33
+  ],
+))[FA1]
 
-    ],
-  )])
+#fig(table(
+  columns: 3,
+  align: (center + horizon, left + horizon),
+  table.header(
+    [*Fonction Annexe 2*],
+    [*Programmation in-situ*],
+    [*Programmeur pour le(s) microcontrôleur(s) utilisé(s)*],
+  ),
+  [Description / rôle],
+  table.cell(colspan: 2)[Programmer le microcontrôleur sans le retirer du
+    circuit.],
+  [Signaux d’entrée],
+  table.cell(colspan: 2)[
+    - Communication USB avec ordinateur
+  ],
+  [Signaux de sortie],
+  table.cell(colspan: 2)[
+    - Signaux électriques de programmation
+  ],
+))[FA2]
 
 == Description des signaux
 
 #fig(table(
   columns: 10,
+  align: center + horizon,
   table.header(
     table.cell(rowspan: 2)[*Signal*],
     [*Fonctions concernées*],
-    [*Nature du signal (A/N/GP)*],
+    [*Nature du signal\ (A/N/GP)*],
     [*Taille entité*],
-    [*Grandeur et unité (U, I…)*],
+    [*Grandeur et unité\ (U, I…)*],
     [*Plage de variation - Niveaux*],
     [*Excursion en fréquence*],
     [*Valeur au repos*],
@@ -734,16 +706,17 @@ breadboard.
   [],
   table.cell(colspan: 9)[Puissance nécessaire pour actionner le mouvement de
     l’aérateur.],
-))
+))[Description des signaux (1/2)]
 
 #fig(table(
   columns: 10,
+  align: center + horizon,
   table.header(
     table.cell(rowspan: 2)[*Signal*],
     [*Fonctions concernées*],
-    [*Nature du signal (A/N/GP)*],
+    [*Nature du signal\ (A/N/GP)*],
     [*Taille entité*],
-    [*Grandeur et unité (U, I…)*],
+    [*Grandeur et unité\ (U, I…)*],
     [*Plage de variation - Niveaux*],
     [*Excursion en fréquence*],
     [*Valeur au repos*],
@@ -832,9 +805,10 @@ breadboard.
   [],
   table.cell(colspan: 9)[Flux d’air entrainé par l’aérateur depuis la pièce
     référence vers la pièce cible.],
-))
+))[Description des signaux (2/2)]
 
-#set page(flipped: false) // Revient en portrait
+#set par(justify: true) // Justifie à nouveau les paragraphes
+#set page(flipped: false, margin: (x: 2cm)) // Revient en portrait
 
 == Contraintes
 
