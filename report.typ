@@ -54,42 +54,10 @@
 #register-glossary(yaml("glo.yml"))
 // LTeX: enabled=true // Réactive la correction orthographique
 
-#include "./0abstract.typ"
+// #include "./0abstract.typ"
 
 #toc() // Table des matières
 #tof() // Table des figures (et tableaux et codes)
-
-= Exemples Typst
-
-#fig(image("polytech.png", width: 50%))[Une figure avec légende]
-
-#link("https://gitlab.com/gfauredev/typst-lib")[Lien] du dépôt GitLab.
-
-#fig(table(
-  columns: 2,
-  table.header([Un], [tableau]),
-  [Gras], [*gras*],
-  [Italique], [_italique_],
-  [Barré], strike[texte],
-))[Légende]
-
-Référence glossaire @typst et bibliographie @typst-doc (définitions dans fichier
-YAML).
-
-#fig()[```Python
-  my_string = """
-    Bloc de code (Python)
-  """
-  for i in range(42):
-      print("{} - Hello, world !".format(i))
-  ```][Python]
-
-#fig(cetz.canvas({
-  import cetz.draw: *
-  plot.plot(size: (6, 6), x-tick-step: none, y-tick-step: none, {
-    plot.add(((0, 0), (3, 3), (6, 1.5), (12, 9)))
-  })
-}))[Légende du graphique]
 
 #include "./1intro.typ"
 
