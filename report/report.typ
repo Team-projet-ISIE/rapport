@@ -21,7 +21,7 @@
 ) = {
   // Set PDF file metadata
   set document(author: meta.authors, title: meta.titles.at(0), date: meta.date)
-  set page(paper: paper, margin: margin, footer-descent: 50%) // Page geometry
+  set page(paper: paper, margin: margin) //, footer-descent: 0%) // Geometry
 
   set text(font: meta.serif, lang: meta.lang) // Text font and language
   set par(justify: true) // Justify paragraphs by default
