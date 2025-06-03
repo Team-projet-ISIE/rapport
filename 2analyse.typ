@@ -1,7 +1,7 @@
 #import "report/report.typ": * // Import all report symbols
 #show figure: set block(breakable: true)
 
-= Analyse Fonctionnelle et Cahier des Charges
+= Analyse fonctionnelle // et cahier des charges
 
 Notre objectif est de réaliser un système permettant d’équilibrer intelligemment
 la température entre deux pièces via une gaine d’aération de diamètre 125~mm les
@@ -819,11 +819,11 @@ pouvons aussi faire l’essai avec un relais, mais qui ne sera pas connecté.
     référence vers la pièce cible.],
 ))
 
-#set page(flipped: false)
-
-== Cahier des Charges Fonctionnel ?
-
-== Performances attendues ?
+#set page(flipped: false) // Revient en portrait
 
 == Contraintes
+
+// == Cahier des charges fonctionnel // À voir
+
+// == Performances attendues // À voir
 

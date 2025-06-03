@@ -1,4 +1,4 @@
-= Étude de l'Existant et Veille Technologique
+= Étude de l'existant, veille technologique
 
 == Solutions existantes
 
@@ -6,9 +6,17 @@
 
 == Capteurs
 
-== Microcontrôleurs
+DHT20
 
 == Actionneurs
 
+Ventilateurs
+
 == Protocoles de communication
+
+ZigBee
+
+== Microcontrôleurs
+
+PIC24
 

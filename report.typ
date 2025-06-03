@@ -67,9 +67,9 @@
 
 #include "./4conception.typ"
 
-#include "./5realisation.typ"
+// #include "./5realisation.typ" // À voir
 
-#include "./6test.typ"
+// #include "./6test.typ" // À voir
 
 #include "./7conclusion.typ"
 

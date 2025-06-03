@@ -1,12 +1,10 @@
-= Conception du Système
+= Conception // du système
 
 == Architecture globale
 
-Schéma bloc
+Schéma bloc…
 
 == Conception matérielle
-
-Hard
 
 === Choix des composants
 
@@ -16,13 +14,9 @@ Hard
 
 == Conception logicielle
 
-Soft
-
-=== Algorithme de régulation
-
-=== Logique de programmation temporelle
-
 === Architecture logicielle
+
+=== Algorithme d’aération
 
 === Interface Homme-Machine
 
