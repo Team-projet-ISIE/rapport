@@ -1,0 +1,3 @@
+#!/bin/sh
+$EDITOR 0abstract.typ 1intro.typ 2analyse.typ 3etude.typ 4conception.typ 5realisation.typ 6test.typ 7conclusion.typ 8annexes.typ
+typst compile report.typ
