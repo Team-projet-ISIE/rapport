@@ -1,6 +1,5 @@
-// LTeX: enabled=false // Désactive la correction orthographique
+// LTeX: enabled=false // Désactive la correction orthographique pour ce fichier
 #import "report/report.typ": * // Import all report symbols
-// Set global metadata (merge with default one) and apply template
 // @typstyle off // Ugly dict addition formatting
 #let meta = default_meta + (
   lang: "fr", // Français
@@ -13,7 +12,7 @@
   date: date(2025, 6, 12) // Date de la soutenance
 )
 #show: template.with(meta) // Métadonnées (paramètres)
-#let accent = "#009EE0" // Bleu du logo Polytech, peut être utile
+#let accent = rgb("#009EE0") // Bleu du logo Polytech, peut être utile
 
 // Page de titre
 #fullpage({
@@ -40,46 +39,43 @@
   v(1fr)
   info()
 })
-// Page de remerciements ?
-// #fullpage({
-//   heading(numbering: none, level: 2, i18n("thanks"))
-//   [Nous remercions…]
-// })
+// #include "./merci.typ" // Page de remerciements ?
+// #include "./0abstract.typ" // Page de résumé ?
 
 #show: make-glossary // Initialise le glossaire
 #register-glossary(yaml("glo.yml")) // Initialise glossaire (pour le fichier)
-// LTeX: enabled=true // Réactive la correction orthographique
 
-// #include "./0abstract.typ"
+#show heading: h => {
+  if calc.rem-euclid(h.level, 2) == 0 {
+    text(accent, h) // Titres de niveau pair en bleu
+  } else {
+    h
+  }
+}
 
 #toc() // Table des matières
 #tof() // Table des figures (et tableaux et codes)
 
-#show heading.where(level: 1): h => {
-  pagebreak(weak: true) // Saut de page avant les grands titres
-  h
-}
-
+#pagebreak() // Saut de page
 #include "./1intro.typ"
-
+#pagebreak() // Saut de page
 #include "./2analyse.typ"
-
+#pagebreak() // Saut de page
 #include "./3etude.typ"
-
+#pagebreak() // Saut de page
 #include "./4conception.typ"
-
+#pagebreak() // Saut de page
 #include "./6test.typ"
-
+#pagebreak() // Saut de page
 // #include "./5realisation.typ" // À voir
-
+// #pagebreak() // Saut de page
 #include "./7conclusion.typ"
-
+#pagebreak() // Saut de page
 #include "./8annexes.typ"
+#pagebreak() // Saut de page
 
 // Glossaire et Bibliographie
-#fullpage({
-  heading(numbering: none, i18n("glossary"))
-  print-glossary(yaml("glo.yml")) // Glossarium glossary
-  pagebreak(weak: true)
-  bibliography("bib.yml") // Typst’s bibliography
-})
+#heading(numbering: none, i18n("glossary"))
+#print-glossary(yaml("glo.yml")) // Glossarium glossary
+#pagebreak(weak: true)
+#bibliography("bib.yml") // Typst’s bibliography
