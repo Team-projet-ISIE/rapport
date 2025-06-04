@@ -1,6 +1,16 @@
-= Test et Validation
+= Test et validation
 
-== Protocoles de test
+== Protocoles de test matériel
+
+=== Tests unitaires
+
+Test fonctions code
+
+=== Test d’intégration
+
+Test de l’ensemble du système
+
+== Protocoles de test logiciel
 
 === Tests unitaires
 
@@ -14,7 +24,7 @@ Test de l’ensemble du système
 
 Efficacité
 
-== Résultats
+// == Résultats des tests
 
-== Analyse et Interprétation
+== Analyse et interprétation
 

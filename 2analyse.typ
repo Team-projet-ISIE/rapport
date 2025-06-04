@@ -39,6 +39,49 @@ breadboard.
 
 === Bête à cornes
 
+#import "@preview/fletcher:0.5.8": diagram, edge, node
+#import fletcher.shapes: ellipse
+
+#diagram(
+  spacing: (4.5cm, 2.5cm),
+  node-stroke: 0.8pt,
+  edge-stroke: 0.8pt,
+  node(
+    (0, 0.5),
+    [À qui le produit rend-il service ?],
+    name: <user>,
+    shape: ellipse,
+    fill: rgb("e0f7fa"),
+  ),
+  node(
+    (0, 1.5),
+    [Sur quoi le produit agit-il ?],
+    name: <matter>,
+    shape: ellipse,
+    fill: rgb("e0f7fa"),
+  ),
+  node(
+    (2, 1),
+    [Dans quel but le système existe-t-il ?],
+    name: <goal>,
+    shape: ellipse,
+    fill: rgb("e8f5e9"),
+  ),
+  node(
+    (1, 1),
+    [PRODUIT],
+    name: <product>,
+    shape: ellipse,
+    fill: rgb("fff9c4"),
+    width: 4cm,
+    height: 2.5cm,
+    stroke: 1.5pt,
+  ),
+  edge(<user>, <product>, "->", dash: "dotted"),
+  edge(<matter>, <product>, "->", dash: "dotted"),
+  edge(<product>, <goal>, "->", dash: "dotted"),
+)
+
 === Matrice MOSCOW // Portée du projet
 
 #fig(table(
