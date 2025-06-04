@@ -59,6 +59,11 @@
 #toc() // Table des matières
 #tof() // Table des figures (et tableaux et codes)
 
+#show heading.where(level: 1): h => {
+  pagebreak(weak: true) // Saut de page avant les grands titres
+  h
+}
+
 #include "./1intro.typ"
 
 #include "./2analyse.typ"

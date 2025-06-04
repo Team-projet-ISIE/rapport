@@ -706,7 +706,7 @@ breadboard.
   [],
   table.cell(colspan: 9)[Puissance nécessaire pour actionner le mouvement de
     l’aérateur.],
-))[Description des signaux (1/2)]
+))[Description des signaux (1~/~2)]
 
 #fig(table(
   columns: 10,
@@ -805,7 +805,7 @@ breadboard.
   [],
   table.cell(colspan: 9)[Flux d’air entrainé par l’aérateur depuis la pièce
     référence vers la pièce cible.],
-))[Description des signaux (2/2)]
+))[Description des signaux (2~/~2)]
 
 #set par(justify: true) // Justifie à nouveau les paragraphes
 #set page(flipped: false, margin: (x: 2cm)) // Revient en portrait

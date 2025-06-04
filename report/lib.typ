@@ -3,11 +3,7 @@
 #import "lib/lib.typ": coll, date, fig, fullpage, i18n, info, rc, res, sign
 // Glossary (initialization)
 #import "@preview/glossarium:0.5.4": (
-  gls,
-  glspl,
-  make-glossary,
-  print-glossary,
-  register-glossary,
+  gls, glspl, make-glossary, print-glossary, register-glossary,
 )
 // Diagrams drawing
 #import "@preview/cetz:0.3.4"
@@ -39,50 +35,28 @@
 
 // ToC’s and ToF’s codes may be factorizable
 // Wrapper around outline to make a Table of Contents
-#let toc(toc: none) = {
-  if type(toc) == content or type(toc) == str {
-    context {
-      if counter(heading).final().at(0) > 0 {
-        outline(title: toc, depth: 3, indent: auto)
-      }
-    }
-  } else {
-    context {
-      if counter(heading).final().at(0) > 0 {
-        outline(depth: 3, indent: auto)
-      }
+#let toc() = {
+  context {
+    if counter(heading).final().at(0) > 0 {
+      pagebreak(weak: true)
+      outline(depth: 3, indent: auto)
     }
   }
 }
 // Wrapper around outline to make an internationalized Table of Figures
-#let tof(tof: none) = {
+#let tof() = {
   let figTitles = (
     table: i18n("tables"),
     raw: i18n("codes"),
     image: i18n("figures"),
   )
-  if type(tof) == dictionary {
-    // pagebreak(weak: true) // TODO break page if ToC + ToF don’t fit in one
+  pagebreak(weak: true)
+  for kind in (table, raw, image) {
     context {
-      for (title, kind) in tof {
-        if counter(figure.where(kind: kind)).final().at(0) > 0 {
-          outline(title: title, target: figure.where(kind: kind))
-        }
-      }
-    }
-  } else if type(tof) == str and (tof == "mix" or tof == "mixed") {
-    outline(
-      title: [#i18n("tables"), #i18n("codes"), #i18n("figures")],
-      target: figure,
-    )
-  } else {
-    for kind in (table, raw, image) {
-      context {
-        if counter(figure.where(kind: kind)).final().at(0) > 0 {
-          outline(title: figTitles.at(repr(kind)), target: figure.where(
-            kind: kind,
-          ))
-        }
+      if counter(figure.where(kind: kind)).final().at(0) > 0 {
+        outline(title: figTitles.at(repr(kind)), target: figure.where(
+          kind: kind,
+        ))
       }
     }
   }

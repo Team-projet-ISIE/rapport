@@ -31,10 +31,6 @@
   set heading(numbering: nb) // Number headings
   show heading: set text(font: meta.sans) // Write headings with sans font
   show heading.where(level: 1): h => align(center, h) // Center top headings
-  show heading.where(level: 1): h => {
-    pagebreak(weak: true) // Break page before level 1 headings
-    h
-  }
 
   set table(fill: (_, y) => if calc.odd(y) {
     rgb("EAF2F5") // Gray odd lines in tables
