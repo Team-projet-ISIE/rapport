@@ -10,11 +10,9 @@
     [Informatique et Systèmes Intelligents Embarqués par apprentissage],
   ),
   authors: ("Fankam Jisèle", "Fauré Guilhem", ),
-  date: date(2025, 6, 12), // Date de la soutenance
+  date: date(2025, 6, 12) // Date de la soutenance
 )
-#show: template.with(
-  meta, // Métadonnées (paramètres)
-)
+#show: template.with(meta) // Métadonnées (paramètres)
 #let accent = "#009EE0" // Bleu du logo Polytech, peut être utile
 
 // Page de titre
@@ -42,7 +40,6 @@
   v(1fr)
   info()
 })
-// #fullpage([]) // Page vide
 // Page de remerciements ?
 // #fullpage({
 //   heading(numbering: none, level: 2, i18n("thanks"))
@@ -50,8 +47,7 @@
 // })
 
 #show: make-glossary // Initialise le glossaire
-// Initialise le glossaire (nécessaire dans chaque fichier)
-#register-glossary(yaml("glo.yml"))
+#register-glossary(yaml("glo.yml")) // Initialise glossaire (pour le fichier)
 // LTeX: enabled=true // Réactive la correction orthographique
 
 // #include "./0abstract.typ"

@@ -39,48 +39,78 @@ breadboard.
 
 === Bête à cornes
 
-#import "@preview/fletcher:0.5.8": diagram, edge, node
-#import fletcher.shapes: ellipse
-
-#diagram(
-  spacing: (4.5cm, 2.5cm),
-  node-stroke: 0.8pt,
-  edge-stroke: 0.8pt,
-  node(
-    (0, 0.5),
-    [À qui le produit rend-il service ?],
-    name: <user>,
-    shape: ellipse,
-    fill: rgb("e0f7fa"),
-  ),
-  node(
-    (0, 1.5),
-    [Sur quoi le produit agit-il ?],
-    name: <matter>,
-    shape: ellipse,
-    fill: rgb("e0f7fa"),
-  ),
-  node(
-    (2, 1),
-    [Dans quel but le système existe-t-il ?],
-    name: <goal>,
-    shape: ellipse,
-    fill: rgb("e8f5e9"),
-  ),
-  node(
-    (1, 1),
-    [PRODUIT],
-    name: <product>,
-    shape: ellipse,
-    fill: rgb("fff9c4"),
-    width: 4cm,
-    height: 2.5cm,
+#cetz.canvas({
+  let user-pos = (-6, 2.75)
+  let matter-pos = (-6, -2.75)
+  let product-pos = (0, 0)
+  let goal-pos = (6.25, 0)
+  cetz.draw.rect(
+    user-pos,
+    (user-pos.at(0) + 4.5, user-pos.at(1) + 1.75),
+    corner-radius: 0.875,
+    fill: rgb(224, 247, 250),
+    stroke: 0.8pt,
+  )
+  cetz.draw.rect(
+    matter-pos,
+    (matter-pos.at(0) + 4.5, matter-pos.at(1) + 1.75),
+    corner-radius: 0.875,
+    fill: rgb(224, 247, 250),
+    stroke: 0.8pt,
+  )
+  cetz.draw.rect(
+    goal-pos,
+    (goal-pos.at(0) + 4.5, goal-pos.at(1) + 2),
+    corner-radius: 1,
+    fill: rgb(232, 245, 233),
+    stroke: 0.8pt,
+  )
+  cetz.draw.circle(
+    product-pos,
+    radius: (2.5, 1.75),
+    fill: rgb(255, 249, 196),
     stroke: 1.5pt,
-  ),
-  edge(<user>, <product>, "->", dash: "dotted"),
-  edge(<matter>, <product>, "->", dash: "dotted"),
-  edge(<product>, <goal>, "->", dash: "dotted"),
-)
+  )
+  cetz.draw.content(user-pos, align(center)[À qui le produit rend-il service ?])
+  cetz.draw.content(matter-pos, align(center)[Sur quoi le produit agit-il ?])
+  cetz.draw.content(goal-pos, align(center)[Dans quel but le système existe-t-il
+    ?])
+  cetz.draw.content(product-pos, text(weight: "bold")[PRODUIT])
+  let user-anchor = (user-pos.at(0) + 2.25, user-pos.at(1) + 0)
+  let matter-anchor = (matter-pos.at(0) + 2.25, matter-pos.at(1) + 0)
+  let product-left-anchor-top = (
+    product-pos.at(0) - 2.5,
+    product-pos.at(1) + 0.4,
+  )
+  let product-left-anchor-bottom = (
+    product-pos.at(0) - 2.5,
+    product-pos.at(1) - 0.4,
+  )
+  let product-right-anchor = (product-pos.at(0) + 2.5, product-pos.at(1) + 0)
+  let goal-anchor = (goal-pos.at(0) - 2.25, goal-pos.at(1) + 0)
+  cetz.draw.bezier(
+    user-anchor,
+    product-left-anchor-top,
+    (user-anchor.at(0) + 2, user-anchor.at(1) + 0),
+    (product-left-anchor-top.at(0) - 2, product-left-anchor-top.at(1) + 0.5),
+    stroke: 1pt,
+    mark: (end: "stealth"),
+  )
+  cetz.draw.bezier(
+    matter-anchor,
+    product-left-anchor-bottom,
+    (matter-anchor.at(0) + 2, matter-anchor.at(1) + 0),
+    (
+      product-left-anchor-bottom.at(0) - 2,
+      product-left-anchor-bottom.at(1) - 0.5,
+    ),
+    stroke: 1pt,
+    mark: (end: "stealth"),
+  )
+  cetz.draw.line(product-right-anchor, goal-anchor, stroke: 1pt, mark: (
+    end: "stealth",
+  ))
+})
 
 === Matrice MOSCOW // Portée du projet
 
@@ -99,15 +129,15 @@ breadboard.
     - Choix entre un des deux modes ci-dessous avec un commutateur physique
   ],
   [
-    - Fonctionnement sur batterie du module ne pilotant pas l’aérateur
+    - Affichage de la température actuelle de la pièce cible
+    - Affichage de la température actuelle de la pièce de référence
+    - Réglage de la température seuil par l’utilisateur
   ],
   table.cell(align: center, strong[Could (objectifs de versions majeures
     ultérieures)]),
   table.cell(align: center, strong[Wont (ne va pas être fait, hors sujet)]),
   [
-    - Affichage de la température actuelle de la pièce cible
-    - Affichage de la température actuelle de la pièce de référence
-    - Réglage de la température seuil par l’utilisateur
+    - Fonctionnement sur batterie du module ne pilotant pas l’aérateur
   ],
   [
     - Compatibilité avec les standards de domotique, intégrations dans des
@@ -144,7 +174,7 @@ breadboard.
     table.header(
       [*Fonction Principale 0*],
       [*Traitements numériques côté référence*],
-      [*Microcontrôleur 16~bit, trou traversant,\ basse consommation*],
+      [*Microcontrôleur 16~bit, trou traversant, faible consommation*],
     ),
     [Description / rôle],
     table.cell(colspan: 2)[Déclencher ou stopper l’aération si les conditions
@@ -220,7 +250,7 @@ breadboard.
 
 #fig(
   table(
-    columns: 3,
+    columns: (auto, auto, 1fr),
     align: (center + horizon, left + horizon),
     table.header(
       [*Fonction Principale 2*],
