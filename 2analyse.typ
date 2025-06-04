@@ -151,7 +151,50 @@ breadboard.
 == Schémas fonctionnels
 
 === Niveau 1 (SFN1)
-#fig(image("SF1D.svg"))[SFN1] // TODO actual sfn1
+
+#import fletcher.shapes: rect
+
+#fig(diagram(
+  spacing: 1cm,
+  // Module 1
+  node((0, 0), [Température pièce référence], name: <in1>),
+  node((0, 1), [Informations pièce cible (Ondes RF)], name: <in2>),
+  node((2, .5), [Flux thermique], name: <out1>),
+  node(
+    (1, .5),
+    enclose: ((1, 0), (1, 1)),
+    align(center)[
+      Captage température pièce référence.
+
+      Récéption des informations pièce cible.
+
+      Déclenchement de l’aération\ sur commande en température.
+    ],
+    stroke: black, // Add a black border
+    inset: .5cm,
+  ),
+  edge(<in1>, (1, 0), "->"),
+  edge(<in2>, (1, 1), "->"),
+  edge((1, .5), <out1>, "->"),
+  // Module 2
+  node((0, 2), [Température pièce cible], name: <in3>),
+  node((0, 3), [Choix du mode par l’utilisateur], name: <in4>),
+  node((2, 2.5), [Informations pièce cible (Ondes RF)], name: <out2>),
+  node(
+    (1, 2.5),
+    enclose: ((1, 2), (1, 3)),
+    align(center)[
+      Captage température pièce cible, choix du mode.
+
+      Transmission au module côté référence.
+    ],
+    stroke: black, // Add a black border
+    inset: .5cm,
+  ),
+  edge(<in3>, (1, 2), "->"),
+  edge(<in4>, (1, 3), "->"),
+  edge((1, 2.5), <out2>, "->"),
+))[SFN1]
 
 #pagebreak()
 === Premier degré (SF1D)
@@ -159,10 +202,10 @@ breadboard.
 #fig(image("SF1D.svg"))[SF1D]
 
 === Second degré (SF2D)
+
 #fig(image("SF1D.svg"))[SF2D] // TODO actual sf2d
 
 #pagebreak()
-
 == Description des fonctions et références de composants
 
 === Fonctions Principales
