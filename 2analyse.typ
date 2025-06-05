@@ -39,78 +39,44 @@ breadboard.
 
 === Bête à cornes
 
-#cetz.canvas({
-  let user-pos = (-6, 2.75)
-  let matter-pos = (-6, -2.75)
-  let product-pos = (0, 0)
-  let goal-pos = (6.25, 0)
-  cetz.draw.rect(
-    user-pos,
-    (user-pos.at(0) + 4.5, user-pos.at(1) + 1.75),
-    corner-radius: 0.875,
-    fill: rgb(224, 247, 250),
-    stroke: 0.8pt,
-  )
-  cetz.draw.rect(
-    matter-pos,
-    (matter-pos.at(0) + 4.5, matter-pos.at(1) + 1.75),
-    corner-radius: 0.875,
-    fill: rgb(224, 247, 250),
-    stroke: 0.8pt,
-  )
-  cetz.draw.rect(
-    goal-pos,
-    (goal-pos.at(0) + 4.5, goal-pos.at(1) + 2),
-    corner-radius: 1,
-    fill: rgb(232, 245, 233),
-    stroke: 0.8pt,
-  )
-  cetz.draw.circle(
-    product-pos,
-    radius: (2.5, 1.75),
-    fill: rgb(255, 249, 196),
-    stroke: 1.5pt,
-  )
-  cetz.draw.content(user-pos, align(center)[À qui le produit rend-il service ?])
-  cetz.draw.content(matter-pos, align(center)[Sur quoi le produit agit-il ?])
-  cetz.draw.content(goal-pos, align(center)[Dans quel but le système existe-t-il
-    ?])
-  cetz.draw.content(product-pos, text(weight: "bold")[PRODUIT])
-  let user-anchor = (user-pos.at(0) + 2.25, user-pos.at(1) + 0)
-  let matter-anchor = (matter-pos.at(0) + 2.25, matter-pos.at(1) + 0)
-  let product-left-anchor-top = (
-    product-pos.at(0) - 2.5,
-    product-pos.at(1) + 0.4,
-  )
-  let product-left-anchor-bottom = (
-    product-pos.at(0) - 2.5,
-    product-pos.at(1) - 0.4,
-  )
-  let product-right-anchor = (product-pos.at(0) + 2.5, product-pos.at(1) + 0)
-  let goal-anchor = (goal-pos.at(0) - 2.25, goal-pos.at(1) + 0)
-  cetz.draw.bezier(
-    user-anchor,
-    product-left-anchor-top,
-    (user-anchor.at(0) + 2, user-anchor.at(1) + 0),
-    (product-left-anchor-top.at(0) - 2, product-left-anchor-top.at(1) + 0.5),
-    stroke: 1pt,
-    mark: (end: "stealth"),
-  )
-  cetz.draw.bezier(
-    matter-anchor,
-    product-left-anchor-bottom,
-    (matter-anchor.at(0) + 2, matter-anchor.at(1) + 0),
-    (
-      product-left-anchor-bottom.at(0) - 2,
-      product-left-anchor-bottom.at(1) - 0.5,
-    ),
-    stroke: 1pt,
-    mark: (end: "stealth"),
-  )
-  cetz.draw.line(product-right-anchor, goal-anchor, stroke: 1pt, mark: (
-    end: "stealth",
-  ))
-})
+#import fletcher.shapes: *
+#fig(diagram(
+  spacing: .25em,
+  node((0, 0), [À qui rend-il service~?]),
+  node(
+    (0, 1),
+    [Personnes présentes\ dans la pièce],
+    stroke: black, // Add a black border
+    shape: ellipse,
+    inset: 1.25em,
+  ),
+  edge(bend: -18deg, stroke: 1pt),
+  node(
+    (2, 1),
+    [Température de\ la pièce cible],
+    stroke: black, // Add a black border
+    shape: ellipse,
+    inset: 1.25em,
+  ),
+  node((2, 0), [Sur quoi agit-il~?]),
+  node(
+    (1, 2),
+    [Déclencheur d’aération sur\ commande en température],
+    stroke: black, // Add a black border
+    shape: ellipse,
+    inset: 1.5em,
+  ),
+  node((1, 4), [Dans quel but~?]),
+  edge((1.65, 1.35), (1.5, 4.5), "->", bend: -17deg, stroke: 1pt),
+  node(
+    (1, 5),
+    name: <goal>,
+    align(center)[Égaliser la température entre deux pièces],
+    stroke: black, // Add a black border
+    inset: .5em,
+    corner-radius: .5em,
+  ),
+))[Bête à cornes]
 
 === Matrice MOSCOW // Portée du projet
 
@@ -199,11 +165,11 @@ breadboard.
 #pagebreak()
 === Premier degré (SF1D)
 
-#fig(image("SF1D.svg"))[SF1D]
+#fig(image("SF1D.svg", height: 90%))[SF1D]
 
 === Second degré (SF2D)
 
-#fig(image("SF1D.svg"))[SF2D] // TODO actual sf2d
+#fig(image("SF1D.svg", height: 90%))[SF2D] // TODO actual sf2d
 
 #pagebreak()
 == Description des fonctions et références de composants
@@ -212,18 +178,18 @@ breadboard.
 
 #fig(
   table(
-    columns: 3,
+    columns: (auto, auto, 1fr),
     align: (center + horizon, left + horizon),
     table.header(
       [*Fonction Principale 0*],
       [*Traitements numériques côté référence*],
-      [*Microcontrôleur 16~bit, trou traversant, faible consommation*],
+      [Microcontrôleur 16~bit, trou traversant, faible consommation],
     ),
-    [Description / rôle],
+    [*Description / rôle*],
     table.cell(colspan: 2)[Déclencher ou stopper l’aération si les conditions
       sont réunies, selon les données rapportées par le module côté cible et la
       température de la pièce référence.],
-    [Références envisagées],
+    [*Références envisagées*],
     table.cell(colspan: 2)[
       - PIC24FJ256GA702-I/SP 28 broches #link(
           "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24FJ256GA702-I-SP/6562000",
@@ -249,12 +215,12 @@ breadboard.
           "https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/16-bit-mcus/pic24f-gu-gl-gp",
         )[PIC24 GU/GP] site Microchip.
     ],
-    [Signaux d’entrée],
+    [*Signaux d’entrée*],
     table.cell(colspan: 2)[
       - TempRef
       - RxRF
     ],
-    [Signaux de sortie],
+    [*Signaux de sortie*],
     table.cell(colspan: 2)[
       - TxRF
       - CmdAeration
@@ -263,29 +229,29 @@ breadboard.
 )[FP0]
 
 #fig(table(
-  columns: 3,
+  columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon),
   table.header(
     [*Fonction Principale 1*],
     [*Traitements numériques côté cible*],
-    [*Microcontrôleur 16~bit, trou traversant, basse consommation*],
+    [Microcontrôleur 16~bit, trou traversant, basse consommation],
   ),
-  [Description / rôle],
+  [*Description / rôle*],
   table.cell(colspan: 2)[Réceptionner la température de la pièce cible et le
     choix du mode par l’utilisateur, piloter l’émission sans-fil de ces
     informations vers le module côté référence.],
-  [Références envisagées],
+  [*Références envisagées*],
   table.cell(colspan: 2)[
     - Pour l’instant les références sont les mêmes que pour la Fonction
       Principale 1
   ],
-  [Signaux d’entrée],
+  [*Signaux d’entrée*],
   table.cell(colspan: 2)[
     - TempCib
     - Mode
     - RxRF
   ],
-  [Signaux de sortie],
+  [*Signaux de sortie*],
   table.cell(colspan: 2)[
     - TxRF
   ],
@@ -298,13 +264,12 @@ breadboard.
     table.header(
       [*Fonction Principale 2*],
       [*Captage température*],
-      [*Capteur de température, minimum capté ⩽ −~10~°C, maximum capté ⩾
-        50~°C*],
+      [Capteur de température, minimum capté ⩽ −~10~°C, maximum capté ⩾ 50~°C],
     ),
-    [Description / rôle],
+    [*Description / rôle*],
     table.cell(colspan: 2)[Capter la température des pièces (référence qui est
       climatisée et cible pour la comparer).],
-    [Références envisagées],
+    [*Références envisagées*],
     table.cell(colspan: 2)[
       - Gravity AHC20 #link(
           "https://www.mouser.fr/ProductDetail/DFRobot/SEN0528?qs=Jm2GQyTW%2FbgFUSAl1tK%252BEQ%3D%3D",
@@ -328,11 +293,11 @@ breadboard.
           "https://www.seeedstudio.com/Grove-AHT20-I2C-Industrial-grade-temperature-and-humidity-sensor-p-4497.html",
         )[Grove] Seeed Studio.
     ],
-    [Signaux d’entrée],
+    [*Signaux d’entrée*],
     table.cell(colspan: 2)[
       - Température ambiante de la pièce (référence/cible)
     ],
-    [Signaux de sortie],
+    [*Signaux de sortie*],
     table.cell(colspan: 2)[
       - TempRef / TempCib
     ],
@@ -341,18 +306,20 @@ breadboard.
 
 #fig(
   table(
-    columns: 3,
+    columns: (auto, auto, 1fr),
     align: (center + horizon, left + horizon),
     table.header(
       [*Fonction Principale 3*],
       [*Interfaçage RF*],
-      [*Communication sans-fil basse consommation (802.15.4 et dérivés,
-        Bluetooth LE)*],
+      [
+        Communication sans-fil basse consommation (802.15.4 et dérivés,
+        Bluetooth LE)
+      ],
     ),
-    [Description / rôle],
+    [*Description / rôle*],
     table.cell(colspan: 2)[Communiquer sans-fil les informations du module de la
       pièce cible au module de la pièce référence.],
-    [Références envisagées],
+    [*Références envisagées*],
     table.cell(colspan: 2)[
       - XB3-24Z8PT-J #link(
           "https://www.digikey.fr/fr/products/detail/digi/XB3-24Z8PT-J/8130934",
@@ -372,11 +339,11 @@ breadboard.
           "https://fr.digi.com/products/embedded-systems/digi-xbee/rf-modules",
         )[Digri XBee] site constructeur.
     ],
-    [Signaux d’entrée],
+    [*Signaux d’entrée*],
     table.cell(colspan: 2)[
       - TxRF
     ],
-    [Signaux de sortie],
+    [*Signaux de sortie*],
     table.cell(colspan: 2)[
       - RxRF
     ],
@@ -389,19 +356,19 @@ breadboard.
 
 #fig(
   table(
-    columns: 3,
+    columns: (auto, auto, 1fr),
     align: (center + horizon, left + horizon),
     table.header(
       [*Fonction Principale 4*],
       [*Interfaçage humain-machine*],
-      [*Interrupteur/commutateur (allumé/éteint)*],
+      [Interrupteur/commutateur (allumé/éteint)],
     ),
-    [Description / rôle],
+    [*Description / rôle*],
     table.cell(colspan: 2)[Choix binaire entre le mode été (refroidissement) et
       le mode hiver (chauffage). Dois indiquer clairement le mode actuellement
       choisi par sa position physique (bascule haut/bas, glissière
       gauche/droite…)],
-    [Références envisagées],
+    [*Références envisagées*],
     table.cell(colspan: 2)[
       - Commutateur à glissière OS102011MS2QN1 chez #link(
           "https://www.digikey.fr/fr/products/detail/c-k/OS102011MS2QN1/411602",
@@ -420,11 +387,11 @@ breadboard.
           "https://www.mouser.fr/c/electromechanical/switches/slide-switches/?mounting%20style=Through%20Hole~~Through%20Hole%2C%20Right%20Angle&active=y&rp=electromechanical%2Fswitches%2Fslide-switches|~Mounting%20Style",
         )[Mouser];.
     ],
-    [Signaux d’entrée],
+    [*Signaux d’entrée*],
     table.cell(colspan: 2)[
       - Choix du mode par l’utilisateur (position haut ou bas)
     ],
-    [Signaux de sortie],
+    [*Signaux de sortie*],
     table.cell(colspan: 2)[
       - Mode
     ],
@@ -438,18 +405,18 @@ breadboard.
 
 #fig(
   table(
-    columns: 3,
+    columns: (auto, auto, 1fr),
     align: (center + horizon, left + horizon),
     table.header(
       [*Fonction Principale 5*],
       [*Commande aérateur en puissance*],
-      [*Driver moteur CC supportant jusqu’à environ 15~V*],
+      [Driver moteur CC supportant jusqu’à environ 15~V],
     ),
-    [Description / rôle],
+    [*Description / rôle*],
     table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
       (alternatif 230~V) de l’aérateur à partir du système en 3.3~V piloté par
       le microcontrôleur.],
-    [Références envisagées],
+    [*Références envisagées*],
     table.cell(colspan: 2)[
       - Driver 1528-4489-ND #link(
           "https://www.digikey.fr/fr/products/detail/adafruit-industries-llc/4489/11594498",
@@ -458,12 +425,12 @@ breadboard.
           "https://www.digikey.fr/fr/products/filter/gestion-de-l-alimentation-pmic/contrôleurs-variateurs-moteur/744?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9C9egCZEIFJAw4CxMiBoAGAMxwArJpCEa9GhT1HwFbVu2WZ2%2BtooJCumDIqX6e6RUOEMmB62poWgTY%2BASBB2jAGzGyckDz8wmKS4DAwXtAKaFh4hCSQ5DTaQTQwlhXOmtG1-jQ1Dv6uII2ajCwgHFy8gqIShGBwdPKKykVqpSCGTJkAtHJ5ivwArqol5BYLmdV5AgAmXItgmhBJXJbsAJ6suFzo2Cji4kA",
         )[chez DigiKey];.
     ],
-    [Signaux d’entrée],
+    [*Signaux d’entrée*],
     table.cell(colspan: 2)[
       - CmdAeration
       - Valim (≃12~V)
     ],
-    [Signaux de sortie],
+    [*Signaux de sortie*],
     table.cell(colspan: 2)[
       - IAeration
     ],
@@ -471,23 +438,23 @@ breadboard.
 )[FP5]
 
 #fig(table(
-  columns: 3,
+  columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon),
   table.header(
     [*Fonction Principale 5 bis*],
     [*Commande aérateur en puissance*],
-    [*Relais ou MOSFET piloté en CC 3.3~V pour contrôler du CC 12~V*],
+    [Relais ou MOSFET piloté en CC 3.3~V pour contrôler du CC 12~V],
   ),
-  [Description / rôle],
+  [*Description / rôle*],
   table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
     (alternatif 230~V) de l’aérateur à partir du système en 3.3~V piloté par le
     microcontrôleur.],
-  [Signaux d’entrée],
+  [*Signaux d’entrée*],
   table.cell(colspan: 2)[
     - CmdAeration
     - Valim (5~V à 25~V)
   ],
-  [Signaux de sortie],
+  [*Signaux de sortie*],
   table.cell(colspan: 2)[
     - IAeration
   ],
@@ -495,47 +462,47 @@ breadboard.
 
 #fig(
   table(
-    columns: 3,
+    columns: (auto, auto, 1fr),
     align: (center + horizon, left + horizon),
     table.header(
       [*Fonction Principale 5 bis*],
       [*Commande aérateur en puissance*],
-      [*Relais piloté en CC basse tension pour contrôler du CA 230~V*],
+      [Relais piloté en CC basse tension pour contrôler du CA 230~V],
     ),
-    [Description / rôle],
+    [*Description / rôle*],
     table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
       (alternatif 230~V) de l’aérateur à partir du système en 3.3~V piloté par
       le microcontrôleur.],
-    [Références envisagées],
+    [*Références envisagées*],
     table.cell(colspan: 2)[
       - TC209R #link(
           "https://www.digikey.fr/fr/products/detail/bright-toward-industrial-co-ltd/TC209R/13556942",
         )[chez Digikey];.
     ],
-    [Signaux d’entrée],
+    [*Signaux d’entrée*],
     table.cell(colspan: 2)[
       - CmdAeration
       - Valim (230~V secteur)
     ],
-    [Signaux de sortie],
+    [*Signaux de sortie*],
     table.cell(colspan: 2)[IAeration],
   ),
 )[FP5~bis]
 
 #fig(
   table(
-    columns: 3,
+    columns: (auto, auto, 1fr),
     align: (center + horizon, left + horizon),
     table.header(
       [*Fonction Principale 6*],
       [*Aération*],
-      [*Aérateur encastrable pour gaine 125~mm*],
+      [Aérateur encastrable pour gaine 125~mm],
     ),
-    [Description / rôle],
+    [*Description / rôle*],
     table.cell(colspan: 2)[Forcer l’air de la pièce de référence à aller dans la
       pièce cible pour harmoniser leurs températures, si activé par le
       microcontrôleur.],
-    [Références envisagées],
+    [*Références envisagées*],
     table.cell(colspan: 2)[
       - Ventilateur MEC0251V3-000U-A99 120~mm 12~V DC 2 fils #link(
           "https://www.digikey.fr/fr/products/detail/sunon-fans/MEC0251V3-000U-A99/2021100",
@@ -589,11 +556,11 @@ breadboard.
           "https://www.idealo.fr/cat/28660/ventilateurs-de-salle-de-bains.html",
         )[Agrégation] ventilateurs salle de bains.
     ],
-    [Signaux d’entrée],
+    [*Signaux d’entrée*],
     table.cell(colspan: 2)[
       - IAeration
     ],
-    [Signaux de sortie],
+    [*Signaux de sortie*],
     table.cell(colspan: 2)[
       - Flux thermique (déplacement de l’air)
     ],
@@ -602,18 +569,18 @@ breadboard.
 
 #fig(
   table(
-    columns: 3,
+    columns: (auto, auto, 1fr),
     align: (center + horizon, left + horizon),
     table.header(
       [*Fonction Principale 7*],
       [*Affichage température*],
-      [*Écran 7 segments minimum 4 chiffres*],
+      [Écran 7 segments minimum 4 chiffres],
     ),
-    [Description / rôle],
+    [*Description / rôle*],
     table.cell(colspan: 2)[Forcer l’air de la pièce de référence à aller dans la
       pièce cible pour harmoniser leurs températures, si activé par le
       microcontrôleur.],
-    [Références envisagées],
+    [*Références envisagées*],
     table.cell(colspan: 2)[
       - Afficheur LCD 4411-CN0295D-ND #link(
           "https://www.digikey.fr/fr/products/detail/sunfounder/CN0295D/18668612",
@@ -622,11 +589,11 @@ breadboard.
           "https://www.digikey.fr/fr/products/filter/lcd-oled-alphanumériques/99?s=N4IgjCBcpgrALFUBjKAzAhgGwM4FMAaEAeygG0QBmWANgE4wAOEIgdlgCZKxE3PuOLEKzqtGdWCAC6RAA4AXKCADK8gE4BLAHYBzEAF8iYOuKQhUkTLkIlyIAAzT9hkDTMaAJkoC0YexDlFSBAheQBPWTwlDBxUZyA",
         )[chez DigiKey];.
     ],
-    [Signaux d’entrée],
+    [*Signaux d’entrée*],
     table.cell(colspan: 2)[
       - IAeration
     ],
-    [Signaux de sortie],
+    [*Signaux de sortie*],
     table.cell(colspan: 2)[
       - Informations visuelles
     ],
@@ -637,18 +604,18 @@ breadboard.
 
 #fig(
   table(
-    columns: 3,
+    columns: (auto, auto, 1fr),
     align: (center + horizon, left + horizon),
     table.header(
       [*Fonction Annexe 0*],
       [*Alimentation générique*],
-      [*Alimentation 3,3~V à partir d’une alimentation plus générique*],
+      [Alimentation 3,3~V à partir d’une alimentation plus générique],
     ),
-    [Description / rôle],
+    [*Description / rôle*],
     table.cell(colspan: 2)[Fournir un courant continu de 3,3~V au circuit de
       contrôle, incluant le microcontrôleur, à partir d’une alimentation
       générique fournissant du courant continu entre 5 et 25~V.],
-    [Références envisagées],
+    [*Références envisagées*],
     table.cell(colspan: 2)[
       - Régulateur de tension linéaire LM1086CT-3.3/NOPB-ND #link(
           "https://www.digikey.fr/fr/products/detail/texas-instruments/LM1086CT-3-3-NOPB/363571",
@@ -660,11 +627,11 @@ breadboard.
           "https://www.digikey.fr/fr/products/filter/régulateurs-de-tension-linéaires/699?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9CYevQTQQKSBhwFiZcPSpgArCCmawAJgAMzNp0g9%2BwsZPBw6iBWix5CJSOVNNxvoA",
         )[chez DigiKey];.
     ],
-    [Signaux d’entrée],
+    [*Signaux d’entrée*],
     table.cell(colspan: 2)[
       - Valim (5~V à 25~V)
     ],
-    [Signaux de sortie],
+    [*Signaux de sortie*],
     table.cell(colspan: 2)[
       - Vcc33
     ],
@@ -672,14 +639,14 @@ breadboard.
 )[FA0]
 
 #fig(table(
-  columns: 3,
+  columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon),
   table.header(
     [*Fonction Annexe 1*],
     [*Alimentation sur batterie*],
-    [*Alimentation 3,3~V à partir d’une batterie ou pile*],
+    [Alimentation 3,3~V à partir d’une batterie ou pile],
   ),
-  [Description / rôle],
+  [*Description / rôle*],
   table.cell(align: left, colspan: 2)[
     // WARN Vraiment nécessaire?
     // Ou utiliser FA0 pour le module côté cible également~?
@@ -688,32 +655,32 @@ breadboard.
     microcontrôleur, à partir d’une solution d’alimentation autonome (batterie,
     pile).
   ],
-  [Signaux d’entrée],
+  [*Signaux d’entrée*],
   table.cell(colspan: 2)[
     - Batterie
   ],
-  [Signaux de sortie],
+  [*Signaux de sortie*],
   table.cell(colspan: 2)[
     - Vcc33
   ],
 ))[FA1]
 
 #fig(table(
-  columns: 3,
+  columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon),
   table.header(
     [*Fonction Annexe 2*],
     [*Programmation in-situ*],
-    [*Programmeur pour le(s) microcontrôleur(s) utilisé(s)*],
+    [Programmeur pour le(s) microcontrôleur(s) utilisé(s)],
   ),
-  [Description / rôle],
+  [*Description / rôle*],
   table.cell(colspan: 2)[Programmer le microcontrôleur sans le retirer du
     circuit.],
-  [Signaux d’entrée],
+  [*Signaux d’entrée*],
   table.cell(colspan: 2)[
     - Communication USB avec ordinateur
   ],
-  [Signaux de sortie],
+  [*Signaux de sortie*],
   table.cell(colspan: 2)[
     - Signaux électriques de programmation
   ],
