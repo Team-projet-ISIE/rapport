@@ -6,6 +6,17 @@
 - Extraits de datasheets ?
 
 #fig[```c
+  #include <xc.h> // Importe la bibliothèque PIC24 constructeur
+
+  void main() {
+      ANSA = 0x0000;        // Numérique pour toutes les broches du port A
+      TRISAbits.TRISA0 = 0; // Définit RA0 en sortie
+      LATAbits.LATA0 = 1;   // Place RA0 à l’état haut
+      while (1);            // Boucle infine, garde le MCU dans cet état
+  }
+  ```][Programme de test de la broche RA0]
+
+#fig[```c
   // FSEC
   #pragma config BWRP = OFF      // Boot Segment Write-Protect bit (Boot Segment may be written)
   #pragma config BSS = XINST_EN  // Boot Segment Program Flash Code Protection bit (Write Protect Disable, use program memory protection for code protection)
@@ -54,14 +65,3 @@
   #pragma config DSWDTPS = DSWDTPS_8 // Deep Sleep Watchdog Timer Postscale (1:8)
   #pragma config DSWDTOSC = LPRC     // DSWDT Clock Select (DSWDT uses LPRC)
   ```][Macros de configuration du PIC24]
-
-#fig[```c
-  #include <xc.h> // Importe la bibliothèque PIC24 constructeur
-
-  void main() {
-      ANSA = 0x0000;        // Numérique pour toutes les broches du port A
-      TRISAbits.TRISA0 = 0; // Définit RA0 en sortie
-      LATAbits.LATA0 = 1;   // Place RA0 à l’état haut
-      while (1);            // Boucle infine, garde le MCU dans cet état
-  }
-  ```][Programme de test de la broche RA0]

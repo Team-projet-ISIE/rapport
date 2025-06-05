@@ -705,7 +705,7 @@ breadboard.
     table.cell(colspan: 9)[*Description*],
   ),
   table.cell(rowspan: 2)[TempRef],
-  [Description de FP2→Description de FP0],
+  [FP2→FP0],
   [N],
   [],
   [U (V)],
@@ -716,7 +716,7 @@ breadboard.
   [],
   table.cell(colspan: 9)[Signal image de la température de la pièce référence.],
   table.cell(rowspan: 2)[TempCib],
-  [Description de FP2→Description de FP1],
+  [FP2→FP1],
   [N],
   [],
   [U (V)],
@@ -728,8 +728,8 @@ breadboard.
   [],
   table.cell(colspan: 9)[Signal image de la température de la pièce cible.],
   table.cell(rowspan: 2)[TxRF],
-  [Description de FP0→Description de FP3\
-    Description de FP1→Description de FP3],
+  [FP0→FP3\
+    FP1→FP3],
   [N],
   [],
   [],
@@ -741,8 +741,8 @@ breadboard.
   table.cell(colspan: 9)[Données que le microcontrôleur envoie pour transmission
     au travers du module sans-fil.],
   table.cell(rowspan: 2)[RxRF],
-  [Description de FP3→Description de FP0\
-    Description de FP3→Description de FP1],
+  [FP3→FP0\
+    FP3→FP1],
   [N],
   [],
   [],
@@ -754,7 +754,7 @@ breadboard.
   table.cell(colspan: 9)[Données que le microcontrôleur reçoit depuis le module
     sans-fil.],
   table.cell(rowspan: 2)[Mode],
-  [Description de FP4→Description de FP1],
+  [FP4→FP1],
   [N],
   [],
   [U (V)],
@@ -766,7 +766,7 @@ breadboard.
   table.cell(colspan: 9)[Bloquant (0) pour le mode hiver (chauffage), passant
     (1) pour le mode été (refroidissement).],
   table.cell(rowspan: 2)[CmdAeration],
-  [Description de FP0→Description de FP5],
+  [FP0→FP5],
   [A],
   [],
   [U (V)],
@@ -778,7 +778,7 @@ breadboard.
   table.cell(colspan: 9)[Bloque l’alimentation de l’aérateur à 0, laisse passer
     l’alimentation de l’aérateur à 1.],
   table.cell(rowspan: 2)[IAeration],
-  [Description de FP5→Description de FP6],
+  [FP5→FP6],
   [A],
   [],
   [I (A)],
@@ -808,8 +808,7 @@ breadboard.
     table.cell(colspan: 9)[*Description*],
   ),
   table.cell(rowspan: 2)[Vcc33],
-  [Description de FA0→Description de FP0\ Description de FA0→Description de
-    FP1],
+  [FA0→FP0\ FA0→FP1],
   [A],
   [],
   [U (V)],
@@ -820,7 +819,7 @@ breadboard.
   [],
   table.cell(colspan: 9)[Alimentation en énergie électrique des composants.],
   table.cell(rowspan: 2)[Valim],
-  [Description de FA0, Description de FP5],
+  [FA0, FP5],
   [A],
   [],
   [U (V)],
@@ -832,7 +831,7 @@ breadboard.
   table.cell(align: left, colspan: 9)[Courant continu fourni par une
     alimentation générique, à adapter à notre circuit précisément.],
   table.cell(rowspan: 2)[Température pièce référence],
-  [Description de FP2 (réf)],
+  [FP2 (réf)],
   [GP],
   [],
   [T (°C)],
@@ -843,7 +842,7 @@ breadboard.
   [],
   table.cell(colspan: 9)[Température de la pièce de référence (climatisée).],
   table.cell(rowspan: 2)[Température pièce cible],
-  [Description de FP2 (cib)],
+  [FP2 (cib)],
   [GP],
   [],
   [T (°C)],
@@ -855,7 +854,7 @@ breadboard.
   table.cell(colspan: 9)[Température de la pièce cible (où l’on souhaite
     profiter de la climatisation de l’autre pièce).],
   table.cell(rowspan: 2)[Choix mode utilisateur],
-  [Description de FP4],
+  [FP4],
   [GP],
   [],
   [],
@@ -867,7 +866,7 @@ breadboard.
   table.cell(colspan: 9)[Choix du mode par l’utilisateur en positionnant un
     interrupteur en haut ou en bas.],
   table.cell(rowspan: 2)[Ondes RF],
-  [Description de FP3],
+  [FP3],
   [A],
   [],
   [],
@@ -878,7 +877,7 @@ breadboard.
   [],
   table.cell(colspan: 9)[Communications sans-fils entre les deux modules.],
   table.cell(rowspan: 2)[Flux thermique],
-  [Description de FP6],
+  [FP6],
   [GP],
   [],
   [P (Pa)],

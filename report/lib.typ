@@ -51,7 +51,7 @@
     raw: i18n("codes"),
   )
   pagebreak(weak: true)
-  for kind in (table, raw, image) {
+  for kind in (image, table, raw) {
     context {
       if counter(figure.where(kind: kind)).final().at(0) > 0 {
         outline(title: figTitles.at(repr(kind)), target: figure.where(
