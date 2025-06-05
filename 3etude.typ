@@ -1,22 +1,22 @@
-= Étude de l'existant, veille technologique
+= Étude de l'existant //, veille technologique
 
-== Solutions existantes
+// == Solutions existantes
 
 == Veille technologique
 
 == Capteurs
 
-DHT20
+- DHT20
+- Boutons poussoirs / interrupteurs ?
 
 == Actionneurs
 
-Ventilateurs
+- Ventilateurs
 
-== Protocoles de communication
+== Modules de communication
 
-ZigBee
+- XBee 3
 
 == Microcontrôleurs
 
-PIC24
-
+- PIC24

@@ -1,3 +1,7 @@
-- key: typst
-  short: Typst
-  description: Système de mise en page puissant et moderne
+- key: mcu
+  short: MCU
+  description: Microcontrôleur
+
+- key: datasheet
+  short: Datasheet
+  description: Fiche technique d’un composant

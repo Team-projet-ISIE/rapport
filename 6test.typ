@@ -4,25 +4,27 @@
 
 === Tests unitaires
 
-Test fonctions code
+==== Test des composants
 
-=== Test d’intégration
+==== Test des fonctions
 
-Test de l’ensemble du système
+=== Test d’intégration // (système complet)
+
+Test système complet.
 
 == Protocoles de test logiciel
 
 === Tests unitaires
 
-Test fonctions code
+Test fonctions individuelles.
 
 === Test d’intégration
 
-Test de l’ensemble du système
+Test du programme entier.
 
-=== Test de performance
+== Test de performance global
 
-Efficacité
+Efficacité du système.
 
 // == Résultats des tests
 

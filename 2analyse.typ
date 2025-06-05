@@ -19,12 +19,12 @@ Les modules doivent communiquer entre eux, et pour cela, nous optons pour un
 #link(
   "https://fr.digi.com/products/embedded-systems/digi-xbee/rf-modules",
 )[XBee] fournissant une interface pour communiquer en 802.15.4, à priori au
-travers d’un protocole de plus haut niveau tel que ZigBee.
+travers d’un protocole de plus haut niveau tel que ZigBee@xbee3-ds.
 
 À notre stade du cursus, nous nous concentrons sur les microcontrôleurs se
 programmant directement en bas niveau (registres…), en particulier 16~bit, et
-nos cours et travaux-pratiques se concentrent sur l’architecture PIC24 de
-Microchip, que l’on privilégiera donc. De plus, nous n’avons pas d’importants
+nos cours et travaux-pratiques se concentrent sur l’architecture PIC24@pic24-ds
+de Microchip, que l’on privilégiera donc. De plus, nous n’avons pas d’importants
 besoins d’entrées-sorties et de puissance de calcul pour ce projet.
 
 N’ayant pas la possibilité de produire un circuit avec composants soudés en
@@ -32,7 +32,7 @@ surface, tous nos composants sont sélectionnés montables en trou-traversant (o
 connectables tel qu’en Grove). Cela sera d’autant plus simple pour tester sur
 breadboard.
 
-#set page(flipped: true, margin: (x: 1cm)) // Pages en paysage
+#set page(flipped: true) //, margin: (x: 1cm)) // Pages en paysage
 #set par(justify: false) // Ne pas justifier les paragraphes, moche dans tables
 
 == Analyse du besoin
@@ -110,7 +110,7 @@ breadboard.
       systèmes domotiques plus larges
     - Fonctionnement avec plus de deux modules, deux pièces
   ],
-))[Première matrice MOSCOW]
+))[Matrice MOSCOW]
 
 #pagebreak()
 
@@ -165,11 +165,11 @@ breadboard.
 #pagebreak()
 === Premier degré (SF1D)
 
-#fig(image("SF1D.svg", height: 90%))[SF1D]
+#fig(image("SF1D.svg", height: 90%))[SF1D] // TODO améliorer
 
 === Second degré (SF2D)
 
-#fig(image("SF1D.svg", height: 90%))[SF2D] // TODO actual sf2d
+#fig(image("placeholder.svg", height: 90%))[SF2D] // TODO SF2D
 
 #pagebreak()
 == Description des fonctions et références de composants
@@ -183,7 +183,7 @@ breadboard.
     table.header(
       [*Fonction Principale 0*],
       [*Traitements numériques côté référence*],
-      [Microcontrôleur 16~bit, trou traversant, faible consommation],
+      [Microcontrôleur 16~bit, trou traversant, basse conso.],
     ),
     [*Description / rôle*],
     table.cell(colspan: 2)[Déclencher ou stopper l’aération si les conditions
@@ -226,7 +226,7 @@ breadboard.
       - CmdAeration
     ],
   ),
-)[FP0]
+)[Description de FP0]
 
 #fig(table(
   columns: (auto, auto, 1fr),
@@ -255,7 +255,7 @@ breadboard.
   table.cell(colspan: 2)[
     - TxRF
   ],
-))[FP1]
+))[Description de FP1]
 
 #fig(
   table(
@@ -302,7 +302,7 @@ breadboard.
       - TempRef / TempCib
     ],
   ),
-)[FP2]
+)[Description de FP2]
 
 #fig(
   table(
@@ -352,7 +352,7 @@ breadboard.
       - Ondes RF
     ],
   ),
-)[FP3]
+)[Description de FP3]
 
 #fig(
   table(
@@ -396,7 +396,7 @@ breadboard.
       - Mode
     ],
   ),
-)[FP4]
+)[Description de FP4]
 
 // WARN N’étant pas qualifiés pour manipuler du courant d’aussi haute tension
 // que celui secteur, n’est-ce pas préférable de réaliser ce projet avec un
@@ -435,7 +435,7 @@ breadboard.
       - IAeration
     ],
   ),
-)[FP5]
+)[Description de FP5]
 
 #fig(table(
   columns: (auto, auto, 1fr),
@@ -443,7 +443,7 @@ breadboard.
   table.header(
     [*Fonction Principale 5 bis*],
     [*Commande aérateur en puissance*],
-    [Relais ou MOSFET piloté en CC 3.3~V pour contrôler du CC 12~V],
+    [Relais~/~MOSFET piloté en CC 3.3~V pour contrôler du CC 12~V],
   ),
   [*Description / rôle*],
   table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
@@ -458,7 +458,7 @@ breadboard.
   table.cell(colspan: 2)[
     - IAeration
   ],
-))[FP5~bis]
+))[Description de FP5~bis]
 
 #fig(
   table(
@@ -487,7 +487,7 @@ breadboard.
     [*Signaux de sortie*],
     table.cell(colspan: 2)[IAeration],
   ),
-)[FP5~bis]
+)[Description de FP5~bis]
 
 #fig(
   table(
@@ -565,7 +565,7 @@ breadboard.
       - Flux thermique (déplacement de l’air)
     ],
   ),
-)[FP6]
+)[Description de FP6]
 
 #fig(
   table(
@@ -598,7 +598,7 @@ breadboard.
       - Informations visuelles
     ],
   ),
-)[FP7]
+)[Description de FP7]
 
 === Fonctions Annexes
 
@@ -636,7 +636,7 @@ breadboard.
       - Vcc33
     ],
   ),
-)[FA0]
+)[Description de FA0]
 
 #fig(table(
   columns: (auto, auto, 1fr),
@@ -649,7 +649,7 @@ breadboard.
   [*Description / rôle*],
   table.cell(align: left, colspan: 2)[
     // WARN Vraiment nécessaire?
-    // Ou utiliser FA0 pour le module côté cible également~?
+    // Ou utiliser Description de FA0 pour le module côté cible également~?
 
     Fournir un courant continu de 3,3~V au circuit de contrôle, incluant le
     microcontrôleur, à partir d’une solution d’alimentation autonome (batterie,
@@ -663,7 +663,7 @@ breadboard.
   table.cell(colspan: 2)[
     - Vcc33
   ],
-))[FA1]
+))[Description de FA1]
 
 #fig(table(
   columns: (auto, auto, 1fr),
@@ -684,7 +684,7 @@ breadboard.
   table.cell(colspan: 2)[
     - Signaux électriques de programmation
   ],
-))[FA2]
+))[Description de FA2]
 
 == Description des signaux
 
@@ -705,7 +705,7 @@ breadboard.
     table.cell(colspan: 9)[*Description*],
   ),
   table.cell(rowspan: 2)[TempRef],
-  [FP2→FP0],
+  [Description de FP2→Description de FP0],
   [N],
   [],
   [U (V)],
@@ -716,7 +716,7 @@ breadboard.
   [],
   table.cell(colspan: 9)[Signal image de la température de la pièce référence.],
   table.cell(rowspan: 2)[TempCib],
-  [FP2→FP1],
+  [Description de FP2→Description de FP1],
   [N],
   [],
   [U (V)],
@@ -728,8 +728,8 @@ breadboard.
   [],
   table.cell(colspan: 9)[Signal image de la température de la pièce cible.],
   table.cell(rowspan: 2)[TxRF],
-  [FP0→FP3\
-    FP1→FP3],
+  [Description de FP0→Description de FP3\
+    Description de FP1→Description de FP3],
   [N],
   [],
   [],
@@ -741,8 +741,8 @@ breadboard.
   table.cell(colspan: 9)[Données que le microcontrôleur envoie pour transmission
     au travers du module sans-fil.],
   table.cell(rowspan: 2)[RxRF],
-  [FP3→FP0\
-    FP3→FP1],
+  [Description de FP3→Description de FP0\
+    Description de FP3→Description de FP1],
   [N],
   [],
   [],
@@ -754,7 +754,7 @@ breadboard.
   table.cell(colspan: 9)[Données que le microcontrôleur reçoit depuis le module
     sans-fil.],
   table.cell(rowspan: 2)[Mode],
-  [FP4→FP1],
+  [Description de FP4→Description de FP1],
   [N],
   [],
   [U (V)],
@@ -766,7 +766,7 @@ breadboard.
   table.cell(colspan: 9)[Bloquant (0) pour le mode hiver (chauffage), passant
     (1) pour le mode été (refroidissement).],
   table.cell(rowspan: 2)[CmdAeration],
-  [FP0→FP5],
+  [Description de FP0→Description de FP5],
   [A],
   [],
   [U (V)],
@@ -778,7 +778,7 @@ breadboard.
   table.cell(colspan: 9)[Bloque l’alimentation de l’aérateur à 0, laisse passer
     l’alimentation de l’aérateur à 1.],
   table.cell(rowspan: 2)[IAeration],
-  [FP5→FP6],
+  [Description de FP5→Description de FP6],
   [A],
   [],
   [I (A)],
@@ -808,7 +808,8 @@ breadboard.
     table.cell(colspan: 9)[*Description*],
   ),
   table.cell(rowspan: 2)[Vcc33],
-  [FA0→FP0\ FA0→FP1],
+  [Description de FA0→Description de FP0\ Description de FA0→Description de
+    FP1],
   [A],
   [],
   [U (V)],
@@ -819,7 +820,7 @@ breadboard.
   [],
   table.cell(colspan: 9)[Alimentation en énergie électrique des composants.],
   table.cell(rowspan: 2)[Valim],
-  [FA0, FP5],
+  [Description de FA0, Description de FP5],
   [A],
   [],
   [U (V)],
@@ -831,7 +832,7 @@ breadboard.
   table.cell(align: left, colspan: 9)[Courant continu fourni par une
     alimentation générique, à adapter à notre circuit précisément.],
   table.cell(rowspan: 2)[Température pièce référence],
-  [FP2 (réf)],
+  [Description de FP2 (réf)],
   [GP],
   [],
   [T (°C)],
@@ -842,7 +843,7 @@ breadboard.
   [],
   table.cell(colspan: 9)[Température de la pièce de référence (climatisée).],
   table.cell(rowspan: 2)[Température pièce cible],
-  [FP2 (cib)],
+  [Description de FP2 (cib)],
   [GP],
   [],
   [T (°C)],
@@ -854,7 +855,7 @@ breadboard.
   table.cell(colspan: 9)[Température de la pièce cible (où l’on souhaite
     profiter de la climatisation de l’autre pièce).],
   table.cell(rowspan: 2)[Choix mode utilisateur],
-  [FP4],
+  [Description de FP4],
   [GP],
   [],
   [],
@@ -866,7 +867,7 @@ breadboard.
   table.cell(colspan: 9)[Choix du mode par l’utilisateur en positionnant un
     interrupteur en haut ou en bas.],
   table.cell(rowspan: 2)[Ondes RF],
-  [FP3],
+  [Description de FP3],
   [A],
   [],
   [],
@@ -877,7 +878,7 @@ breadboard.
   [],
   table.cell(colspan: 9)[Communications sans-fils entre les deux modules.],
   table.cell(rowspan: 2)[Flux thermique],
-  [FP6],
+  [Description de FP6],
   [GP],
   [],
   [P (Pa)],
@@ -893,9 +894,9 @@ breadboard.
 #set par(justify: true) // Justifie à nouveau les paragraphes
 #set page(flipped: false, margin: (x: 2cm)) // Revient en portrait
 
-== Contraintes
+// == Contraintes // TODO À voir
 
-// == Cahier des charges fonctionnel // À voir
+// == Cahier des charges fonctionnel // TODO À voir
 
-// == Performances attendues // À voir
+// == Performances attendues // TODO À voir
 

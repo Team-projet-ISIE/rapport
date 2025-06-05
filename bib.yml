@@ -1,7 +1,17 @@
-typst-doc:
+# PIC24F04KA201-ds:
+pic24-ds:
   type: reference
   language: en
-  title: Documentation Typst
-  author: Typst
-  url: https://typst.app/docs
-  date: 2025-05-18
+  title: datasheet PIC24F04KA201
+  author: Microchip
+  url: https://ww1.microchip.com/downloads/en/DeviceDoc/30009937c.pdf
+  date: 2025-06-06
+
+# XBee3-ds:
+xbee3-ds:
+  type: reference
+  language: en
+  title: datasheet Digi XBee 3
+  author: Digi
+  url: https://www.digi.com/resources/library/data-sheets/ds_xbee-3-zigbee-3
+  date: 2025-06-06

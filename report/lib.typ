@@ -46,9 +46,9 @@
 // Wrapper around outline to make an internationalized Table of Figures
 #let tof() = {
   let figTitles = (
+    image: i18n("figures"),
     table: i18n("tables"),
     raw: i18n("codes"),
-    image: i18n("figures"),
   )
   pagebreak(weak: true)
   for kind in (table, raw, image) {

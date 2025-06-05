@@ -1,7 +1,7 @@
 = Conclusion
 
-== Bilan
+// == Bilan
 
-== Synthèse des résultats
+// == Synthèse des résultats
 
 == Perspectives et améliorations futures
