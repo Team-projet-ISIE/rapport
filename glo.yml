@@ -1,7 +1,35 @@
+- key: isie
+  short: ISIE
+  long: Informatique et Systèmes Intelligents Embarqués
+  description: Le cursus que nous suivons actuellement à Polytech Tours
+
+- key: polytech
+  short: Polytech
+  long: Polytech Tours
+  description: L’école d’ingénieur dans laquelle nous étudions actuellement
+
+- key: chauvin
+  short: F. Chauvin
+  long: Frédéric Chauvin
+  description: Le responsable du projet de déclencheur d’aération, le « client »
+
+- key: réf
+  short: pièce référence
+  description: La pièce qui est activement climatisée, dans laquelle on
+               récupère l’air
+
+- key: cible
+  short: pièce cible
+  description: La pièce qui à défaut d’être activement climatisée est aérée
+               intelligemment par le système avec l’air d’une pièce climatisée
+
 - key: mcu
   short: MCU
-  description: Microcontrôleur
+  long: microcontrôleur
+  description: Circuit intégré capable d’effectuer des calculs, de stocker de
+               l’information et de communiquer grâce à ses entrées-sorties
 
 - key: datasheet
-  short: Datasheet
-  description: Fiche technique d’un composant
+  short: datasheet
+  description: Fiche technique présentant toutes les caractéristiques d’un
+               composant électronique

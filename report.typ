@@ -37,7 +37,10 @@
     }
   })
   v(1fr)
-  info()
+  coll(info(), [
+    Encadrant\
+    #text(1.15em)[*Chauvin Frédéric*]
+  ])
 })
 // #include "./merci.typ" // Page de remerciements ?
 // #include "./0abstract.typ" // Page de résumé ?
