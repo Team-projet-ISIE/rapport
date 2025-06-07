@@ -1,42 +1,40 @@
+# Contexte général
 - key: isie
   short: ISIE
   long: Informatique et Systèmes Intelligents Embarqués
-  group: school
+  group: Contexte général
   description: Le cursus que nous suivons actuellement à Polytech Tours
-
 - key: polytech
   short: Polytech
   long: Polytech Tours
-  group: school
+  group: Contexte général
   description: L’école d’ingénieur dans laquelle nous étudions actuellement
-
 - key: chauvin
   short: F. Chauvin
   long: Frédéric Chauvin
-  group: school
+  group: Contexte général
   description: Le responsable du projet de déclencheur d’aération, le « client »
 
+# Spécifique au projet
 - key: réf
   short: pièce référence
-  group: proj
-  description: La pièce qui est activement climatisée, dans laquelle on
-               récupère l’air
-
+  group: Spécifique au projet
+  description: La pièce qui est activement climatisée, dans laquelle nous récupérons l’air
 - key: cible
   long: pièce cible
-  group: proj
+  group: Spécifique au projet
   description: La pièce qui, à défaut d’être activement climatisée, est aérée
                intelligemment par le système avec l’air d’une pièce climatisée
 
+# Technique
 - key: mcu
   short: MCU
   long: microcontrôleur
-  group: tech
+  group: Technique
   description: Circuit intégré capable d’effectuer des calculs, de stocker de
                l’information et de communiquer grâce à ses entrées-sorties
-
 - key: datasheet
   long: datasheet
-  group: tech
+  group: Technique
   description: Fiche technique présentant toutes les caractéristiques d’un
                composant électronique
