@@ -32,7 +32,7 @@ surface, tous nos composants sont sélectionnés montables en trou-traversant (o
 connectables tel qu’en Grove). Cela sera d’autant plus simple pour tester sur
 breadboard.
 
-#set page(flipped: true) //, margin: (x: 1cm)) // Pages en paysage
+#set page(flipped: true, header-ascent: .5em, footer-descent: .5em) // Paysage
 #set par(justify: false) // Ne pas justifier les paragraphes, moche dans tables
 
 == Analyse du besoin
@@ -45,7 +45,7 @@ breadboard.
   node((0, 0), [À qui rend-il service~?]),
   node(
     (0, 1),
-    [Personnes présentes\ dans la pièce],
+    [Personnes présentes\ dans la pièce cible],
     stroke: black, // Add a black border
     shape: ellipse,
     inset: 1.25em,
@@ -53,7 +53,7 @@ breadboard.
   edge(bend: -18deg, stroke: 1pt),
   node(
     (2, 1),
-    [Température de\ la pièce cible],
+    [Air de la\ pièce cible],
     stroke: black, // Add a black border
     shape: ellipse,
     inset: 1.25em,
@@ -67,11 +67,14 @@ breadboard.
     inset: 1.5em,
   ),
   node((1, 4), [Dans quel but~?]),
-  edge((1.65, 1.35), (1.5, 4.5), "->", bend: -17deg, stroke: 1pt),
+  edge((1.65, 1.4), (1.5, 4.5), "->", bend: -17deg, stroke: 1pt),
   node(
     (1, 5),
     name: <goal>,
-    align(center)[Égaliser la température entre deux pièces],
+    align(center)[
+      Égaliser la température entre deux pièces,\
+      pour le plus grand confort des personnes présentes
+    ],
     stroke: black, // Add a black border
     inset: .5em,
     corner-radius: .5em,
@@ -85,7 +88,7 @@ breadboard.
   align: (left, left),
   table.header(
     align(center, strong[Must (à faire absolument, objectifs de la v1.0.0)]),
-    align(center, strong[Should ( objectifs de sous-versions v1.x.x)]),
+    align(center, strong[Should (objectifs de sous-versions v1.x.x)]),
   ),
   [
     - Mode hiver (chauffage)~: Aérer si la pièce cible est plus froide que la
@@ -116,60 +119,61 @@ breadboard.
 
 == Schémas fonctionnels
 
-=== Niveau 1 (SFN1)
-
 #import fletcher.shapes: rect
 
-#fig(diagram(
-  spacing: 1cm,
-  // Module 1
-  node((0, 0), [Température pièce référence], name: <in1>),
-  node((0, 1), [Informations pièce cible (Ondes RF)], name: <in2>),
-  node((2, .5), [Flux thermique], name: <out1>),
-  node(
-    (1, .5),
-    enclose: ((1, 0), (1, 1)),
-    align(center)[
-      Captage température pièce référence.
+=== Niveau 1 (SFN1)
 
-      Récéption des informations pièce cible.
-
-      Déclenchement de l’aération\ sur commande en température.
-    ],
-    stroke: black, // Add a black border
-    inset: .5cm,
+#fig(
+  diagram(
+    spacing: 1cm,
+    // Module 1
+    node((0, 0), [Température @réf], name: <in1>),
+    // node((0, 1), [Informations @cible (Ondes RF)], name: <in2>),
+    node((2, 1), [Flux thermique], name: <out1>),
+    node(
+      (1, .5),
+      enclose: ((1, 0), (1, 2)),
+      block(width: 20em)[
+        Déclenchement intelligent de l’aération en fonction des informations
+        recueillies
+      ],
+      stroke: black, // Add a black border
+      inset: .5cm,
+    ),
+    edge(<in1>, (1, 0), "->"),
+    // edge(<in2>, (1, 1), "->"),
+    edge((1, 1), <out1>, "->"),
+    // Module 2
+    node((0, 1), [Température pièce cible], name: <in3>),
+    node((0, 2), [Choix du mode par l’utilisateur], name: <in4>),
+    // node((2, 2.5), [Informations pièce cible (Ondes RF)], name: <out2>),
+    // node(
+    //   (1, 2.5),
+    //   enclose: ((1, 2), (1, 3)),
+    //   block(width: 20em)[
+    //     Captage de la température pièce cible et du choix du mode, transmissions à
+    //     l’autre module côté référence
+    //   ],
+    //   stroke: black, // Add a black border
+    //   inset: .5cm,
+    // ),
+    edge(<in3>, (1, 1), "->"),
+    edge(<in4>, (1, 2), "->"),
+    // edge((1, 2.5), <out2>, "->"),
+    // node((1, 3), [Informations autre pièce (Ondes RF)], name: <in2>),
+    // edge((1, 2), <in2>, "->"),
+    // edge(<in2>, (1, 2), "->"),
   ),
-  edge(<in1>, (1, 0), "->"),
-  edge(<in2>, (1, 1), "->"),
-  edge((1, .5), <out1>, "->"),
-  // Module 2
-  node((0, 2), [Température pièce cible], name: <in3>),
-  node((0, 3), [Choix du mode par l’utilisateur], name: <in4>),
-  node((2, 2.5), [Informations pièce cible (Ondes RF)], name: <out2>),
-  node(
-    (1, 2.5),
-    enclose: ((1, 2), (1, 3)),
-    align(center)[
-      Captage température pièce cible, choix du mode.
-
-      Transmission au module côté référence.
-    ],
-    stroke: black, // Add a black border
-    inset: .5cm,
-  ),
-  edge(<in3>, (1, 2), "->"),
-  edge(<in4>, (1, 3), "->"),
-  edge((1, 2.5), <out2>, "->"),
-))[SFN1]
+)[SFN1 (vue hollistique du système, pas en modules distincts)]
 
 #pagebreak()
 === Premier degré (SF1D)
 
-#fig(image("SF1D.svg", height: 90%))[SF1D] // TODO améliorer
+#fig(image("SF1D.svg"))[SF1D] // TODO améliorer
 
 === Second degré (SF2D)
 
-#fig(image("placeholder.svg", height: 90%))[SF2D] // TODO SF2D
+#fig(image("placeholder.svg"))[SF2D] // TODO SF2D
 
 #pagebreak()
 == Description des fonctions et références de composants
@@ -686,7 +690,7 @@ breadboard.
   ],
 ))[Description de FA2]
 
-== Description des signaux
+== Description des signaux // TODO infos manquantes
 
 #fig(table(
   columns: 10,
@@ -765,6 +769,24 @@ breadboard.
   [],
   table.cell(colspan: 9)[Bloquant (0) pour le mode hiver (chauffage), passant
     (1) pour le mode été (refroidissement).],
+))[Description des signaux (1~/~2)]
+
+#fig(table(
+  columns: 10,
+  align: center + horizon,
+  table.header(
+    table.cell(rowspan: 2)[*Signal*],
+    [*Fonctions concernées*],
+    [*Nature du signal\ (A/N/GP)*],
+    [*Taille entité*],
+    [*Grandeur et unité\ (U, I…)*],
+    [*Plage de variation - Niveaux*],
+    [*Excursion en fréquence*],
+    [*Valeur au repos*],
+    [*Contraintes temporelles*],
+    [*Conformité à une norme*],
+    table.cell(colspan: 9)[*Description*],
+  ),
   table.cell(rowspan: 2)[CmdAeration],
   [FP0→FP5],
   [A],
@@ -789,24 +811,6 @@ breadboard.
   [],
   table.cell(colspan: 9)[Puissance nécessaire pour actionner le mouvement de
     l’aérateur.],
-))[Description des signaux (1~/~2)]
-
-#fig(table(
-  columns: 10,
-  align: center + horizon,
-  table.header(
-    table.cell(rowspan: 2)[*Signal*],
-    [*Fonctions concernées*],
-    [*Nature du signal\ (A/N/GP)*],
-    [*Taille entité*],
-    [*Grandeur et unité\ (U, I…)*],
-    [*Plage de variation - Niveaux*],
-    [*Excursion en fréquence*],
-    [*Valeur au repos*],
-    [*Contraintes temporelles*],
-    [*Conformité à une norme*],
-    table.cell(colspan: 9)[*Description*],
-  ),
   table.cell(rowspan: 2)[Vcc33],
   [FA0→FP0\ FA0→FP1],
   [A],
@@ -841,6 +845,17 @@ breadboard.
   [],
   [],
   table.cell(colspan: 9)[Température de la pièce de référence (climatisée).],
+  table.cell(rowspan: 2)[Ondes RF],
+  [FP3],
+  [A],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  table.cell(colspan: 9)[Communications sans-fils entre les deux modules.],
   table.cell(rowspan: 2)[Température pièce cible],
   [FP2 (cib)],
   [GP],
@@ -865,17 +880,6 @@ breadboard.
   [],
   table.cell(colspan: 9)[Choix du mode par l’utilisateur en positionnant un
     interrupteur en haut ou en bas.],
-  table.cell(rowspan: 2)[Ondes RF],
-  [FP3],
-  [A],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  table.cell(colspan: 9)[Communications sans-fils entre les deux modules.],
   table.cell(rowspan: 2)[Flux thermique],
   [FP6],
   [GP],
@@ -890,12 +894,8 @@ breadboard.
     référence vers la pièce cible.],
 ))[Description des signaux (2~/~2)]
 
-#set par(justify: true) // Justifie à nouveau les paragraphes
-#set page(flipped: false, margin: (x: 2cm)) // Revient en portrait
-
 // == Contraintes // TODO À voir
 
 // == Cahier des charges fonctionnel // TODO À voir
 
 // == Performances attendues // TODO À voir
-
