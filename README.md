@@ -1,6 +1,6 @@
 # Déclencher d’aération sur commande en température
 
-![Rapport PDF](./report.pdf)
+[Rapport PDF](./report.pdf)
 
 ## TODO
 
@@ -23,3 +23,30 @@
   - …
 - [ ] Valider à priori les fonctions
 - [ ] Fiches de tests des fonctions
+
+### Captage
+
+- [ ] Caractérisation des capteurs
+
+### Commande en puissance
+
+- [ ] …
+
+### Alimentation
+
+- [ ] …
+
+### Conditionnement capteurs numériques
+
+- [ ] …
+
+### Communication
+
+- [ ] …
+
+### Non applicable
+
+- CAN/CNA
+- Amplification
+- Filtrage analogique
+- Conditionnement de capteurs analogiques
