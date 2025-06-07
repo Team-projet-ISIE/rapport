@@ -1,6 +1,6 @@
 # Déclencher d’aération sur commande en température
 
-[Rapport PDF](./report.pdf)
+![Rapport PDF](./report.pdf)
 
 ## TODO
 
