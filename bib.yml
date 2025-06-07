@@ -5,7 +5,7 @@ pic24-ds:
   title: datasheet PIC24F04KA201
   author: Microchip
   url: https://ww1.microchip.com/downloads/en/DeviceDoc/30009937c.pdf
-  date: 2025-06-06
+  date: 2025-05-30
 
 # XBee3-ds:
 xbee3-ds:
@@ -14,4 +14,4 @@ xbee3-ds:
   title: datasheet Digi XBee 3
   author: Digi
   url: https://www.digi.com/resources/library/data-sheets/ds_xbee-3-zigbee-3
-  date: 2025-06-06
+  date: 2025-05-30
