@@ -41,3 +41,12 @@
   group: Technique
   description: Fiche technique présentant toutes les caractéristiques d’un
                composant électronique
+- key: 802-15
+  short: 802.15.4
+  group: Technique
+  description: Norme de communication sans-fil faible consommation.
+- key: zigbee
+  short: ZigBee
+  group: Technique
+  description: Protocole de communication sans-fil faible consommation,
+               basé sur la norme 802.15.4

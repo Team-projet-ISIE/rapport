@@ -12,14 +12,14 @@ pièce).
 
 Chaque module commence par capter la température de sa pièce d’accueil. N’ayant
 pas besoin d’une importante précision et fonctionnant en température ambiante,
-des capteurs «~smart~» connectables en Grove semblent tout indiqués, ils
+des capteurs "smart" connecant en I#super[2]C ou SPI semblent tout indiqués, ils
 simplifieront le projet.
 
 Les modules doivent communiquer entre eux, et pour cela, nous optons pour un
 #link(
   "https://fr.digi.com/products/embedded-systems/digi-xbee/rf-modules",
-)[XBee] fournissant une interface pour communiquer en 802.15.4, à priori au
-travers d’un protocole de plus haut niveau tel que ZigBee@xbee3-ds.
+)[XBee] fournissant une interface pour communiquer en @802-15@802-15-doc, à
+priori au travers d’un protocole de plus haut niveau tel que ZigBee@xbee3-ds.
 
 À notre stade du cursus, nous nous concentrons sur les microcontrôleurs se
 programmant directement en bas niveau (registres…), en particulier 16~bit, et
@@ -31,6 +31,9 @@ N’ayant pas la possibilité de produire un circuit avec composants soudés en
 surface, tous nos composants sont sélectionnés montables en trou-traversant (ou
 connectables tel qu’en Grove). Cela sera d’autant plus simple pour tester sur
 breadboard.
+
+#let HIGH = $3.3 V$ // Définition du niveau électrique HAUT
+#let LOW = $0 V$ // Définition du niveau électrique BAS
 
 #set page(flipped: true, header-ascent: .5em, footer-descent: .5em) // Paysage
 #set par(justify: false) // Ne pas justifier les paragraphes, moche dans tables
@@ -45,15 +48,19 @@ breadboard.
   node((0, 0), [À qui rend-il service~?]),
   node(
     (0, 1),
-    [Personnes présentes\ dans la pièce cible],
+    height: 4em,
+    width: 14em,
+    [Personnes présentes dans la @cible],
     stroke: black, // Add a black border
     shape: ellipse,
     inset: 1.25em,
   ),
-  edge(bend: -18deg, stroke: 1pt),
+  edge(bend: -14deg, stroke: 1pt),
   node(
     (2, 1),
-    [Air de la\ pièce cible],
+    height: 4em,
+    width: 14em,
+    [Air de la @cible],
     stroke: black, // Add a black border
     shape: ellipse,
     inset: 1.25em,
@@ -61,19 +68,22 @@ breadboard.
   node((2, 0), [Sur quoi agit-il~?]),
   node(
     (1, 2),
-    [Déclencheur d’aération sur\ commande en température],
+    height: 5em,
+    width: 18em,
+    [Déclencheur d’aération sur commande en température],
     stroke: black, // Add a black border
     shape: ellipse,
     inset: 1.5em,
   ),
   node((1, 4), [Dans quel but~?]),
-  edge((1.65, 1.4), (1.5, 4.5), "->", bend: -17deg, stroke: 1pt),
+  edge((1.6, 1.4), (1.45, 4.5), "->", bend: -17deg, stroke: 1pt),
   node(
     (1, 5),
     name: <goal>,
-    align(center)[
-      Égaliser la température entre deux pièces,\
-      pour le plus grand confort des personnes présentes
+    height: 4em,
+    width: 22em,
+    [
+      Profiter de températures confortables dans la @réf
     ],
     stroke: black, // Add a black border
     inset: .5em,
@@ -133,7 +143,8 @@ breadboard.
     node(
       (1, .5),
       enclose: ((1, 0), (1, 2)),
-      block(width: 20em)[
+      width: 17em,
+      [
         Déclenchement intelligent de l’aération en fonction des informations
         recueillies
       ],
@@ -144,7 +155,7 @@ breadboard.
     // edge(<in2>, (1, 1), "->"),
     edge((1, 1), <out1>, "->"),
     // Module 2
-    node((0, 1), [Température pièce cible], name: <in3>),
+    node((0, 1), [Température @cible], name: <in3>),
     node((0, 2), [Choix du mode par l’utilisateur], name: <in4>),
     // node((2, 2.5), [Informations pièce cible (Ondes RF)], name: <out2>),
     // node(
@@ -176,103 +187,22 @@ breadboard.
 #fig(image("placeholder.svg"))[SF2D] // TODO SF2D
 
 #pagebreak()
-== Description des fonctions et références de composants
+== Description des fonctions et références de composants // TODO séparer réfs
 
-=== Fonctions Principales
+=== Fonctions principales
 
-#fig(
-  table(
-    columns: (auto, auto, 1fr),
-    align: (center + horizon, left + horizon),
-    table.header(
-      [*Fonction Principale 0*],
-      [*Traitements numériques côté référence*],
-      [Microcontrôleur 16~bit, trou traversant, basse conso.],
-    ),
-    [*Description / rôle*],
-    table.cell(colspan: 2)[Déclencher ou stopper l’aération si les conditions
-      sont réunies, selon les données rapportées par le module côté cible et la
-      température de la pièce référence.],
-    [*Références envisagées*],
-    table.cell(colspan: 2)[
-      - PIC24FJ256GA702-I/SP 28 broches #link(
-          "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24FJ256GA702-I-SP/6562000",
-        )[chez DigiKey];.
-      - PIC24F08KL301-I/P-ND 20 broches #link(
-          "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24F08KL301-I-P/2835112ç",
-        )[chez DigiKey];.
-      - PIC24F04KL100-I/P #link(
-          "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24F04KL100-I-P/2835099",
-        )[chez DigiKey];.
-      - PIC24F04KL100-I/P #link(
-          "https://www.mouser.fr/ProductDetail/Microchip-Technology/PIC24F04KL100-I-P?qs=%252Bg1Dl%2FaibpHsewcuwRJLng%3D%3D",
-        )[chez Mouser];.
-      - Références PIC24 #link(
-          "https://www.digikey.fr/fr/products/filter/embarqués/microcontrôleurs/685?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9CYOHUQgUkDDgLEyIAAzNJIALQU5CpXkIlI5AExwArOv2Fz5qzUb3HNGiFdW45rYR2%2B0PJQ-ACuKqbkVlraMHICACZcOmDqEGyckCCeIOwAnqy4XOjYKOLiQA",
-        )[chez DigiKey];.
-      - Références PIC24 #link(
-          "https://www.mouser.fr/c/semiconductors/embedded-processors-controllers/microcontrollers-mcu/16-bit-microcontrollers-mcu/?core=PIC24E~~PIC24H&mounting%20style=Through%20Hole&active=y&rp=semiconductors%2Fembedded-processors-controllers%2Fmicrocontrollers-mcu%2F16-bit-microcontrollers-mcu|~Core|~Mounting%20Style",
-        )[chez Mouser];.
-      - Références #link(
-          "https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/16-bit-mcus/pic24f-ga",
-        )[PIC24F GA] et #link(
-          "https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/16-bit-mcus/pic24f-gu-gl-gp",
-        )[PIC24 GU/GP] site Microchip.
-    ],
-    [*Signaux d’entrée*],
-    table.cell(colspan: 2)[
-      - TempRef
-      - RxRF
-    ],
-    [*Signaux de sortie*],
-    table.cell(colspan: 2)[
-      - TxRF
-      - CmdAeration
-    ],
-  ),
-)[Description de FP0]
-
-#fig(table(
-  columns: (auto, auto, 1fr),
-  align: (center + horizon, left + horizon),
-  table.header(
-    [*Fonction Principale 1*],
-    [*Traitements numériques côté cible*],
-    [Microcontrôleur 16~bit, trou traversant, basse consommation],
-  ),
-  [*Description / rôle*],
-  table.cell(colspan: 2)[Réceptionner la température de la pièce cible et le
-    choix du mode par l’utilisateur, piloter l’émission sans-fil de ces
-    informations vers le module côté référence.],
-  [*Références envisagées*],
-  table.cell(colspan: 2)[
-    - Pour l’instant les références sont les mêmes que pour la Fonction
-      Principale 1
-  ],
-  [*Signaux d’entrée*],
-  table.cell(colspan: 2)[
-    - TempCib
-    - Mode
-    - RxRF
-  ],
-  [*Signaux de sortie*],
-  table.cell(colspan: 2)[
-    - TxRF
-  ],
-))[Description de FP1]
+==== Fonctions captage
 
 #fig(
   table(
     columns: (auto, auto, 1fr),
-    align: (center + horizon, left + horizon),
-    table.header(
-      [*Fonction Principale 2*],
-      [*Captage température*],
-      [Capteur de température, minimum capté ⩽ −~10~°C, maximum capté ⩾ 50~°C],
-    ),
+    align: (center + horizon, left + horizon, center + horizon),
+    table.header([*Fonction*], [*FP2*], [Captage température]),
     [*Description / rôle*],
-    table.cell(colspan: 2)[Capter la température des pièces (référence qui est
-      climatisée et cible pour la comparer).],
+    table.cell(colspan: 2)[
+      Capter la température de la @réf qui est climatisée et de la @cible pour
+      la comparer. Minimum capté $lt.eq 10 °C$, maximum capté $gt.eq 50 °C$.
+    ],
     [*Références envisagées*],
     table.cell(colspan: 2)[
       - Gravity AHC20 #link(
@@ -311,67 +241,19 @@ breadboard.
 #fig(
   table(
     columns: (auto, auto, 1fr),
-    align: (center + horizon, left + horizon),
+    align: (center + horizon, left + horizon, center + horizon),
     table.header(
-      [*Fonction Principale 3*],
-      [*Interfaçage RF*],
-      [
-        Communication sans-fil basse consommation (802.15.4 et dérivés,
-        Bluetooth LE)
-      ],
+      [*Fonction*], [*FP4*], [Interfaçage humain-machine],
+      //   [Interrupteur/commutateur (allumé/éteint)],
     ),
     [*Description / rôle*],
-    table.cell(colspan: 2)[Communiquer sans-fil les informations du module de la
-      pièce cible au module de la pièce référence.],
-    [*Références envisagées*],
     table.cell(colspan: 2)[
-      - XB3-24Z8PT-J #link(
-          "https://www.digikey.fr/fr/products/detail/digi/XB3-24Z8PT-J/8130934",
-        )[chez DigiKey];, antenne intégrée, ZigBee 3, 802.15.4, I2C, SPI, UART ≃
-        24~€
-      - XB24CDMSIT-001 chez #link(
-          "https://www.mouser.fr/ProductDetail/Digi/XB24CDMSIT-001?qs=XmMZR4xR0DDHBWHJZQYv7A%3D%3D",
-        )[Mouser];, 802.15.4, Zigbee, SPI/UART ≃ 28~€
-      - WRL-22630 #link(
-          "https://www.digikey.fr/fr/products/detail/sparkfun-electronics/WRL-22630/22321047",
-        )[chez DigiKey];, Bluetooth v4.2, Bluetooth v5.0, Zigbee, SPI/UART ≃
-        29~€
-      - Références modules RF #link(
-          "https://www.digikey.fr/fr/products/filter/modems-et-modules-d-émetteurs-récepteurs-rf/872?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9CcGAFZEIFJAw4CxMiADMMuGBlzCWnTJjM2nSD37Cxk8DRob5i5XkIlI5AEw0Y9eyEJvX2lTEA4uXkFRCUJaGgonNCxXNQ8QeJl6MAAGAPTPGE8NBEJ6OBowDQhS8o0qPLKabI1PBvLs6gaZTyoTQgps7Pp6XP7smBy%2BynHdavSKGRp6VtLMmAdQ8ItI6xjwcoRoBSSVN3VcpnEroA",
-        )[chez DigiKey];.
-      - Références modules #link(
-          "https://fr.digi.com/products/embedded-systems/digi-xbee/rf-modules",
-        )[Digri XBee] site constructeur.
+      Choix binaire entre le mode été (refroidissement) et le mode hiver
+      (chauffage). Idéalement, indique le mode actuellement choisi par sa
+      position physique (bascule haut/bas, glissière gauche/droite…).
+      Commutateur à bascule, commutateur à glissière ou boutton poussoir à
+      auto-verrouillage.
     ],
-    [*Signaux d’entrée*],
-    table.cell(colspan: 2)[
-      - TxRF
-    ],
-    [*Signaux de sortie*],
-    table.cell(colspan: 2)[
-      - RxRF
-    ],
-    [Signaux E/S],
-    table.cell(colspan: 2)[
-      - Ondes RF
-    ],
-  ),
-)[Description de FP3]
-
-#fig(
-  table(
-    columns: (auto, auto, 1fr),
-    align: (center + horizon, left + horizon),
-    table.header(
-      [*Fonction Principale 4*],
-      [*Interfaçage humain-machine*],
-      [Interrupteur/commutateur (allumé/éteint)],
-    ),
-    [*Description / rôle*],
-    table.cell(colspan: 2)[Choix binaire entre le mode été (refroidissement) et
-      le mode hiver (chauffage). Dois indiquer clairement le mode actuellement
-      choisi par sa position physique (bascule haut/bas, glissière
-      gauche/droite…)],
     [*Références envisagées*],
     table.cell(colspan: 2)[
       - Commutateur à glissière OS102011MS2QN1 chez #link(
@@ -386,7 +268,6 @@ breadboard.
       - Références interrupteurs bascule #link(
           "https://www.mouser.fr/c/electromechanical/switches/rocker-switches/?instock=y&active=y",
         )[Mouser];.
-
       - Références glissière #link(
           "https://www.mouser.fr/c/electromechanical/switches/slide-switches/?mounting%20style=Through%20Hole~~Through%20Hole%2C%20Right%20Angle&active=y&rp=electromechanical%2Fswitches%2Fslide-switches|~Mounting%20Style",
         )[Mouser];.
@@ -402,6 +283,8 @@ breadboard.
   ),
 )[Description de FP4]
 
+==== Fonctions analogiques
+
 // WARN N’étant pas qualifiés pour manipuler du courant d’aussi haute tension
 // que celui secteur, n’est-ce pas préférable de réaliser ce projet avec un
 // ventilateur en courant continu 12 V (type ventilateur d’ordinateur) ? Nous
@@ -410,78 +293,18 @@ breadboard.
 #fig(
   table(
     columns: (auto, auto, 1fr),
-    align: (center + horizon, left + horizon),
-    table.header(
-      [*Fonction Principale 5*],
-      [*Commande aérateur en puissance*],
-      [Driver moteur CC supportant jusqu’à environ 15~V],
-    ),
+    align: (center + horizon, left + horizon, center + horizon),
+    table.header([*Fonction*], [*FP5* (V~1)], [Commande aérateur en puissance]),
     [*Description / rôle*],
-    table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
-      (alternatif 230~V) de l’aérateur à partir du système en 3.3~V piloté par
-      le microcontrôleur.],
-    [*Références envisagées*],
     table.cell(colspan: 2)[
-      - Driver 1528-4489-ND #link(
-          "https://www.digikey.fr/fr/products/detail/adafruit-industries-llc/4489/11594498",
-        )[chez DigiKey];.
-      - Références #link(
-          "https://www.digikey.fr/fr/products/filter/gestion-de-l-alimentation-pmic/contrôleurs-variateurs-moteur/744?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9C9egCZEIFJAw4CxMiBoAGAMxwArJpCEa9GhT1HwFbVu2WZ2%2BtooJCumDIqX6e6RUOEMmB62poWgTY%2BASBB2jAGzGyckDz8wmKS4DAwXtAKaFh4hCSQ5DTaQTQwlhXOmtG1-jQ1Dv6uII2ajCwgHFy8gqIShGBwdPKKykVqpSCGTJkAtHJ5ivwArqol5BYLmdV5AgAmXItgmhBJXJbsAJ6suFzo2Cji4kA",
-        )[chez DigiKey];.
+      Contrôller la circulation du courant secteur (alternatif $230 V$) dans
+      l’aérateur à partir du @mcu en #HIGH.
     ],
-    [*Signaux d’entrée*],
-    table.cell(colspan: 2)[
-      - CmdAeration
-      - Valim (≃12~V)
-    ],
-    [*Signaux de sortie*],
-    table.cell(colspan: 2)[
-      - IAeration
-    ],
-  ),
-)[Description de FP5]
-
-#fig(table(
-  columns: (auto, auto, 1fr),
-  align: (center + horizon, left + horizon),
-  table.header(
-    [*Fonction Principale 5 bis*],
-    [*Commande aérateur en puissance*],
-    [Relais~/~MOSFET piloté en CC 3.3~V pour contrôler du CC 12~V],
-  ),
-  [*Description / rôle*],
-  table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
-    (alternatif 230~V) de l’aérateur à partir du système en 3.3~V piloté par le
-    microcontrôleur.],
-  [*Signaux d’entrée*],
-  table.cell(colspan: 2)[
-    - CmdAeration
-    - Valim (5~V à 25~V)
-  ],
-  [*Signaux de sortie*],
-  table.cell(colspan: 2)[
-    - IAeration
-  ],
-))[Description de FP5~bis]
-
-#fig(
-  table(
-    columns: (auto, auto, 1fr),
-    align: (center + horizon, left + horizon),
-    table.header(
-      [*Fonction Principale 5 bis*],
-      [*Commande aérateur en puissance*],
-      [Relais piloté en CC basse tension pour contrôler du CA 230~V],
-    ),
-    [*Description / rôle*],
-    table.cell(colspan: 2)[Bloquer ou laisser passer l’alimentation secteur
-      (alternatif 230~V) de l’aérateur à partir du système en 3.3~V piloté par
-      le microcontrôleur.],
     [*Références envisagées*],
     table.cell(colspan: 2)[
       - TC209R #link(
           "https://www.digikey.fr/fr/products/detail/bright-toward-industrial-co-ltd/TC209R/13556942",
-        )[chez Digikey];.
+        )[chez Digikey];
     ],
     [*Signaux d’entrée*],
     table.cell(colspan: 2)[
@@ -489,23 +312,53 @@ breadboard.
       - Valim (230~V secteur)
     ],
     [*Signaux de sortie*],
-    table.cell(colspan: 2)[IAeration],
+    table.cell(colspan: 2)[
+      - IAeration
+    ],
   ),
-)[Description de FP5~bis]
+)[Description de FP5 (V~1)]
 
 #fig(
   table(
     columns: (auto, auto, 1fr),
-    align: (center + horizon, left + horizon),
-    table.header(
-      [*Fonction Principale 6*],
-      [*Aération*],
-      [Aérateur encastrable pour gaine 125~mm],
-    ),
+    align: (center + horizon, left + horizon, center + horizon),
+    table.header([*Fonction*], [*FP5* (V~2)], [Commande aérateur en puissance]),
     [*Description / rôle*],
-    table.cell(colspan: 2)[Forcer l’air de la pièce de référence à aller dans la
-      pièce cible pour harmoniser leurs températures, si activé par le
-      microcontrôleur.],
+    table.cell(colspan: 2)[
+      Contrôller la circulation du courant d’alimentation $approx 12 V$ dans
+      l’aérateur à partir du @mcu en #HIGH.
+    ],
+    [*Références envisagées*],
+    table.cell(colspan: 2)[
+      - Driver 1528-4489-ND #link(
+          "https://www.digikey.fr/fr/products/detail/adafruit-industries-llc/4489/11594498",
+        )[chez DigiKey];
+      - Références #link(
+          "https://www.digikey.fr/fr/products/filter/gestion-de-l-alimentation-pmic/contrôleurs-variateurs-moteur/744?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9C9egCZEIFJAw4CxMiBoAGAMxwArJpCEa9GhT1HwFbVu2WZ2%2BtooJCumDIqX6e6RUOEMmB62poWgTY%2BASBB2jAGzGyckDz8wmKS4DAwXtAKaFh4hCSQ5DTaQTQwlhXOmtG1-jQ1Dv6uII2ajCwgHFy8gqIShGBwdPKKykVqpSCGTJkAtHJ5ivwArqol5BYLmdV5AgAmXItgmhBJXJbsAJ6suFzo2Cji4kA",
+        )[chez DigiKey];
+    ],
+    [*Signaux d’entrée*],
+    table.cell(colspan: 2)[
+      - CmdAeration
+      - Valim (5~V à 25~V)
+    ],
+    [*Signaux de sortie*],
+    table.cell(colspan: 2)[IAeration],
+  ),
+)[Description de FP5 (V~2)]
+
+#fig(
+  table(
+    columns: (auto, auto, 1fr),
+    align: (center + horizon, left + horizon, center + horizon),
+    table.header([*Fonction*], [*FP6*], [Aération]),
+    [*Description / rôle*],
+    table.cell(colspan: 2)[
+      Forcer l’air de la @réf à aller dans la @cible au travers d’une gaine
+      125~mm pour harmoniser leurs températures, si activé par le @mcu.
+      Idéalement, encastrable dans la gaine 125~mm (pas le cas pour le premier
+      prototype). // TODO à voir
+    ],
     [*Références envisagées*],
     table.cell(colspan: 2)[
       - Ventilateur MEC0251V3-000U-A99 120~mm 12~V DC 2 fils #link(
@@ -571,19 +424,147 @@ breadboard.
   ),
 )[Description de FP6]
 
+==== Fonctions numériques
+
 #fig(
   table(
     columns: (auto, auto, 1fr),
-    align: (center + horizon, left + horizon),
+    align: (center + horizon, left + horizon, center + horizon),
     table.header(
-      [*Fonction Principale 7*],
-      [*Affichage température*],
-      [Écran 7 segments minimum 4 chiffres],
+      [*Fonction*], [*FP0*], [Traitements numériques côté référence]
     ),
     [*Description / rôle*],
-    table.cell(colspan: 2)[Forcer l’air de la pièce de référence à aller dans la
-      pièce cible pour harmoniser leurs températures, si activé par le
-      microcontrôleur.],
+    table.cell(colspan: 2)[
+      Déclencher ou stopper l’aération si les conditions sont réunies, selon les
+      données rapportées par le module @cible et la température de la @réf. @mcu
+      16~bit, conditionné en trou traversant, idéalement proposant des options
+      basse consommation (mode veille, fréquence basse…).
+    ],
+    [*Références envisagées*],
+    table.cell(colspan: 2)[
+      - PIC24FJ256GA702-I/SP 28 broches #link(
+          "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24FJ256GA702-I-SP/6562000",
+        )[chez DigiKey];.
+      - PIC24F08KL301-I/P-ND 20 broches #link(
+          "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24F08KL301-I-P/2835112ç",
+        )[chez DigiKey];.
+      - PIC24F04KL100-I/P #link(
+          "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24F04KL100-I-P/2835099",
+        )[chez DigiKey];.
+      - PIC24F04KL100-I/P #link(
+          "https://www.mouser.fr/ProductDetail/Microchip-Technology/PIC24F04KL100-I-P?qs=%252Bg1Dl%2FaibpHsewcuwRJLng%3D%3D",
+        )[chez Mouser];.
+      - Références PIC24 #link(
+          "https://www.digikey.fr/fr/products/filter/embarqués/microcontrôleurs/685?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9CYOHUQgUkDDgLEyIAAzNJIALQU5CpXkIlI5AExwArOv2Fz5qzUb3HNGiFdW45rYR2%2B0PJQ-ACuKqbkVlraMHICACZcOmDqEGyckCCeIOwAnqy4XOjYKOLiQA",
+        )[chez DigiKey];.
+      - Références PIC24 #link(
+          "https://www.mouser.fr/c/semiconductors/embedded-processors-controllers/microcontrollers-mcu/16-bit-microcontrollers-mcu/?core=PIC24E~~PIC24H&mounting%20style=Through%20Hole&active=y&rp=semiconductors%2Fembedded-processors-controllers%2Fmicrocontrollers-mcu%2F16-bit-microcontrollers-mcu|~Core|~Mounting%20Style",
+        )[chez Mouser];.
+      - Références #link(
+          "https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/16-bit-mcus/pic24f-ga",
+        )[PIC24F GA] et #link(
+          "https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/16-bit-mcus/pic24f-gu-gl-gp",
+        )[PIC24 GU/GP] site Microchip.
+    ],
+    [*Signaux d’entrée*],
+    table.cell(colspan: 2)[
+      - TempRef
+      - RxRF
+    ],
+    [*Signaux de sortie*],
+    table.cell(colspan: 2)[
+      - TxRF
+      - CmdAeration
+    ],
+  ),
+)[Description de FP0]
+
+#fig(table(
+  columns: (auto, auto, 1fr),
+  align: (center + horizon, left + horizon, center + horizon),
+  table.header([*Fonction*], [*FP1*], [Traitements numériques côté cible]),
+  [*Description / rôle*],
+  table.cell(colspan: 2)[
+    - Mesurer
+      - Température de la @cible
+      - Choix du mode par l’utilisateur
+    - Piloter
+      - Émission sans-fil de ces informations vers le module @réf
+      - Affichage des informations pour l’utilisateur
+
+    @mcu 16~bit, conditionné en trou traversant, idéalement proposant des
+    options basse consommation (mode veille, fréquence basse…).
+  ],
+  [*Signaux d’entrée*],
+  table.cell(colspan: 2)[
+    - TempCib
+    - Mode
+    - RxRF
+  ],
+  [*Signaux de sortie*],
+  table.cell(colspan: 2)[
+    - TxRF
+  ],
+))[Description de FP1]
+
+==== Fonctions communication
+
+#fig(
+  table(
+    columns: (auto, auto, 1fr),
+    align: (center + horizon, left + horizon, center + horizon),
+    table.header([*Fonction*], [*FP3*], [Interfaçage RF]),
+    [*Description / rôle*],
+    table.cell(colspan: 2)[
+      Communiquer sans-fil les informations du module de la pièce cible au
+      module de la pièce référence. Idéalement, faible consommation.
+    ],
+    [*Références envisagées*],
+    table.cell(colspan: 2)[
+      - XB3-24Z8PT-J #link(
+          "https://www.digikey.fr/fr/products/detail/digi/XB3-24Z8PT-J/8130934",
+        )[chez DigiKey];, antenne intégrée, ZigBee 3, 802.15.4, I2C, SPI, UART ≃
+        24~€
+      - XB24CDMSIT-001 chez #link(
+          "https://www.mouser.fr/ProductDetail/Digi/XB24CDMSIT-001?qs=XmMZR4xR0DDHBWHJZQYv7A%3D%3D",
+        )[Mouser];, 802.15.4, Zigbee, SPI/UART ≃ 28~€
+      - WRL-22630 #link(
+          "https://www.digikey.fr/fr/products/detail/sparkfun-electronics/WRL-22630/22321047",
+        )[chez DigiKey];, Bluetooth v4.2, Bluetooth v5.0, Zigbee, SPI/UART ≃
+        29~€
+      - Références modules RF #link(
+          "https://www.digikey.fr/fr/products/filter/modems-et-modules-d-émetteurs-récepteurs-rf/872?s=N4IgjCBcoGwJxVAYygMwIYBsDOBTANCAPZQDaIALGGABxwDsIAuoQA4AuUIAyuwE4BLAHYBzEAF9CcGAFZEIFJAw4CxMiADMMuGBlzCWnTJjM2nSD37Cxk8DRob5i5XkIlI5AEw0Y9eyEJvX2lTEA4uXkFRCUJaGgonNCxXNQ8QeJl6MAAGAPTPGE8NBEJ6OBowDQhS8o0qPLKabI1PBvLs6gaZTyoTQgps7Pp6XP7smBy%2BynHdavSKGRp6VtLMmAdQ8ItI6xjwcoRoBSSVN3VcpnEroA",
+        )[chez DigiKey];.
+      - Références modules #link(
+          "https://fr.digi.com/products/embedded-systems/digi-xbee/rf-modules",
+        )[Digri XBee] site constructeur.
+    ],
+    [*Signaux d’entrée*],
+    table.cell(colspan: 2)[
+      - TxRF
+    ],
+    [*Signaux de sortie*],
+    table.cell(colspan: 2)[
+      - RxRF
+    ],
+    [Signaux E/S],
+    table.cell(colspan: 2)[
+      - Ondes RF
+    ],
+  ),
+)[Description de FP3]
+
+#fig(
+  table(
+    columns: (auto, auto, 1fr),
+    align: (center + horizon, left + horizon, center + horizon),
+    table.header([*Fonction*], [*FP7*], [Affichage température]),
+    [*Description / rôle*],
+    table.cell(colspan: 2)[
+      Afficher la température actuelle de la @cible, le mode choisi
+      (chauffage/refroidissement) et l’état actuel de la ventilation.
+      Éventuellement, afficher la température de la @réf.
+    ],
     [*Références envisagées*],
     table.cell(colspan: 2)[
       - Afficheur LCD 4411-CN0295D-ND #link(
@@ -604,21 +585,21 @@ breadboard.
   ),
 )[Description de FP7]
 
-=== Fonctions Annexes
+=== Fonctions annexes
+
+==== Fonctions analogiques
 
 #fig(
   table(
     columns: (auto, auto, 1fr),
-    align: (center + horizon, left + horizon),
-    table.header(
-      [*Fonction Annexe 0*],
-      [*Alimentation générique*],
-      [Alimentation 3,3~V à partir d’une alimentation plus générique],
-    ),
+    align: (center + horizon, left + horizon, center + horizon),
+    table.header([*Fonction*], [*FA0* (V~1)], [Alimentation]),
     [*Description / rôle*],
-    table.cell(colspan: 2)[Fournir un courant continu de 3,3~V au circuit de
-      contrôle, incluant le microcontrôleur, à partir d’une alimentation
-      générique fournissant du courant continu entre 5 et 25~V.],
+    table.cell(colspan: 2)[
+      Fournir un courant continu de #HIGH au circuit incluant le @mcu, à partir
+      d’une alimentation générique fournissant du courant continu entre $5 V$ et
+      $25 V$.
+    ],
     [*Références envisagées*],
     table.cell(colspan: 2)[
       - Régulateur de tension linéaire LM1086CT-3.3/NOPB-ND #link(
@@ -640,24 +621,17 @@ breadboard.
       - Vcc33
     ],
   ),
-)[Description de FA0]
+)[Description de FA0 (V~1)]
 
 #fig(table(
   columns: (auto, auto, 1fr),
-  align: (center + horizon, left + horizon),
-  table.header(
-    [*Fonction Annexe 1*],
-    [*Alimentation sur batterie*],
-    [Alimentation 3,3~V à partir d’une batterie ou pile],
-  ),
+  align: (center + horizon, left + horizon, center + horizon),
+  table.header([*Fonction*], [*FA0* (V~2)], [Alimentation]),
   [*Description / rôle*],
   table.cell(align: left, colspan: 2)[
     // WARN Vraiment nécessaire?
-    // Ou utiliser Description de FA0 pour le module côté cible également~?
-
-    Fournir un courant continu de 3,3~V au circuit de contrôle, incluant le
-    microcontrôleur, à partir d’une solution d’alimentation autonome (batterie,
-    pile).
+    Fournir un courant continu de #HIGH au circuit incluant le @mcu, à partir de
+    piles ou d’une batterie.
   ],
   [*Signaux d’entrée*],
   table.cell(colspan: 2)[
@@ -667,19 +641,18 @@ breadboard.
   table.cell(colspan: 2)[
     - Vcc33
   ],
-))[Description de FA1]
+))[Description de FA0 (V~2)]
 
 #fig(table(
   columns: (auto, auto, 1fr),
-  align: (center + horizon, left + horizon),
-  table.header(
-    [*Fonction Annexe 2*],
-    [*Programmation in-situ*],
-    [Programmeur pour le(s) microcontrôleur(s) utilisé(s)],
-  ),
+  align: (center + horizon, left + horizon, center + horizon),
+  table.header([*Fonction*], [*FA1*], [Programmation in-situ]),
   [*Description / rôle*],
-  table.cell(colspan: 2)[Programmer le microcontrôleur sans le retirer du
-    circuit.],
+  table.cell(colspan: 2)[
+    Programmer le @mcu en le laissant soudé au ciruit imprimé ou placé sur la
+    breadboard. Programmateur adapté au @mcu choisi, par exemple PICKit pour un
+    @mcu PIC24.
+  ],
   [*Signaux d’entrée*],
   table.cell(colspan: 2)[
     - Communication USB avec ordinateur
@@ -688,7 +661,7 @@ breadboard.
   table.cell(colspan: 2)[
     - Signaux électriques de programmation
   ],
-))[Description de FA2]
+))[Description de FA1]
 
 == Description des signaux // TODO infos manquantes
 
@@ -713,7 +686,7 @@ breadboard.
   [N],
   [],
   [U (V)],
-  [0~V à 3,3~V],
+  [#LOW à #HIGH],
   [\< 1~Hz],
   [],
   [],
@@ -724,7 +697,7 @@ breadboard.
   [N],
   [],
   [U (V)],
-  [0 à 3,3~V],
+  [#LOW à #HIGH],
   [\<
     1~Hz],
   [],
@@ -762,9 +735,9 @@ breadboard.
   [N],
   [],
   [U (V)],
-  [0 / 3,3~V],
+  [#LOW / #HIGH],
   [\<~1~Hz],
-  [0~V\ (0 logique)],
+  [#LOW\ (0 logique)],
   [],
   [],
   table.cell(colspan: 9)[Bloquant (0) pour le mode hiver (chauffage), passant
@@ -792,7 +765,7 @@ breadboard.
   [A],
   [],
   [U (V)],
-  [0 / 3,3~V],
+  [#LOW / #HIGH],
   [\< 1~Hz],
   [0~V (bloquant)],
   [],
@@ -816,7 +789,7 @@ breadboard.
   [A],
   [],
   [U (V)],
-  [3,3~V],
+  [#HIGH],
   [],
   [],
   [],

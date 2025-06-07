@@ -4,13 +4,14 @@
 
 ## TODO
 
-- [x] Bête à cornes (À améliorer)
-- [x] SFN1 (À améliorer)
-- [x] SF1D (À améliorer, simplifier)
-- [x] Description des fonctions (À améliorer)
-  - [ ] Classement des fonctions par nature
+- [x] Bête à cornes
+- [x] SFN1
+- [x] SF1D (Ne pas faire apparaître commande en puissance ?)
+- [x] Description des fonctions
+  - [x] Classement des fonctions par nature
+  - [ ] Retirer les références envisagées, les justifier dans une autre section
 - [x] Description des signaux (À améliorer)
-- [ ] SF2D
+- [ ] SF2D ?
 - [ ] Caractérisations détaillées des fonctions
   - [ ] Caractérisations des capteurs
   - Rôle
