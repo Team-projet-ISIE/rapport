@@ -2,23 +2,36 @@
 
 [Rapport PDF](./report.pdf)
 
+## Caractérisation détaillée fonction
+
+- Précision
+- Résolution
+- Vitesse
+- Caractéristiques économiques
+- Stock
+- Caractéristiques environnementales
+- Moyens de fabrication
+
 ## TODO
 
 - [x] Bête à cornes
 - [x] SFN1
-- [x] SF1D (Ne pas faire apparaître commande en puissance ?)
+- [x] SF1D (Faire apparaître commande en puissance ?)
 - [x] Description des fonctions
   - [x] Classement des fonctions par nature
-  - [ ] Retirer les références envisagées, les justifier dans une autre section
+  - [x] Retirer les références envisagées
 - [x] Description des signaux (À améliorer)
-- [ ] SF2D ?
-- [ ] Caractérisations détaillées des fonctions
-  - [ ] Caractérisations des capteurs
-  - Rôle
-  - Performances : Précision, résolution, vitesse…
-  - Caractéristiques économiques, stock
-  - Caractéristiques environnementales
-  - Moyens de fabrication
+- [ ] SF2D avec 5-25V entrant dans FA0, 230V secteur entrant dans FP5
+  - [ ] V2 avec ≃12V entrant dans FP5
+  - [ ] V3 avec piles ou batterie entrant dans FA0
+- [ ] Justification des références de capteurs dans une autre section
+- [ ] Caractérisation détaillée du capteur de température et d’humidité
+- [ ] Caractérisation détaillée de l’interface humain machine
+- [ ] Caractérisation détaillée de la commande en puissance
+- [ ] Caractérisation détaillée de l’aérateur/ventilateur
+- [ ] Caractérisation détaillée du circuit d’alimentation
+- [ ] Caractérisation détaillée du module ZigBee
+- [ ] Caractérisation détaillée de l’afficheur
 - [ ] Validation de l’interfaçage capteur température (& humidité) / MCU
   - [ ] Validation protocole de communication
 - [ ] Validation de l’interfaçage module ZigBee / MCU
@@ -32,7 +45,7 @@
   - [ ] Avec des piles / une batterie
 - [ ] Validation de la communication sans-fil entre les deux modules
 
-### Non applicable
+### Ne s’applique pas au projet
 
 - CAN/CNA
 - Amplification
