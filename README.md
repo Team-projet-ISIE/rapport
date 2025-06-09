@@ -22,8 +22,8 @@
   - [x] Retirer les références envisagées
 - [x] Description des signaux (À améliorer)
 - [x] SF2D avec 5-25V entrant dans FA0, 230V secteur entrant dans FP5
-  - [x] V2 avec ≃12V entrant dans FP5
-  - [x] V3 avec piles ou batterie entrant dans FA0
+  - [x] V2 avec ≃12V alimentant la commande en puissance de l’aération
+  - [x] V3 avec piles ou batterie alimentant module cible
 - [ ] Justification des références de capteurs dans une autre section
 - [ ] Caractérisation détaillée du capteur de température et d’humidité
 - [ ] Caractérisation détaillée de l’interface humain machine
