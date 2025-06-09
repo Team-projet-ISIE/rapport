@@ -175,16 +175,49 @@ breadboard.
     // edge((1, 2), <in2>, "->"),
     // edge(<in2>, (1, 2), "->"),
   ),
-)[SFN1 (vue hollistique du système, pas en modules distincts)]
+)[SFN1 (vue holistique du système, pas en modules distincts)]
 
 #pagebreak()
-=== Premier degré (SF1D)
+=== Premier degré
 
-#fig(image("./sf1d.v1.svg", height: 40em))[SF1D]
+#let presentFig(body, fig) = {
+  grid(
+    columns: (1fr, 3fr),
+    rows: 1fr,
+    gutter: .5em,
+    body, fig,
+  )
+}
 
-// === Second degré (SF2D)
+#coll(
+  cols: (1fr, 3fr),
+  [
+    #set par(justify: true)
+    Ce premier schéma fonctionnel offre une vue d’ensemble de ce que le système
+    devra être capable de faire, mais dans certains cas sans se soucier de la
+    façon dont ces besoins seront addressés.
 
-// #fig(image("placeholder.svg"))[SF2D] // ?
+    Il est un reflet direct de l’expression de besoin, auxquel ont été ajoutées
+    les fonctions annexes d’alimentation et de programmation du #gls(
+      "mcu",
+      display: "microcontrôleur (MCU),",
+    ) ainsi que la fonction principale de commande en puissance, qui apparaît
+    directement nécessaire.
+  ],
+  align(horizon, fig(image("./sf1d.v1.svg"))[SF1D]),
+)
+
+=== Second degré
+
+#fig(image("./sf2d.v1.svg", height: 40em))[SF2D]
+
+=== Second degré alternatif 1
+
+#fig(image("./sf2d.v2.svg", height: 40em))[SF2D (alt.~1)]
+
+=== Second degré alternatif 2
+
+#fig(image("./sf2d.v3.svg", height: 40em))[SF2D (alt.~2)]
 
 #pagebreak()
 == Description des fonctions et références de composants // TODO séparer réfs

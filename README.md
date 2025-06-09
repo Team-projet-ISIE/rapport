@@ -21,9 +21,9 @@
   - [x] Classement des fonctions par nature
   - [x] Retirer les références envisagées
 - [x] Description des signaux (À améliorer)
-- [ ] SF2D avec 5-25V entrant dans FA0, 230V secteur entrant dans FP5
-  - [ ] V2 avec ≃12V entrant dans FP5
-  - [ ] V3 avec piles ou batterie entrant dans FA0
+- [x] SF2D avec 5-25V entrant dans FA0, 230V secteur entrant dans FP5
+  - [x] V2 avec ≃12V entrant dans FP5
+  - [x] V3 avec piles ou batterie entrant dans FA0
 - [ ] Justification des références de capteurs dans une autre section
 - [ ] Caractérisation détaillée du capteur de température et d’humidité
 - [ ] Caractérisation détaillée de l’interface humain machine
