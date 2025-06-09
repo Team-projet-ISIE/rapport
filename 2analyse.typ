@@ -587,7 +587,7 @@ breadboard.
 #fig(table(
   columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon, center + horizon),
-  table.header([*Fonction*], [*FA1* (alt.~1)], [Alimentation]),
+  table.header([*Fonction*], [*FA1*], [Alimentation]),
   [*Description / rôle*],
   table.cell(colspan: 2)[
     Fournir un courant continu de #HIGH au circuit incluant le @mcu, à partir
@@ -602,7 +602,7 @@ breadboard.
   table.cell(colspan: 2)[
     - Vcc33
   ],
-))[Description de FA1 (alt.~1)]
+))[Description de FA1]
 // [*Références envisagées*],
 //   - Régulateur de tension linéaire LM1086CT-3.3/NOPB-ND #link(
 //       "https://www.digikey.fr/fr/products/detail/texas-instruments/LM1086CT-3-3-NOPB/363571",
@@ -617,7 +617,7 @@ breadboard.
 #fig(table(
   columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon, center + horizon),
-  table.header([*Fonction*], [*FA1* (alt.~2)], [Alimentation]),
+  table.header([*Fonction*], [*FA1* (alt.~1)], [Alimentation]),
   [*Description / rôle*],
   table.cell(align: left, colspan: 2)[
     // WARN Vraiment nécessaire?
@@ -632,7 +632,7 @@ breadboard.
   table.cell(colspan: 2)[
     - Vcc33
   ],
-))[Description de FA1 (alt.~2)]
+))[Description de FA1 (alt.~1)]
 
 #fig(table(
   columns: (auto, auto, 1fr),
@@ -776,7 +776,7 @@ breadboard.
   table.cell(colspan: 9)[Puissance nécessaire pour actionner le mouvement de
     l’aérateur.],
   table.cell(rowspan: 2)[Vcc33],
-  [FA0→FP0\ FA0→FP1],
+  [FA1→FP0\ FA1→FP1],
   [A],
   [],
   [U (V)],
@@ -787,7 +787,7 @@ breadboard.
   [],
   table.cell(colspan: 9)[Alimentation en énergie électrique des composants.],
   table.cell(rowspan: 2)[Valim],
-  [FA0, FP5],
+  [FA1, FP5],
   [A],
   [],
   [U (V)],

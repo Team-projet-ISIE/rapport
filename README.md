@@ -27,7 +27,7 @@
 
 - [ ] Description FA2 (alim 12V)
 - [ ] Compléter description des signaux
-  - [ ] Mettre à jour nom fonctions (FA0->FA1…)
+  - [x] Mettre à jour nom fonctions (FA0->FA1…)
 
 - Étude de l’existant
   - [ ] Intro
