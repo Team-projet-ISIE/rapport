@@ -19,7 +19,7 @@ Les modules doivent communiquer entre eux, et pour cela, nous optons pour un
 #link(
   "https://fr.digi.com/products/embedded-systems/digi-xbee/rf-modules",
 )[XBee] fournissant une interface pour communiquer en @802-15@802-15-doc, à
-priori au travers d’un protocole de plus haut niveau tel que ZigBee@xbee3-ds.
+priori au travers d’un protocole de plus haut niveau tel que @zigbee@xbee3-ds.
 
 À notre stade du cursus, nous nous concentrons sur les microcontrôleurs se
 programmant directement en bas niveau (registres…), en particulier 16~bit, et
@@ -180,44 +180,40 @@ breadboard.
 #pagebreak()
 === Premier degré
 
-#let presentFig(body, fig) = {
+#let presentFig(f, c, body) = {
+  set par(justify: true)
   grid(
     columns: (1fr, 3fr),
     rows: 1fr,
     gutter: .5em,
-    body, fig,
+    body, align(horizon, fig(f, c)),
   )
 }
 
-#coll(
-  cols: (1fr, 3fr),
-  [
-    #set par(justify: true)
-    Ce premier schéma fonctionnel offre une vue d’ensemble de ce que le système
-    devra être capable de faire, mais dans certains cas sans se soucier de la
-    façon dont ces besoins seront addressés.
+#presentFig(image("./sf1d.v1.svg"), [SF1D])[
+  Ce premier schéma fonctionnel offre une vue d’ensemble de ce que le système
+  devra être capable de faire, mais dans certains cas sans se soucier de la
+  façon dont ces besoins seront addressés.
 
-    Il est un reflet direct de l’expression de besoin, auxquel ont été ajoutées
-    les fonctions annexes d’alimentation et de programmation du #gls(
-      "mcu",
-      display: "microcontrôleur (MCU),",
-    ) ainsi que la fonction principale de commande en puissance, qui apparaît
-    directement nécessaire.
-  ],
-  align(horizon, fig(image("./sf1d.v1.svg"))[SF1D]),
-)
+  Il est un reflet direct de l’expression de besoin, auxquel ont été ajoutées
+  les fonctions annexes d’alimentation et de programmation du #gls(
+    "mcu",
+    display: "microcontrôleur (MCU),",
+  ) ainsi que la fonction principale de commande en puissance, qui apparaît
+  directement nécessaire.
+]
 
 === Second degré
 
-#fig(image("./sf2d.v1.svg", height: 40em))[SF2D]
+#presentFig(image("./sf2d.v1.svg"), [SF2D])[second schéma fonctionnel]
 
 === Second degré alternatif 1
 
-#fig(image("./sf2d.v2.svg", height: 40em))[SF2D (alt.~1)]
+#presentFig(image("./sf2d.v2.svg"), [SF2D])[second schéma fonctionnel]
 
 === Second degré alternatif 2
 
-#fig(image("./sf2d.v3.svg", height: 40em))[SF2D (alt.~2)]
+#presentFig(image("./sf2d.v3.svg"), [SF2D])[second schéma fonctionnel]
 
 #pagebreak()
 == Description des fonctions et références de composants // TODO séparer réfs
@@ -314,7 +310,9 @@ breadboard.
 #fig(table(
   columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon, center + horizon),
-  table.header([*Fonction*], [*FP5* (V~1)], [Commande aérateur en puissance]),
+  table.header(
+    [*Fonction*], [*FP5* (alt.~1)], [Commande aérateur en puissance]
+  ),
   [*Description / rôle*],
   table.cell(colspan: 2)[
     Contrôller la circulation du courant secteur (alternatif $230 V$) dans
@@ -329,7 +327,7 @@ breadboard.
   table.cell(colspan: 2)[
     - IAeration
   ],
-))[Description de FP5 (V~1)]
+))[Description de FP5 (alt.~1)]
 //Références envisagées
 //- TC209R #link(
 //    "https://www.digikey.fr/fr/products/detail/bright-toward-industrial-co-ltd/TC209R/13556942",
@@ -338,7 +336,9 @@ breadboard.
 #fig(table(
   columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon, center + horizon),
-  table.header([*Fonction*], [*FP5* (V~2)], [Commande aérateur en puissance]),
+  table.header(
+    [*Fonction*], [*FP5* (alt.~2)], [Commande aérateur en puissance]
+  ),
   [*Description / rôle*],
   table.cell(colspan: 2)[
     Contrôller la circulation du courant d’alimentation $approx 12 V$ dans
@@ -351,7 +351,7 @@ breadboard.
   ],
   [*Signaux de sortie*],
   table.cell(colspan: 2)[IAeration],
-))[Description de FP5 (V~2)]
+))[Description de FP5 (alt.~2)]
 //Références envisagées
 //- Driver 1528-4489-ND #link(
 //    "https://www.digikey.fr/fr/products/detail/adafruit-industries-llc/4489/11594498",
@@ -587,7 +587,7 @@ breadboard.
 #fig(table(
   columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon, center + horizon),
-  table.header([*Fonction*], [*FA0* (V~1)], [Alimentation]),
+  table.header([*Fonction*], [*FA1* (alt.~1)], [Alimentation]),
   [*Description / rôle*],
   table.cell(colspan: 2)[
     Fournir un courant continu de #HIGH au circuit incluant le @mcu, à partir
@@ -602,7 +602,7 @@ breadboard.
   table.cell(colspan: 2)[
     - Vcc33
   ],
-))[Description de FA0 (V~1)]
+))[Description de FA1 (alt.~1)]
 // [*Références envisagées*],
 //   - Régulateur de tension linéaire LM1086CT-3.3/NOPB-ND #link(
 //       "https://www.digikey.fr/fr/products/detail/texas-instruments/LM1086CT-3-3-NOPB/363571",
@@ -617,7 +617,7 @@ breadboard.
 #fig(table(
   columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon, center + horizon),
-  table.header([*Fonction*], [*FA0* (V~2)], [Alimentation]),
+  table.header([*Fonction*], [*FA1* (alt.~2)], [Alimentation]),
   [*Description / rôle*],
   table.cell(align: left, colspan: 2)[
     // WARN Vraiment nécessaire?
@@ -632,12 +632,12 @@ breadboard.
   table.cell(colspan: 2)[
     - Vcc33
   ],
-))[Description de FA0 (V~2)]
+))[Description de FA1 (alt.~2)]
 
 #fig(table(
   columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon, center + horizon),
-  table.header([*Fonction*], [*FA1*], [Programmation in-situ]),
+  table.header([*Fonction*], [*FA0*], [Programmation in-situ]),
   [*Description / rôle*],
   table.cell(colspan: 2)[
     Programmer le @mcu en le laissant soudé au ciruit imprimé ou placé sur la
@@ -652,7 +652,7 @@ breadboard.
   table.cell(colspan: 2)[
     - Signaux électriques de programmation
   ],
-))[Description de FA1]
+))[Description de FA0]
 
 == Description des signaux // TODO infos manquantes
 
