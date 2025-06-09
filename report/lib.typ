@@ -24,9 +24,9 @@
   authors: ("Guilhem Fauré",), // Author(s) of the document
   date: date(2025, 5, 31), // Date of the document (last template update)
   // Fonts
-  sans: ("Nacelle",), // "Inter", "FiraGO", "sans-serif"
-  serif: ("Libre Baskerville",), // "Vollkorn", "Merriweather", "serif"
-  mono: ("JetBrainsMono NF",), // "FiraCode Nerd Font", "mono"
+  sans: ("New Computer Modern",),
+  serif: ("Libertinus Sans",),
+  mono: ("JetBrainsMono NF",),
   // Assets (simpler to use them in body directly)
   // glossary: "glossary.yml",
   // bibliography: "bibliography.yml",
