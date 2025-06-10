@@ -23,8 +23,7 @@
 // Test du programme entier.
 
 == Test de performance global
-
-Efficacité du système.
+// Efficacité du système.
 
 // == Résultats des tests
 

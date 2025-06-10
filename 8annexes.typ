@@ -16,6 +16,7 @@
   }
   ```][Programme de test de la broche RA0]
 
+/*
 #fig[```c
   // FSEC
   #pragma config BWRP = OFF      // Boot Segment Write-Protect bit (Boot Segment may be written)
@@ -65,3 +66,4 @@
   #pragma config DSWDTPS = DSWDTPS_8 // Deep Sleep Watchdog Timer Postscale (1:8)
   #pragma config DSWDTOSC = LPRC     // DSWDT Clock Select (DSWDT uses LPRC)
   ```][Macros de configuration du PIC24]
+*/
