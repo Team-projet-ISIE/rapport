@@ -1,26 +1,26 @@
-= Test et validation
+= Validation et test
+
+== Validation à priori des fonctions et interfaçages
 
 == Protocoles de test matériel
 
-=== Tests unitaires
+// === Tests unitaires
 
-==== Test des composants
+// === Test des composants
 
-==== Test des fonctions
+// === Test des fonctions
 
-=== Test d’intégration // (système complet)
+// (système complet)
+// === Test d’intégration
 
-Test système complet.
+// == Protocoles de test logiciel
+== Test unitaires logiciels
 
-== Protocoles de test logiciel
+// === Tests unitaires
+// Test fonctions individuelles.
 
-=== Tests unitaires
-
-Test fonctions individuelles.
-
-=== Test d’intégration
-
-Test du programme entier.
+// === Test d’intégration
+// Test du programme entier.
 
 == Test de performance global
 

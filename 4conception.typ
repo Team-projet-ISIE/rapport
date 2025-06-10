@@ -1,13 +1,10 @@
 #import "report/report.typ": * // Import all report symbols
-= Conception // du système
+= Conception
 
-== Architecture globale
-
+- Architecture globale ?
 - Schéma bloc ?
-
-@mcu
-
-@datasheet
+- @mcu ?
+- @datasheet ?
 
 #set page(flipped: true)
 
@@ -15,10 +12,13 @@
 
 === Choix des composants
 
-#text(red)[*TODO: Est-ce la meilleure manière de présenter ? Paragraphes pour
-  justifier ?*]
+#text(red)[
+  *TODO: Est-ce la meilleure manière de présenter ? Paragraphes pour
+  justifier ?*
+]
 
-==== Traitements numériques (FP0/FP1) // TODO check si bon code fonction
+// TODO check si bon code fonction
+==== Traitements numériques (FP0/FP1)
 
 #fig(table(
   columns: 4,
@@ -29,7 +29,8 @@
   [Filtrage local obligatoire pour éviter les resets parasites du PIC24F],
 ))[Choix des composants du bloc alimentation]
 
-==== Captage température et humidité (FP2) // TODO check si bon code fonction
+// TODO check si bon code fonction
+==== Captage température et humidité (FP2)
 
 #fig(table(
   columns: 4,
@@ -118,9 +119,10 @@
 
 == Conception logicielle
 
-=== Architecture logicielle
+- Architecture globale ?
+- Schéma bloc ?
 
 === Algorithme d’aération
 
-=== Interface Homme-Machine
+// === Interfaçage humain-machine ?
 
