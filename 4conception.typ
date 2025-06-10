@@ -107,3 +107,14 @@ Remplacement pull-up 4,7 kΩ par 10–47 kΩ, suppression de condensateurs
 
 // === Interfaçage humain-machine ?
 
+#fig(pseudo[
+  + *Boucler Indéfiniment*
+    + tempRef $arrow.l$ lire(capteur température pièce référence)
+    + tempCib $arrow.l$ lire(capteur température pièce cible)
+    + mode $arrow.l$ lire(mode sélectionné)
+    + *Si* ( mode $=$ CHAUFFAGE *Et* tempRef $>$ ( tempCib $+ 1°C$ ) )
+      + *Ou* ( mode $=$ REFROIDISSEMENT *Et* tempCib $>$ ( tempRef $+ 1°C$ ) )
+      + activer(mode chauffage)
+    + dormir(N secondes)
+  + *Fin Boucle*
+])[Algorithme d’aération haut niveau]

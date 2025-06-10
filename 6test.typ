@@ -14,11 +14,11 @@
 // (système complet)
 // === Test d’intégration
 
-=== FA0 (Programmation)
+// === FA0 (Programmation)
 
 #fig(image("./test/fa0.png"))[Test de FA0]
 
-=== FA1 (Alimentation)
+// === FA1 (Alimentation)
 
 #fig(image("./test/regulateur.png"))[Test individuel du régulateur]
 

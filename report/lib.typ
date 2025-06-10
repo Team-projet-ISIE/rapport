@@ -9,7 +9,8 @@
 #import "@preview/cetz:0.3.4"
 #import "@preview/cetz-plot:0.1.1": chart, plot // TODO add examples
 #import "@preview/fletcher:0.5.7" as fletcher: diagram, edge, node
-// #import "@preview/physica:0.9.5" // Engineering
+#import "@preview/lovelace:0.3.0": * // Pseudocode rendering
+#let pseudo = pseudocode-list // Shortcut
 
 // Default global metadata passed around
 // WARN there may be a better way to do this
