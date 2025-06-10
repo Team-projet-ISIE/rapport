@@ -24,7 +24,8 @@
 }
 
 // Smart figure shorthand
-#let fig(sup: none, content, ..sink) = {
+#let fig(sup: none, justify: false, content, ..sink) = {
+  set par(justify: justify)
   let caption = none
   let kind = auto
   if sink.pos().len() > 0 {

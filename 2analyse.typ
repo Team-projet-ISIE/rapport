@@ -1,45 +1,7 @@
 #import "report/report.typ": * // Import all report symbols
-// #show figure: set block(breakable: true)
-
-= Analyse fonctionnelle // et cahier des charges
-
-Notre objectif est de réaliser un système permettant d’équilibrer intelligemment
-la température entre deux pièces via une gaine d’aération de diamètre 125~mm les
-reliant. Pour cela, nous concevons un système composé de deux modules, un à
-destination de la pièce référence (pièce qui est climatisée) et l’autre à
-destination de la pièce cible (qui bénéficiera de la climatisation de l’autre
-pièce).
-
-Chaque module commence par capter la température de sa pièce d’accueil. N’ayant
-pas besoin d’une importante précision et fonctionnant en température ambiante,
-des capteurs "smart" connecant en I#super[2]C ou SPI semblent tout indiqués, ils
-simplifieront le projet.
-
-Les modules doivent communiquer entre eux, et pour cela, nous optons pour un
-#link(
-  "https://fr.digi.com/products/embedded-systems/digi-xbee/rf-modules",
-)[XBee] fournissant une interface pour communiquer en @802-15@802-15-doc, à
-priori au travers d’un protocole de plus haut niveau tel que @zigbee@xbee3-ds.
-
-À notre stade du cursus, nous nous concentrons sur les microcontrôleurs se
-programmant directement en bas niveau (registres…), en particulier 16~bit, et
-nos cours et travaux-pratiques se concentrent sur l’architecture PIC24@pic24-ds
-de Microchip, que l’on privilégiera donc. De plus, nous n’avons pas d’importants
-besoins d’entrées-sorties et de puissance de calcul pour ce projet.
-
-N’ayant pas la possibilité de produire un circuit avec composants soudés en
-surface, tous nos composants sont sélectionnés montables en trou-traversant (ou
-connectables tel qu’en Grove). Cela sera d’autant plus simple pour tester sur
-breadboard.
-
+#import fletcher.shapes: rect
 #let HIGH = $3.3 V$ // Définition du niveau électrique HAUT
 #let LOW = $0 V$ // Définition du niveau électrique BAS
-
-#set page(flipped: true, header-ascent: .5em, footer-descent: .5em) // Paysage
-#set par(justify: false) // Ne pas justifier les paragraphes, moche dans tables
-
-== Analyse du besoin
-
 #let presentFig(f, c, body) = {
   grid(
     columns: (1fr, 3fr),
@@ -52,80 +14,87 @@ breadboard.
     fig(f, c),
   )
 }
+// #show figure: set block(breakable: true)
 
-=== Bête à cornes
+= Analyse
+
+== Analyse du besoin
+
+Notre objectif est de réaliser un système permettant d’équilibrer intelligemment
+la température entre deux pièces via une gaine d’aération de diamètre 125~mm les
+reliant.
+
+Plus précisément, le système doit aérer la @cible qui n’est pas climatisée avec
+l’air de la @réf qui l’est. Le but étant de réduire la nécessité en équipement
+de climatisation, et potentiellement la consommation énergétique, tout en
+fournissant un confort thermique aux occupants de la @cible.
+
+Nous pouvons commencer par condenser la capture du besoin et faire ressortir
+l’essence du projet dans un diagramme de bête à cornes.
 
 #import fletcher.shapes: *
-#grid(
-  columns: (1fr, 3fr),
-  gutter: .5em,
-  [
-    #set par(justify: true)
-    La bête à cornes est la première étape d’analyse. Elle permet de capturer
-    rapidement le besoin et de faire ressortir l’essence du projet.
+#align(center, fig(diagram(
+  spacing: .25em,
+  node((0, 0), [À qui rend-il service~?]),
+  node(
+    (0, 1),
+    height: 4em,
+    width: 12em,
+    [Personnes présentes dans la @cible],
+    stroke: black, // Add a black border
+    shape: ellipse,
+    inset: 1.25em,
+  ),
+  edge(bend: -14deg, stroke: 1pt),
+  node(
+    (2, 1),
+    height: 4em,
+    width: 12em,
+    [Air de la @cible et de la @réf],
+    stroke: black, // Add a black border
+    shape: ellipse,
+    inset: 1.25em,
+  ),
+  node((2, 0), [Sur quoi agit-il~?]),
+  node(
+    (1, 2),
+    height: 5em,
+    width: 18em,
+    [Déclencheur d’aération sur commande en température],
+    stroke: black, // Add a black border
+    shape: ellipse,
+    inset: 1.5em,
+  ),
+  node((1, 4), [Dans quel but~?]),
+  edge((1.65, 1.33), (1.5, 4.5), "->", bend: -17deg, stroke: 1pt),
+  node(
+    (1, 5),
+    name: <goal>,
+    height: 4em,
+    width: 22em,
+    [
+      Profiter de températures confortables dans la @cible
+    ],
+    stroke: black, // Add a black border
+    inset: .5em,
+    corner-radius: .5em,
+  ),
+))[Bête à cornes])
 
-    Quand à elle, la matrice MOSCOW permet de définir les attendus, la portée du
-    projet. Elle aide à focaliser les efforts sur ce qui est important, à ne pas
-    disperser l’énergie inutilement.
-  ],
-  fig(diagram(
-    spacing: .25em,
-    node((0, 0), [À qui rend-il service~?]),
-    node(
-      (0, 1),
-      height: 4em,
-      width: 12em,
-      [Personnes présentes dans la @cible],
-      stroke: black, // Add a black border
-      shape: ellipse,
-      inset: 1.25em,
-    ),
-    edge(bend: -14deg, stroke: 1pt),
-    node(
-      (2, 1),
-      height: 4em,
-      width: 12em,
-      [Air de la @cible],
-      stroke: black, // Add a black border
-      shape: ellipse,
-      inset: 1.25em,
-    ),
-    node((2, 0), [Sur quoi agit-il~?]),
-    node(
-      (1, 2),
-      height: 5em,
-      width: 18em,
-      [Déclencheur d’aération sur commande en température],
-      stroke: black, // Add a black border
-      shape: ellipse,
-      inset: 1.5em,
-    ),
-    node((1, 4), [Dans quel but~?]),
-    edge((1.65, 1.33), (1.5, 4.5), "->", bend: -17deg, stroke: 1pt),
-    node(
-      (1, 5),
-      name: <goal>,
-      height: 4em,
-      width: 22em,
-      [
-        Profiter de températures confortables dans la @réf
-      ],
-      stroke: black, // Add a black border
-      inset: .5em,
-      corner-radius: .5em,
-    ),
-  ))[Bête à cornes],
-)
-
-// Portée du projet
-=== Matrice MOSCOW
+Nous commençons aussi par définir les attendus, la portée du projet au sein
+d’une matrice MOSCOW. Cela permettra de focaliser les efforts sur ce qui est
+important, de ne pas disperser l’énergie inutilement vers des non-objectifs.
 
 #fig(table(
   columns: 2,
   align: (left, left),
   table.header(
-    align(center, strong[Must (à faire absolument, objectifs de la v1.0.0)]),
-    align(center, strong[Should (objectifs de sous-versions v1.x.x)]),
+    align(center, strong[
+      Must\ (à faire absolument, objectifs de la v1.0.0)
+    ]),
+    align(center, strong[
+      Should\ (objectifs de sous-versions v1.x.x)
+    ]),
   ),
   [
     - Mode hiver (chauffage)~: Aérer si la pièce cible est plus froide que la
@@ -139,28 +108,56 @@ breadboard.
     - Affichage de la température actuelle de la pièce de référence
     - Réglage de la température seuil par l’utilisateur
   ],
-  table.cell(align: center, strong[Could (objectifs de versions majeures
-    ultérieures)]),
-  table.cell(align: center, strong[Wont (ne va pas être fait, hors sujet)]),
+  table.cell(align: center, strong[
+    Could\ (objectifs de versions majeures ultérieures)
+  ]),
+  table.cell(align: center, strong[
+    Wont\ (ne va pas être fait, hors sujet)
+  ]),
   [
-    - Fonctionnement sur batterie du module ne pilotant pas l’aérateur
+    - Fonctionnement sur batterie d’une partie du système
   ],
   [
     - Compatibilité avec les standards de domotique, intégrations dans des
       systèmes domotiques plus larges
-    - Fonctionnement avec plus de deux modules, deux pièces
+    - Fonctionnement avec plus de deux pièces, autres que @réf et @cible
   ],
 ))[Matrice MOSCOW]
 
 #pagebreak()
+== Analyse fonctionnelle
 
-== Schémas fonctionnels
+=== Schéma fonctionnel de niveau un
 
-#import fletcher.shapes: rect
+Le système doit être capable de prendre la décision d’aérer en fonction d’une
+différence de température.
 
-=== Niveau 1 (SFN1)
+Nous identifions donc directement le besoin de mesurer la température dans les
+deux pièces, donc la nécessité de composer le système en deux modules distincts,
+un à destination de la @réf (climatisée) et l’autre à destination de la @cible
+qui bénéficiera de la climatisation de l’autre pièce.
 
-#presentFig(
+Le but ultime du déclencheur d’aération est de rendre la température de la
+@cible plus agréable pour ses occupants, on ne veut donc pas que l’aération se
+déclenche alors que la température de la @réf est moins agréable que celle de la
+@cible. Il faut donc pouvoir indiquer nos préférences en terme de température,
+sous la forme d’un choix entre deux modes, chauffage ou refroidissement. Nul
+besoin d’une indication plus précise, car il n’est de toute façon pas possible
+de chauffer ou refroidir plus que la différence de température entre les deux
+pièces.
+
+L’essence du système repose dans sa capacité à influer sur le mouvement de
+l’air, ce pourquoi il doit tout naturellement être capable de déclencher un flux
+d’air entre les deux pièces.
+
+Finalement, bien que n’étant pas un besoin majeur du système, il pourrait être
+intéressant pour l’utilisateur que le système lui apporte visuellement des
+informations telles que les températures des pièces, ou l’état de fonctionnement
+de l’aérateur.
+
+Nous pouvons résumer cette identification des entrées/sorties dans un schéma.
+
+#fig(
   diagram(
     spacing: 1cm,
     // Module 1
@@ -204,55 +201,91 @@ breadboard.
     // edge((1, 2), <in2>, "->"),
     // edge(<in2>, (1, 2), "->"),
   ),
-  [SFN1 (vue holistique du système, pas en modules distincts)],
-)[
-  Le SFN1 permet de définir en premier lieu les entrées et sorties du système,
-  en se concentrant seulement sur les signaux "physiques".
+)[SFN1 (vue holistique du système, pas en modules distincts)]
 
-  Si les sorties correspondent directement aux attendus formalisés, les entrées
-  doivent être réfléchies, elles sont l’information dont on aura besoin pour
-  créer les sorties.
-]
+Le SFN1 permet de définir en premier lieu les entrées et sorties du système, en
+se concentrant seulement sur les signaux "physiques" autour du projet que l’on
+voit comme une boite fermée.
 
-#pagebreak()
-=== Premier degré
+=== Schéma fonctionnel de premier degré
 
-#presentFig(image("./sf1d.v1.svg"), [SF1D])[
-  Ce premier schéma fonctionnel offre une vue d’ensemble de ce que le système
-  devra être capable de faire, mais dans certains cas sans se soucier de la
-  façon dont ces besoins seront addressés.
+Chaque module doit embarquer de quoi capter la température de sa pièce
+d’accueil. N’ayant pas besoin d’une précision ou d’autres capacités
+inhabituelles, et fonctionnant en température ambiante, des capteurs "smart"
+communicant en I#super[2]C ou SPI semblent tout indiqués, ils simplifieront le
+projet en réduisant le besoin en conditionnement.
 
-  Il est un reflet direct de l’expression de besoin, auxquel ont été ajoutées
-  les fonctions annexes d’alimentation et de programmation du #gls(
-    "mcu",
-    display: "microcontrôleur (MCU),",
-  ) ainsi que la fonction principale de commande en puissance, qui apparaît
-  directement nécessaire.
-]
+Les paramètres devant être testés pour savoir si les conditions de déclenchement
+de l’aération sont réunies incluent la différence de température entre les deux
+pièces, et le mode choisi.
 
-=== Second degré
+Or, les deux modules étant distincts, ils devront communiquer, car ces
+paramètres doivent être connus par un seul processeur pour qu’ils puissent être
+utilisés au sein de comparaisons. Situés dans des pièces distantes, ils devront
+communiquer sans fil.
 
-#presentFig(image("./sf2d.v1.svg"), [SF2D])[
-  Ce second schéma fonctionnel fait apparaître l’entrée directe de
-  l’alimentation secteur dans la fonction d’alimentation en puissance.
-]
+#fig(image("./sf1d.v1.svg"))[SF1D]
 
-=== Second degré alternatif 1
+Ce premier schéma fonctionnel offre une vue d’ensemble de ce que le système
+devra être capable de faire, mais dans certains cas sans se soucier de la façon
+dont ces besoins seront addressés.
 
-#presentFig(image("./sf2d.v2.svg"), [SF2D])[
-  Ce schéma fonctionnel de second degré alternatif remplace l’alimentation
-  secteur de la commande en puissance par une alimentation 12~V.
-]
+Il est un reflet direct de l’expression de besoin, auquel ont été ajoutées les
+fonctions annexes d’alimentation et de programmation du #gls(
+  "mcu",
+  display: "microcontrôleur (MCU),",
+) ainsi que la fonction principale de commande en puissance, qui apparaît
+directement nécessaire.
 
-=== Second degré alternatif 2
-
-#presentFig(image("./sf2d.v3.svg"), [SF2D])[
-  Ce schéma fonctionnel de second degré alternatif ajoute une alimentatio sur
-  batterie pour le module de la @cible.
-]
+=== Schéma fonctionnel de second degré
 
 
-#pagebreak()
+Ce second schéma fonctionnel fait apparaître l’entrée directe de l’alimentation
+secteur dans la fonction d’alimentation en puissance.
+
+#fig(image("./sf2d.v1.svg"))[SF2D]
+
+=== Schéma fonctionnel de second degré alternatif 1
+
+
+Ce schéma fonctionnel de second degré alternatif remplace l’alimentation secteur
+de la commande en puissance par une alimentation 12~V.
+
+#fig(image("./sf2d.v2.svg"))[SF2D]
+
+=== Schéma fonctionnel de second degré alternatif 2
+
+Ce schéma fonctionnel de second degré alternatif ajoute une alimentatio sur
+batterie pour le module de la @cible.
+
+#fig(image("./sf2d.v3.svg"))[SF2D]
+
+=== Précisions
+
+À notre stade du cursus, nous nous concentrons sur les @mcu se programmant
+directement en bas niveau (registres…), en particulier 16~bit, et nos cours et
+travaux-pratiques se concentrent sur l’architecture PIC24@pic24-ds de Microchip,
+que l’on privilégiera probablement. De plus, ce projet ne requiert à priori pas
+d’importantes capacités d’entrées-sorties et de puissance de calcul qui
+justifieraient un @mcu plus performant.
+
+Ayant comme consigne préalable d’employer un @mcu 16 bit, notre choix ne se
+portera pas sur des @mcu embarquant des fonctionnalités sans fil tels que les
+`STM32WBxxxx` ou les `nRF5xxx`, qui s’avèrent tous en 32 bit. Nous devrons donc
+employer des modules apportant une connectivité sans-fil faible consommation à
+notre @mcu 16 bit, s’interfaçant idéalement avec des protocoles connus tels
+qu’I#super[2]C ou SPI.
+
+#link(
+  "https://fr.digi.com/products/embedded-systems/digi-xbee/rf-modules",
+)[XBee] fournissant une interface pour communiquer en @802-15@802-15-doc, à
+priori au travers d’un protocole de plus haut niveau tel que @zigbee@xbee3-ds.
+
+Aussi, n’ayant pas la possibilité de produire un circuit avec composants soudés
+en surface, tous nos composants sont sélectionnés montables en trou-traversant
+(ou connectables tel qu’en Grove). Cela sera d’autant plus simple pour tester
+sur breadboard.
+
 == Description des fonctions
 
 === Fonctions principales
@@ -551,9 +584,11 @@ breadboard.
   ],
 ))[Description de FA0]
 
-== Description des signaux // TODO infos manquantes
+#set page(flipped: true, header-ascent: .5em, footer-descent: .5em) // Paysage
+#set par(justify: false) // Ne pas justifier les paragraphes, moche dans tables
 
-// #show table.cell.where(colspan: 9): set align(left)
+== Description des signaux
+// TODO vérifier infos, notamment taille entité
 
 #fig(table(
   columns: 10,

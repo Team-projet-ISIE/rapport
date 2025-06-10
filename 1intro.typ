@@ -2,19 +2,19 @@
 
 // == Contexte général
 
-Venant tous deux d’un parcours de BUT dépourvu d’électronique, nous avons appris
-beaucoup en peu de temps depuis notre arrivée en @isie à @polytech.
+Réaliser ce déclencheur d’aération, en étant responsables du recueil de besoin
+jusqu’à la réalisation, en passant par l’analyse et la conception, représente
+une opportunité de consolider les nombreux apprentissages effectués en cette
+première année en @isie à @polytech, les mettant en pratique. Mais, ce projet,
+pour nous le premier de cette envergure, représente aussi un important défi.
 
-Ce projet électronique où nous sommes responsables du recueil de besoin jusqu’à
-la réalisation, en passant par l’analyse et la conception, représente donc une
-opportunité de consolider nos apprentissages en les mettant en pratique, mais
-aussi un important défi.
-
-Étant notre premier projet de cet acabit, nous ne savions pas à priori par
-quelles étapes passer, quelle méthodologie adopter. Nous avons donc exploré
-plusieurs pistes et fait demi-tour à plusieurs reprises. Si ce processus peut
-apparaître comme fastidieux, il n’en a pas moins constitué une expérience riche
-en enseignements.
+N’ayant pas d’expérience préalable sur un projet de cet acabit, nous ne savions
+pas à priori par quelles étapes passer, quelle méthodologie adopter. Si nous
+avons pu nous en référer aux enseignements théoriques de l’année, la tâche est
+tout autre lorsqu’il s’agit de la diriger. Nous avons donc exploré plusieurs
+pistes et fait demi-tour à plusieurs reprises. Si ce processus peut apparaître
+comme fastidieux, il n’en a pas moins constitué une expérience riche en
+enseignements.
 
 == Problématiques à résoudre
 
@@ -30,11 +30,9 @@ pièces reliées par une gaine d’aération.
 
 == Objectifs du projet
 
-// == Plan // Redondant avec ToC ?
-
 L’objectif du projet est de pouvoir profiter de la climatisation d’une pièce
-dans une autre pièce, limitant le nombre d’unités de climatisation nécessaires
-dans le bâtiment.
+dans une autre pièce, limitant ainsi le nombre d’unités de climatisation
+nécessaires dans le bâtiment.
 
 Il doit être possible de choisir entre deux modes : chauffage ou
 refroidissement. En fonction du choix utilisateur, il faut utiliser l’air
