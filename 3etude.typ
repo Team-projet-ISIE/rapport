@@ -30,15 +30,23 @@
 
 ==== CA 230~V
 
-- Relais statique TC209R #link(
-    "https://www.digikey.fr/fr/products/detail/bright-toward-industrial-co-ltd/TC209R/13556942",
+- Relais de puissance G5LE-14 DC3 #link(
+    "https://www.digikey.fr/fr/products/detail/omron-electronics-inc-emc-div/G5LE-14-DC3/1815628",
   )[chez Digikey]
-- Relais à lame souple 374-1326-ND #link(
-    "https://www.digikey.fr/fr/products/detail/standex-meder-electronics/SIL05-1A75-71D/3131689",
+- Relais de puissance AWHSH112DM00G #link(
+    "https://www.digikey.fr/fr/products/detail/amphenol-anytek/AWHSH112DM00G/16721953",
   )[chez Digikey]
-- Relais à lame souple 306-1402-ND #link(
-    "https://www.digikey.fr/fr/products/detail/coto-technology/7301-05-1000/710387",
+- Relais statique AZ943-1AH-12DEF #link(
+    "https://www.digikey.fr/fr/products/detail/american-zettler/AZ943-1AH-12DEF/14307629",
   )[chez Digikey]
+- Relais statique AZ943-1AH-12DEF #link(
+    "https://www.digikey.fr/fr/products/detail/american-zettler/AZ943-1AH-12DEF/14307629",
+  )[chez Digikey]
+- Relais statique J107F1CS1212VDC.36 #link(
+    "https://www.digikey.fr/fr/products/detail/cit-relay-and-switch/J107F1CS1212VDC-36/12502789",
+  )[chez Digikey]
+
+==== MOSFET (nécessaire sur les relais à bobine)
 
 ==== CC 12~V
 
