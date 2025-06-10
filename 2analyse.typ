@@ -224,18 +224,25 @@ paramètres doivent être connus par un seul processeur pour qu’ils puissent �
 utilisés au sein de comparaisons. Situés dans des pièces distantes, ils devront
 communiquer sans fil.
 
+Comme tout système électronique, il doit être alimenté. Une fonction
+d’alimentation est donc prévue. Idem pour la programmation du @mcu.
+
+Finalement, nous pouvons directement relever que la commande d’un aérateur par
+un @mcu ne pourra se faire directement, et nécessitera une fonction de commande
+en puissance, quels que soient les références finalement choisies.
+
 #fig(image("./sf1d.v1.svg"))[SF1D]
 
 Ce premier schéma fonctionnel offre une vue d’ensemble de ce que le système
-devra être capable de faire, mais dans certains cas sans se soucier de la façon
-dont ces besoins seront addressés.
+devra être capable de faire, mais dans certains cas élude une partie de la
+complexité sous-jacente.
 
 Il est un reflet direct de l’expression de besoin, auquel ont été ajoutées les
 fonctions annexes d’alimentation et de programmation du #gls(
   "mcu",
   display: "microcontrôleur (MCU),",
 ) ainsi que la fonction principale de commande en puissance, qui apparaît
-directement nécessaire.
+directement comme nécessaire.
 
 === Schéma fonctionnel de second degré
 
