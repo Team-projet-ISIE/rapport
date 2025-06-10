@@ -228,8 +228,9 @@ breadboard.
   table.header([*Fonction*], [*FP2*], [Captage température]),
   [*Description / rôle*],
   table.cell(colspan: 2)[
-    Capter la température de la @réf qui est climatisée et de la @cible pour la
-    comparer. Minimum capté $lt.eq 10 °C$, maximum capté $gt.eq 50 °C$.
+    Deux instances, une captant la température de la @réf qui est climatisée et
+    une autre captant celle de la @cible pour la comparer. Minimum capté
+    $lt.eq 10 °C$, maximum capté $gt.eq 50 °C$.
   ],
   [*Signaux d’entrée*],
   table.cell(colspan: 2)[
@@ -310,9 +311,7 @@ breadboard.
 #fig(table(
   columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon, center + horizon),
-  table.header(
-    [*Fonction*], [*FP5* (alt.~1)], [Commande aérateur en puissance]
-  ),
+  table.header([*Fonction*], [*FP5*], [Commande aérateur en puissance]),
   [*Description / rôle*],
   table.cell(colspan: 2)[
     Contrôller la circulation du courant secteur (alternatif $230 V$) dans
@@ -321,13 +320,13 @@ breadboard.
   [*Signaux d’entrée*],
   table.cell(colspan: 2)[
     - CmdAeration
-    - Valim (230~V secteur)
+    - Vac (230~V secteur)
   ],
   [*Signaux de sortie*],
   table.cell(colspan: 2)[
     - IAeration
   ],
-))[Description de FP5 (alt.~1)]
+))[Description de FP5]
 //Références envisagées
 //- TC209R #link(
 //    "https://www.digikey.fr/fr/products/detail/bright-toward-industrial-co-ltd/TC209R/13556942",
@@ -336,9 +335,7 @@ breadboard.
 #fig(table(
   columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon, center + horizon),
-  table.header(
-    [*Fonction*], [*FP5* (alt.~2)], [Commande aérateur en puissance]
-  ),
+  table.header([*Fonction*], [*FP5* (alt.)], [Commande aérateur en puissance]),
   [*Description / rôle*],
   table.cell(colspan: 2)[
     Contrôller la circulation du courant d’alimentation $approx 12 V$ dans
@@ -347,11 +344,11 @@ breadboard.
   [*Signaux d’entrée*],
   table.cell(colspan: 2)[
     - CmdAeration
-    - Valim (5~V à 25~V)
+    - Vcc5-25 (5~V à 25~V)
   ],
   [*Signaux de sortie*],
   table.cell(colspan: 2)[IAeration],
-))[Description de FP5 (alt.~2)]
+))[Description de FP5 (alt.)]
 //Références envisagées
 //- Driver 1528-4489-ND #link(
 //    "https://www.digikey.fr/fr/products/detail/adafruit-industries-llc/4489/11594498",
@@ -529,7 +526,7 @@ breadboard.
   table.cell(colspan: 2)[
     - RxRF
   ],
-  [Signaux E/S],
+  [*Signaux E/S*],
   table.cell(colspan: 2)[
     - Ondes RF
   ],
@@ -556,7 +553,7 @@ breadboard.
 #fig(table(
   columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon, center + horizon),
-  table.header([*Fonction*], [*FP7*], [Affichage température]),
+  table.header([*Fonction*], [*FP7*], [Interfaçage machine humain]),
   [*Description / rôle*],
   table.cell(colspan: 2)[
     Afficher la température actuelle de la @cible, le mode choisi
@@ -584,6 +581,7 @@ breadboard.
 
 ==== Fonctions analogiques
 
+// LTeX: enabled=false // Désactive la correction orthographique temporairement
 #fig(table(
   columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon, center + horizon),
@@ -596,7 +594,7 @@ breadboard.
   ],
   [*Signaux d’entrée*],
   table.cell(colspan: 2)[
-    - Valim (5~V à 25~V)
+    - Vcc5-25 (5~V à 25~V)
   ],
   [*Signaux de sortie*],
   table.cell(colspan: 2)[
@@ -617,12 +615,31 @@ breadboard.
 #fig(table(
   columns: (auto, auto, 1fr),
   align: (center + horizon, left + horizon, center + horizon),
-  table.header([*Fonction*], [*FA1* (alt.~1)], [Alimentation]),
+  table.header([*Fonction*], [*FA2*], [Alimentation commande en puissance]),
+  [*Description / rôle*],
+  table.cell(colspan: 2)[
+    Fournir un courant continu de $approx 12 V$ à la structure d’alimentation en
+    puissance, à partir d’une alimentation générique fournissant du courant
+    continu entre $5 V$ et $25 V$.
+  ],
+  [*Signaux d’entrée*],
+  table.cell(colspan: 2)[
+    - Vcc5-25 (5~V à 25~V)
+  ],
+  [*Signaux de sortie*],
+  table.cell(colspan: 2)[
+    - Vcc120 (12~V)
+  ],
+))[Description de FA2]
+
+#fig(table(
+  columns: (auto, auto, 1fr),
+  align: (center + horizon, left + horizon, center + horizon),
+  table.header([*Fonction*], [*FA3*], [Alimentation module cible autonome]),
   [*Description / rôle*],
   table.cell(align: left, colspan: 2)[
-    // WARN Vraiment nécessaire?
-    Fournir un courant continu de #HIGH au circuit incluant le @mcu, à partir de
-    piles ou d’une batterie.
+    Fournir un courant continu de #HIGH au module de la @cible, à partir de
+    piles (ou d’une batterie).
   ],
   [*Signaux d’entrée*],
   table.cell(colspan: 2)[
@@ -632,7 +649,9 @@ breadboard.
   table.cell(colspan: 2)[
     - Vcc33
   ],
-))[Description de FA1 (alt.~1)]
+))[Description de FA3]
+
+==== Fonctions numériques // TODO Fonction numérique ?
 
 #fig(table(
   columns: (auto, auto, 1fr),
@@ -644,17 +663,21 @@ breadboard.
     breadboard. Programmateur adapté au @mcu choisi, par exemple PICKit pour un
     @mcu PIC24.
   ],
-  [*Signaux d’entrée*],
-  table.cell(colspan: 2)[
-    - Communication USB avec ordinateur
-  ],
   [*Signaux de sortie*],
   table.cell(colspan: 2)[
-    - Signaux électriques de programmation
+    - MCUR
+  ],
+  [*Signaux E/S*],
+  table.cell(colspan: 2)[
+    - Données (communication avec ordinateur via USB)
+    - PGD
+    - PGC
   ],
 ))[Description de FA0]
 
 == Description des signaux // TODO infos manquantes
+
+// #show table.cell.where(colspan: 9): set align(left)
 
 #fig(table(
   columns: 10,
@@ -675,64 +698,75 @@ breadboard.
   table.cell(rowspan: 2)[TempRef],
   [FP2→FP0],
   [N],
-  [],
+  // TODO, valeurs provisoires
+  [1],
   [U (V)],
   [#LOW à #HIGH],
-  [\< 1~Hz],
-  [],
-  [],
-  [],
-  table.cell(colspan: 9)[Signal image de la température de la pièce référence.],
+  [< 1 Hz],
+  [#LOW],
+  [N~/~A],
+  [I²C / SPI],
+  table.cell(colspan: 9)[
+    Signal fournissant la température de la @réf.
+  ],
   table.cell(rowspan: 2)[TempCib],
   [FP2→FP1],
   [N],
-  [],
+  // TODO, valeurs provisoires
+  [1],
   [U (V)],
   [#LOW à #HIGH],
-  [\<
-    1~Hz],
-  [],
-  [],
-  [],
-  table.cell(colspan: 9)[Signal image de la température de la pièce cible.],
+  [< 1 Hz],
+  [#LOW],
+  [N~/~A],
+  [I²C / SPI],
+  table.cell(colspan: 9)[
+    Signal fournissant la température de la @cible.
+  ],
   table.cell(rowspan: 2)[TxRF],
-  [FP0→FP3\
-    FP1→FP3],
+  [FP0→FP3\ FP1→FP3],
   [N],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  table.cell(colspan: 9)[Données que le microcontrôleur envoie pour transmission
-    au travers du module sans-fil.],
+  // TODO, valeurs provisoires
+  [1],
+  [U (V)],
+  [#LOW à #HIGH],
+  [< 1 Hz],
+  [#LOW],
+  [N~/~A],
+  [I²C / SPI],
+  table.cell(colspan: 9)[
+    Données que le microcontrôleur envoie pour transmission au travers du module
+    sans-fil.
+  ],
   table.cell(rowspan: 2)[RxRF],
-  [FP3→FP0\
-    FP3→FP1],
+  [FP3→FP0\ FP3→FP1],
   [N],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  table.cell(colspan: 9)[Données que le microcontrôleur reçoit depuis le module
-    sans-fil.],
+  // TODO, valeurs provisoires
+  [1],
+  [U (V)],
+  [#LOW à #HIGH],
+  [< 1 Hz],
+  [#LOW],
+  [N~/~A],
+  [I²C / SPI],
+  table.cell(colspan: 9)[
+    Données que le microcontrôleur reçoit depuis le module sans-fil.
+  ],
   table.cell(rowspan: 2)[Mode],
   [FP4→FP1],
   [N],
-  [],
+  // TODO, valeurs provisoires
+  [2],
   [U (V)],
-  [#LOW / #HIGH],
+  [#LOW / #HIGH\ Hiver / Été],
   [\<~1~Hz],
   [#LOW\ (0 logique)],
-  [],
-  [],
-  table.cell(colspan: 9)[Bloquant (0) pour le mode hiver (chauffage), passant
-    (1) pour le mode été (refroidissement).],
+  [N~/~A],
+  [I²C / SPI],
+  table.cell(colspan: 9)[
+    Bloquant (0) pour le mode hiver (chauffage), passant (1) pour le mode été
+    (refroidissement).
+  ],
 ))[Description des signaux (1~/~2)]
 
 #fig(table(
@@ -754,109 +788,118 @@ breadboard.
   table.cell(rowspan: 2)[CmdAeration],
   [FP0→FP5],
   [A],
-  [],
+  // TODO, valeurs provisoires
+  [2],
   [U (V)],
-  [#LOW / #HIGH],
+  [#LOW / #HIGH\ KO / OK],
   [\< 1~Hz],
   [0~V (bloquant)],
-  [],
-  [],
-  table.cell(colspan: 9)[Bloque l’alimentation de l’aérateur à 0, laisse passer
-    l’alimentation de l’aérateur à 1.],
+  [N~/~A],
+  [N~/~A],
+  table.cell(colspan: 9)[
+    Bloque l’alimentation de l’aérateur à 0, laisse passer l’alimentation de
+    l’aérateur à 1.
+  ],
   table.cell(rowspan: 2)[IAeration],
   [FP5→FP6],
   [A],
-  [],
+  [2],
   [I (A)],
-  [0 / 230~V],
+  [0 / 230~V\ KO / OK],
   [\< 1~Hz],
-  [],
-  [],
-  [],
-  table.cell(colspan: 9)[Puissance nécessaire pour actionner le mouvement de
-    l’aérateur.],
+  [#LOW],
+  [N~/~A],
+  [N~/~A],
+  table.cell(colspan: 9)[
+    Puissance nécessaire pour actionner le mouvement de l’aérateur.
+  ],
   table.cell(rowspan: 2)[Vcc33],
-  [FA1→FP0\ FA1→FP1],
+  [FA1→Tous],
   [A],
-  [],
+  [1],
   [U (V)],
-  [#HIGH],
-  [],
-  [],
-  [],
-  [],
+  [#HIGH$plus.minus 10 %$],
+  [N~/~A],
+  [N~/~A],
+  [N~/~A],
+  [N~/~A],
   table.cell(colspan: 9)[Alimentation en énergie électrique des composants.],
-  table.cell(rowspan: 2)[Valim],
+  table.cell(rowspan: 2)[Vcc5-25],
   [FA1, FP5],
   [A],
-  [],
+  [1],
   [U (V)],
   [5~V à 25~V],
-  [\< 1~Hz],
-  [],
-  [],
-  [],
-  table.cell(align: left, colspan: 9)[Courant continu fourni par une
-    alimentation générique, à adapter à notre circuit précisément.],
+  [N~/~A],
+  [N~/~A],
+  [N~/~A],
+  [N~/~A],
+  table.cell(colspan: 9)[
+    Courant continu fourni par une alimentation générique, à adapter à notre
+    circuit précisément.
+  ],
   table.cell(rowspan: 2)[Température pièce référence],
   [FP2 (réf)],
   [GP],
-  [],
+  [1],
   [T (°C)],
-  [],
-  [],
-  [],
-  [],
-  [],
+  [0~°C à 50~°C],
+  [N~/~A],
+  [N~/~A],
+  [N~/~A],
+  [N~/~A],
   table.cell(colspan: 9)[Température de la pièce de référence (climatisée).],
   table.cell(rowspan: 2)[Ondes RF],
   [FP3],
   [A],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
+  [1],
+  [N~/~A],
+  [N~/~A],
+  [N~/~A],
+  [Absent],
+  [N~/~A],
+  [N~/~A],
   table.cell(colspan: 9)[Communications sans-fils entre les deux modules.],
   table.cell(rowspan: 2)[Température pièce cible],
   [FP2 (cib)],
   [GP],
-  [],
+  [1],
   [T (°C)],
-  [],
-  [],
-  [],
-  [],
-  [],
+  [0~°C à 50~°C],
+  [N~/~A],
+  [N~/~A],
+  [N~/~A],
+  [N~/~A],
   table.cell(colspan: 9)[Température de la pièce cible (où l’on souhaite
     profiter de la climatisation de l’autre pièce).],
   table.cell(rowspan: 2)[Choix mode utilisateur],
   [FP4],
   [GP],
-  [],
-  [],
+  [2],
+  [N~/~A],
   [Haut / Bas],
-  [],
-  [],
-  [],
-  [],
+  [< 1 Hz],
+  [N~/~A],
+  [N~/~A],
+  [N~/~A],
   table.cell(colspan: 9)[Choix du mode par l’utilisateur en positionnant un
     interrupteur en haut ou en bas.],
   table.cell(rowspan: 2)[Flux thermique],
   [FP6],
   [GP],
-  [],
-  [P (Pa)],
-  [],
-  [],
-  [],
-  [],
-  [],
+  [1],
+  [N~/~A],
+  // [P (Pa)],
+  [0~°C à 50~°C],
+  [N~/~A],
+  [N~/~A],
+  [N~/~A],
+  [N~/~A],
   table.cell(colspan: 9)[Flux d’air entrainé par l’aérateur depuis la pièce
     référence vers la pièce cible.],
 ))[Description des signaux (2~/~2)]
+
+// LTeX: enabled=true // Réactive la correction orthographique
 
 // == Contraintes // TODO À voir
 

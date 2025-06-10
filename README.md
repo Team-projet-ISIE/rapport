@@ -25,9 +25,13 @@
   - [x] V2 avec ≃12V alimentant la commande en puissance de l’aération
   - [x] V3 avec piles ou batterie alimentant module cible
 
-- [ ] Description FA2 (alim 12V)
-- [ ] Compléter description des signaux
-  - [x] Mettre à jour nom fonctions (FA0->FA1…)
+- [x] Description FA2 (alim 12V)
+- [x] Description FA3 (alim autonome)
+- [x] Mettre à jour nom fonctions (FA0->FA1…)
+
+- [ ] SF3D avec les connections I²C, les bons signaux
+
+- [ ] Corriger, vérifier description des signaux
 
 - Étude de l’existant
   - [ ] Intro
