@@ -40,56 +40,82 @@ breadboard.
 
 == Analyse du besoin
 
+#let presentFig(f, c, body) = {
+  grid(
+    columns: (1fr, 3fr),
+    rows: 1fr,
+    gutter: .5em,
+    {
+      set par(justify: true)
+      body
+    },
+    fig(f, c),
+  )
+}
+
 === Bête à cornes
 
 #import fletcher.shapes: *
-#fig(diagram(
-  spacing: .25em,
-  node((0, 0), [À qui rend-il service~?]),
-  node(
-    (0, 1),
-    height: 4em,
-    width: 14em,
-    [Personnes présentes dans la @cible],
-    stroke: black, // Add a black border
-    shape: ellipse,
-    inset: 1.25em,
-  ),
-  edge(bend: -14deg, stroke: 1pt),
-  node(
-    (2, 1),
-    height: 4em,
-    width: 14em,
-    [Air de la @cible],
-    stroke: black, // Add a black border
-    shape: ellipse,
-    inset: 1.25em,
-  ),
-  node((2, 0), [Sur quoi agit-il~?]),
-  node(
-    (1, 2),
-    height: 5em,
-    width: 18em,
-    [Déclencheur d’aération sur commande en température],
-    stroke: black, // Add a black border
-    shape: ellipse,
-    inset: 1.5em,
-  ),
-  node((1, 4), [Dans quel but~?]),
-  edge((1.6, 1.4), (1.45, 4.5), "->", bend: -17deg, stroke: 1pt),
-  node(
-    (1, 5),
-    name: <goal>,
-    height: 4em,
-    width: 22em,
-    [
-      Profiter de températures confortables dans la @réf
-    ],
-    stroke: black, // Add a black border
-    inset: .5em,
-    corner-radius: .5em,
-  ),
-))[Bête à cornes]
+#grid(
+  columns: (1fr, 3fr),
+  gutter: .5em,
+  [
+    #set par(justify: true)
+    La bête à cornes est la première étape d’analyse. Elle permet de capturer
+    rapidement le besoin et de faire ressortir l’essence du projet.
+
+    Quand à elle, la matrice MOSCOW permet de définir les attendus, la portée du
+    projet. Elle aide à focaliser les efforts sur ce qui est important, à ne pas
+    disperser l’énergie inutilement.
+  ],
+  fig(diagram(
+    spacing: .25em,
+    node((0, 0), [À qui rend-il service~?]),
+    node(
+      (0, 1),
+      height: 4em,
+      width: 12em,
+      [Personnes présentes dans la @cible],
+      stroke: black, // Add a black border
+      shape: ellipse,
+      inset: 1.25em,
+    ),
+    edge(bend: -14deg, stroke: 1pt),
+    node(
+      (2, 1),
+      height: 4em,
+      width: 12em,
+      [Air de la @cible],
+      stroke: black, // Add a black border
+      shape: ellipse,
+      inset: 1.25em,
+    ),
+    node((2, 0), [Sur quoi agit-il~?]),
+    node(
+      (1, 2),
+      height: 5em,
+      width: 18em,
+      [Déclencheur d’aération sur commande en température],
+      stroke: black, // Add a black border
+      shape: ellipse,
+      inset: 1.5em,
+    ),
+    node((1, 4), [Dans quel but~?]),
+    edge((1.65, 1.33), (1.5, 4.5), "->", bend: -17deg, stroke: 1pt),
+    node(
+      (1, 5),
+      name: <goal>,
+      height: 4em,
+      width: 22em,
+      [
+        Profiter de températures confortables dans la @réf
+      ],
+      stroke: black, // Add a black border
+      inset: .5em,
+      corner-radius: .5em,
+    ),
+  ))[Bête à cornes],
+)
 
 // Portée du projet
 === Matrice MOSCOW
@@ -134,23 +160,14 @@ breadboard.
 
 === Niveau 1 (SFN1)
 
-#let presentFig(f, c, body) = {
-  set par(justify: true)
-  grid(
-    columns: (1fr, 3fr),
-    rows: 1fr,
-    gutter: .5em,
-    body, fig(f, c),
-  )
-}
-
 #presentFig(
   diagram(
     spacing: 1cm,
     // Module 1
     node((0, 0), [Température @réf], name: <in1>),
     // node((0, 1), [Informations @cible (Ondes RF)], name: <in2>),
-    node((2, 1), [Flux thermique], name: <out1>),
+    node((2, .5), [Flux thermique], name: <out1>),
+    node((2, 1.5), [Informations visuelles], name: <out2>),
     node(
       (1, .5),
       enclose: ((1, 0), (1, 2)),
@@ -164,7 +181,8 @@ breadboard.
     ),
     edge(<in1>, (1, 0), "->"),
     // edge(<in2>, (1, 1), "->"),
-    edge((1, 1), <out1>, "->"),
+    edge((1, .5), <out1>, "->"),
+    edge((1, 1.5), <out2>, "->"),
     // Module 2
     node((0, 1), [Température @cible], name: <in3>),
     node((0, 2), [Choix du mode par l’utilisateur], name: <in4>),
@@ -187,7 +205,14 @@ breadboard.
     // edge(<in2>, (1, 2), "->"),
   ),
   [SFN1 (vue holistique du système, pas en modules distincts)],
-)[Explication SFN1]
+)[
+  Le SFN1 permet de définir en premier lieu les entrées et sorties du système,
+  en se concentrant seulement sur les signaux "physiques".
+
+  Si les sorties correspondent directement aux attendus formalisés, les entrées
+  doivent être réfléchies, elles sont l’information dont on aura besoin pour
+  créer les sorties.
+]
 
 #pagebreak()
 === Premier degré
