@@ -1,3 +1,4 @@
+#import "report/report.typ": * // Import all report symbols
 = Validation et test
 
 == Validation à priori des fonctions et interfaçages
@@ -12,6 +13,16 @@
 
 // (système complet)
 // === Test d’intégration
+
+=== FA0 (Programmation)
+
+#fig(image("./test/fa0.png"))[Test de FA0]
+
+=== FA1 (Alimentation)
+
+#fig(image("./test/regulateur.png"))[Test individuel du régulateur]
+
+#fig(image("./test/fa1.png"))[Test de FA1]
 
 // == Protocoles de test logiciel
 == Test unitaires logiciels
