@@ -244,28 +244,55 @@ fonctions annexes d’alimentation et de programmation du #gls(
 ) ainsi que la fonction principale de commande en puissance, qui apparaît
 directement comme nécessaire.
 
+#pagebreak()
 === Schéma fonctionnel de second degré
 
+Certains éléments liés à l’alimentation sont à préciser. En effet, $V_"cc"$
+entrée n’est pas définie, et on ne sait pas de quelle source l’aérateur tire son
+énergie.
 
-Ce second schéma fonctionnel fait apparaître l’entrée directe de l’alimentation
-secteur dans la fonction d’alimentation en puissance.
+Après une rapide exploration des aérateurs disponibles, il apparaît qu’ils sont
+généralement alimentés directement sur secteur, en alternatif 230~V. FP5 aura
+donc à contrôler le passage du courant alternatif 230~V au travers de
+l’aérateur, à partir du @mcu.
+
+En ce qui concerne l’alimentation du système à proprement parler, nous
+considérons qu’il devrait accepter une certaine gamme de tensions usuelles,
+souvent trouvées sur les alimentations génériques. Ceci permet de se passer
+d’alimentation interne, tout en ne restreignant pas trop l’utilisateur.
+
 
 #fig(image("./sf2d.v1.svg"))[SF2D]
 
+#pagebreak()
 === Schéma fonctionnel de second degré alternatif 1
 
+Il apparaît que nous ne sommes pas habilités à manipuler du courant en 230~V.
+Nous proposons donc une version alternative utilisant non pas un aérateur en
+230~V, mais un ventilateur en courant continu 12~V avec lequel il est moins
+risqué de traiter.
 
-Ce schéma fonctionnel de second degré alternatif remplace l’alimentation secteur
-de la commande en puissance par une alimentation 12~V.
+Ce système altéré est surtout utile pour réaliser un prototype et des tests,
+dans l’idéal un aérateur en bonne et due forme adapté aux gaines 125~mm serait
+utilisé.
 
-#fig(image("./sf2d.v2.svg"))[SF2D]
+Pour s’accommoder du ventilateur en 12~V, une fonction d’alimentation adaptée
+est prévue.
 
+#fig(image("./sf2d.v2.svg"))[SF2D (alt.~1)]
+
+#pagebreak()
 === Schéma fonctionnel de second degré alternatif 2
 
-Ce schéma fonctionnel de second degré alternatif ajoute une alimentatio sur
-batterie pour le module de la @cible.
+Le module côté @cible pourrait ne pas être constamment à proximité d’une source
+de courant électrique, contrairement au module côte @réf qui doit nécessairement
+avoir une alimentation pour l’aérateur.
 
-#fig(image("./sf2d.v3.svg"))[SF2D]
+Cette alternative propose donc de rendre le module côté @cible autonome
+énergétiquement par l’ajout d’une alimentation sur batterie. Cela pourrait
+rendre l’utilisation plus aisée.
+
+#fig(image("./sf2d.v3.svg"))[SF2D (alt.~2)]
 
 === Précisions
 
@@ -283,10 +310,10 @@ employer des modules apportant une connectivité sans-fil faible consommation à
 notre @mcu 16 bit, s’interfaçant idéalement avec des protocoles connus tels
 qu’I#super[2]C ou SPI.
 
-#link(
-  "https://fr.digi.com/products/embedded-systems/digi-xbee/rf-modules",
-)[XBee] fournissant une interface pour communiquer en @802-15@802-15-doc, à
-priori au travers d’un protocole de plus haut niveau tel que @zigbee@xbee3-ds.
+// #link(
+//   "https://fr.digi.com/products/embedded-systems/digi-xbee/rf-modules",
+// )[XBee] fournissant une interface pour communiquer en @802-15@802-15-doc, à
+// priori au travers d’un protocole de plus haut niveau tel que @zigbee@xbee3-ds.
 
 Aussi, n’ayant pas la possibilité de produire un circuit avec composants soudés
 en surface, tous nos composants sont sélectionnés montables en trou-traversant

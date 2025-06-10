@@ -110,12 +110,12 @@
 
 === Schéma électronique
 
-#fig(image("./carte1.png", height: 100% - 3em))[
-  Schéma électronique du module @réf (NI Multisim)
+#fig(image("./carte1.png", height: 100% - 3em))[Schéma électronique du module
+  @réf (NI Multisim)
 ]
 
-#fig(image("./carte2.png", height: 100% - 2em))[
-  Schéma électronique du module @cible (NI Multisim)
+#fig(image("./carte2.png", height: 100% - 2em))[Schéma électronique du module
+  @cible (NI Multisim)
 ]
 
 #set page(flipped: false)
