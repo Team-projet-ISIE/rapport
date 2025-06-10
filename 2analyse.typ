@@ -333,8 +333,8 @@ sur breadboard.
   [*Description / rôle*],
   table.cell(colspan: 2)[
     Deux instances, une captant la température de la @réf qui est climatisée et
-    une autre captant celle de la @cible pour la comparer. Minimum capté
-    $lt.eq 10 °C$, maximum capté $gt.eq 50 °C$.
+    une autre captant celle de la @cible pour la comparer. Minimum
+    capté~$lt.eq$~$10°C$, maximum capté~$gt.eq$~$50°C$.
   ],
   [*Signaux d’entrée*],
   table.cell(colspan: 2)[
@@ -494,7 +494,7 @@ sur breadboard.
   [*Description / rôle*],
   table.cell(colspan: 2)[
     Communiquer sans-fil les informations du module de la pièce cible au module
-    de la pièce référence. Idéalement, faible consommation.
+    de la @réf. Idéalement, faible consommation.
   ],
   [*Signaux d’entrée*],
   table.cell(colspan: 2)[
@@ -626,7 +626,17 @@ sur breadboard.
 
 #fig(table(
   columns: 10,
-  align: center + horizon,
+  align: (
+    center + horizon,
+    left + horizon,
+    center + horizon,
+    center + horizon,
+    center + horizon,
+    center + horizon,
+    center + horizon,
+    center + horizon,
+    center + horizon,
+  ),
   table.header(
     table.cell(rowspan: 2)[*Signal*],
     [*Fonctions concernées*],
@@ -638,7 +648,7 @@ sur breadboard.
     [*Valeur au repos*],
     [*Contraintes temporelles*],
     [*Conformité à une norme*],
-    table.cell(colspan: 9)[*Description*],
+    table.cell(colspan: 9, align: center)[*Description*],
   ),
   table.cell(rowspan: 2)[TempRef],
   [FP2→FP0],
@@ -716,7 +726,17 @@ sur breadboard.
 
 #fig(table(
   columns: 10,
-  align: center + horizon,
+  align: (
+    center + horizon,
+    left + horizon,
+    center + horizon,
+    center + horizon,
+    center + horizon,
+    center + horizon,
+    center + horizon,
+    center + horizon,
+    center + horizon,
+  ),
   table.header(
     table.cell(rowspan: 2)[*Signal*],
     [*Fonctions concernées*],
@@ -728,7 +748,7 @@ sur breadboard.
     [*Valeur au repos*],
     [*Contraintes temporelles*],
     [*Conformité à une norme*],
-    table.cell(colspan: 9)[*Description*],
+    table.cell(colspan: 9, align: center)[*Description*],
   ),
   table.cell(rowspan: 2)[CmdAeration],
   [FP0→FP5],
@@ -783,7 +803,7 @@ sur breadboard.
     Courant continu fourni par une alimentation générique, à adapter à notre
     circuit précisément.
   ],
-  table.cell(rowspan: 2)[Température pièce référence],
+  table.cell(rowspan: 2)[Température @réf],
   [FP2 (réf)],
   [GP],
   [1],
@@ -793,7 +813,7 @@ sur breadboard.
   [N~/~A],
   [N~/~A],
   [N~/~A],
-  table.cell(colspan: 9)[Température de la pièce de référence (climatisée).],
+  table.cell(colspan: 9)[Température de la @réf (climatisée).],
   table.cell(rowspan: 2)[Ondes RF],
   [FP3],
   [A],
@@ -805,7 +825,7 @@ sur breadboard.
   [N~/~A],
   [N~/~A],
   table.cell(colspan: 9)[Communications sans-fils entre les deux modules.],
-  table.cell(rowspan: 2)[Température pièce cible],
+  table.cell(rowspan: 2)[Température @cible],
   [FP2 (cib)],
   [GP],
   [1],
@@ -815,8 +835,8 @@ sur breadboard.
   [N~/~A],
   [N~/~A],
   [N~/~A],
-  table.cell(colspan: 9)[Température de la pièce cible (où l’on souhaite
-    profiter de la climatisation de l’autre pièce).],
+  table.cell(colspan: 9)[Température de la @cible (où l’on souhaite profiter de
+    la climatisation de l’autre pièce).],
   table.cell(rowspan: 2)[Choix mode utilisateur],
   [FP4],
   [GP],
