@@ -57,6 +57,28 @@
 //   [Recommandée dans les \ régulateurs à découpage],
 // ))[Choix des composants du bloc alimentation]
 
+=== Écoconception
+
+==== Alimentation
+
+Remplacement du LM2574 (rendement 75–80 %) par un #link(
+  "https://www.mouser.fr/c/?q=MP1584&srsltid=AfmBOoomZs3Ve2X_ggsdSyUf4NPJ5ALkqRL-gmh70By6GHsim0H8emv",
+)[MP1584] (rendement 90–95 %) pour un gain de rendement de 15 à 20~%.
+
+Ajout d’un MOSFET pour couper l’alimentation des périphériques (LCD, XBee)
+lorsqu’ils ne sont pas utilisés.
+
+==== Microcontrôleur
+
+Utilisation des modes Sleep du PIC24.
+
+Réduction de fréquence d’horloge via PLL/OSCCON.
+
+==== Passifs
+
+Remplacement pull-up 4,7 kΩ par 10–47 kΩ, suppression de condensateurs
+"superflus".
+
 === Schéma électronique
 
 #fig(image("./carte1.230.png"))[Schéma électronique du module @réf avec aération
@@ -78,8 +100,8 @@
 
 == Conception logicielle
 
-- Architecture globale ?
-- Schéma bloc ?
+// - Architecture globale ?
+// - Schéma bloc ?
 
 === Algorithme d’aération
 
