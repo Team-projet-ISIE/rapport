@@ -2,8 +2,8 @@
 #show figure: set block(breakable: true)
 #heading(numbering: none)[Annexes]
 
-- Code C
-- Extraits de datasheets ?
+// - Code C
+// - Extraits de datasheets ?
 
 #fig[```c
   #include <xc.h> // Importe la bibliothèque PIC24 constructeur
