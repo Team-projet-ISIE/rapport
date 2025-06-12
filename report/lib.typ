@@ -11,6 +11,7 @@
 #import "@preview/fletcher:0.5.7" as fletcher: diagram, edge, node
 #import "@preview/lovelace:0.3.0": * // Pseudocode rendering
 #let pseudo = pseudocode-list // Shortcut
+#import "@preview/muchpdf:0.1.0": muchpdf // Embed PDFs
 
 // Default global metadata passed around
 // WARN there may be a better way to do this
