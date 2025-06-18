@@ -1,3 +1,4 @@
+#import "report/report.typ": * // Import all report symbols
 = Introduction
 
 // == Contexte général
@@ -37,3 +38,6 @@ nécessaires dans le bâtiment.
 Il doit être possible de choisir entre deux modes : chauffage ou
 refroidissement. En fonction du choix utilisateur, il faut utiliser l’air
 climatisé de la @réf pour aérer la @cible aux moments opportuns.
+
+#fig(image("./schemaPiecesAeration.excalidraw.svg"))[Croquis du système
+  d’aération dans son ensemble]
