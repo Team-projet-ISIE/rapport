@@ -14,6 +14,14 @@ xbee3-ds:
   url: https://www.digi.com/resources/library/data-sheets/ds_xbee-3-zigbee-3
   date: 2025-05-30
 
+xbee3-doc:
+  type: reference
+  language: en
+  title: documentation Digi XBee 3
+  author: Digi
+  url: https://docs.digi.com/resources/documentation/digidocs/pdfs/90001543.pdf
+  date: 2025-06-03
+
 802-15-doc:
   type: reference
   language: en

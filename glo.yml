@@ -3,28 +3,29 @@
   short: ISIE
   long: Informatique et Systèmes Intelligents Embarqués
   # group: Contexte général
-  description: Le cursus que nous suivons actuellement à Polytech Tours
+  description: Le cursus que nous suivons actuellement à Polytech Tours.
 - key: polytech
   short: Polytech
   long: Polytech Tours
   # group: Contexte général
-  description: L’école d’ingénieur dans laquelle nous étudions actuellement
+  description: L’école d’ingénieur dans laquelle nous étudions actuellement.
 - key: chauvin
   short: F. Chauvin
   long: Frédéric Chauvin
   # group: Contexte général
-  description: Le responsable du projet de déclencheur d’aération, le « client »
+  description: Le responsable du projet de déclencheur d’aération, le « client ».
 
 # Spécifique au projet
 - key: réf
   short: pièce référence
   group: Spécifique au projet
-  description: La pièce qui est activement climatisée, dans laquelle nous récupérons l’air
+  description: La pièce qui est activement climatisée,
+               dans laquelle nous récupérons l’air.
 - key: cible
   short: pièce cible
   group: Spécifique au projet
   description: La pièce qui, à défaut d’être activement climatisée, est aérée
-               intelligemment par le système avec l’air d’une pièce climatisée
+               intelligemment par le système avec l’air d’une pièce climatisée.
 
 # Technique
 - key: mcu
@@ -34,13 +35,13 @@
   longplural: microcontrôleurs
   group: Technique
   description: Circuit intégré capable d’effectuer des calculs, de stocker de
-               l’information et de communiquer grâce à ses entrées-sorties
+               l’information et de communiquer grâce à ses entrées-sorties.
 - key: datasheet
   short: datasheet
   plural: datasheets
   group: Technique
   description: Fiche technique présentant toutes les caractéristiques d’un
-               composant électronique
+               composant électronique.
 - key: 802-15
   short: 802.15.4
   group: Technique
@@ -49,4 +50,9 @@
   short: ZigBee
   group: Technique
   description: Protocole de communication sans-fil faible consommation,
-               basé sur la norme 802.15.4
+               basé sur la norme 802.15.4.
+
+- key: taille-entite
+  short: Taille entité
+  description: Le nombre de fils sur lequel se transmet un signal
+               (hors horloge dans le cas d’une communication synchrone).

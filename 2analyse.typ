@@ -1,6 +1,7 @@
 #import "report/report.typ": * // Import all report symbols
 #import fletcher.shapes: rect
 #let HIGH = $3.3 V$ // Définition du niveau électrique HAUT
+#let ALIM_HIGH = [25]
 #let LOW = $0 V$ // Définition du niveau électrique BAS
 #let presentFig(f, c, body) = {
   grid(
@@ -622,73 +623,70 @@ sur breadboard.
 #set par(justify: false) // Ne pas justifier les paragraphes, moche dans tables
 
 == Description des signaux
-// TODO vérifier infos, notamment taille entité
+
+#set table(
+  fill: (x, y) => if x == 0 or y == 0 or y == 1 {
+    rgb("EAF2F5")
+  } else { none },
+  align: (x, y) => if x == 1 and y > 1 and calc.odd(y) {
+    left + horizon
+  } else {
+    center + horizon
+  },
+)
+
 
 #fig(table(
   columns: 10,
-  align: (
-    center + horizon,
-    left + horizon,
-    center + horizon,
-    center + horizon,
-    center + horizon,
-    center + horizon,
-    center + horizon,
-    center + horizon,
-    center + horizon,
-  ),
   table.header(
     table.cell(rowspan: 2)[*Signal*],
     [*Fonctions concernées*],
     [*Nature du signal\ (A/N/GP)*],
-    [*Taille entité*],
+    [*@taille-entite*],
     [*Grandeur et unité\ (U, I…)*],
     [*Plage de variation - Niveaux*],
     [*Excursion en fréquence*],
     [*Valeur au repos*],
     [*Contraintes temporelles*],
     [*Conformité à une norme*],
-    table.cell(colspan: 9, align: center)[*Description*],
+    table.cell(colspan: 9)[*Description*],
   ),
   table.cell(rowspan: 2)[TempRef],
   [FP2→FP0],
   [N],
-  // TODO, valeurs provisoires
   [1],
   [U (V)],
-  [#LOW à #HIGH],
-  [< 1 Hz],
+  [#LOW / #HIGH],
+  [400~kHz @xbee3-doc],
   [#LOW],
   [N~/~A],
-  [I²C / SPI],
+  [I²C],
   table.cell(colspan: 9)[
     Signal fournissant la température de la @réf.
   ],
   table.cell(rowspan: 2)[TempCib],
   [FP2→FP1],
   [N],
-  // TODO, valeurs provisoires
   [1],
   [U (V)],
-  [#LOW à #HIGH],
-  [< 1 Hz],
+  [#LOW / #HIGH],
+  [400~kHz @xbee3-doc],
   [#LOW],
   [N~/~A],
-  [I²C / SPI],
+  [I²C],
   table.cell(colspan: 9)[
     Signal fournissant la température de la @cible.
   ],
   table.cell(rowspan: 2)[TxRF],
   [FP0→FP3\ FP1→FP3],
   [N],
-  // TODO, valeurs provisoires
   [1],
   [U (V)],
-  [#LOW à #HIGH],
-  [< 1 Hz],
+  [#LOW / #HIGH],
+  [400~kHz @xbee3-doc],
   [#LOW],
   [N~/~A],
-  [I²C / SPI],
+  [I²C],
   table.cell(colspan: 9)[
     Données que le microcontrôleur envoie pour transmission au travers du module
     sans-fil.
@@ -696,82 +694,68 @@ sur breadboard.
   table.cell(rowspan: 2)[RxRF],
   [FP3→FP0\ FP3→FP1],
   [N],
-  // TODO, valeurs provisoires
   [1],
   [U (V)],
-  [#LOW à #HIGH],
-  [< 1 Hz],
+  [#LOW / #HIGH],
+  [400~kHz @xbee3-doc],
   [#LOW],
   [N~/~A],
-  [I²C / SPI],
+  [I²C],
   table.cell(colspan: 9)[
     Données que le microcontrôleur reçoit depuis le module sans-fil.
   ],
   table.cell(rowspan: 2)[Mode],
   [FP4→FP1],
   [N],
-  // TODO, valeurs provisoires
-  [2],
+  [1],
   [U (V)],
   [#LOW / #HIGH\ Hiver / Été],
-  [\<~1~Hz],
+  [$<$~1~Hz],
   [#LOW\ (0 logique)],
   [N~/~A],
-  [I²C / SPI],
+  [N~/~A],
   table.cell(colspan: 9)[
     Bloquant (0) pour le mode hiver (chauffage), passant (1) pour le mode été
     (refroidissement).
   ],
-))[Description des signaux (1~/~2)]
-
-#fig(table(
-  columns: 10,
-  align: (
-    center + horizon,
-    left + horizon,
-    center + horizon,
-    center + horizon,
-    center + horizon,
-    center + horizon,
-    center + horizon,
-    center + horizon,
-    center + horizon,
-  ),
-  table.header(
-    table.cell(rowspan: 2)[*Signal*],
-    [*Fonctions concernées*],
-    [*Nature du signal\ (A/N/GP)*],
-    [*Taille entité*],
-    [*Grandeur et unité\ (U, I…)*],
-    [*Plage de variation - Niveaux*],
-    [*Excursion en fréquence*],
-    [*Valeur au repos*],
-    [*Contraintes temporelles*],
-    [*Conformité à une norme*],
-    table.cell(colspan: 9, align: center)[*Description*],
-  ),
   table.cell(rowspan: 2)[CmdAeration],
   [FP0→FP5],
-  [A],
-  // TODO, valeurs provisoires
-  [2],
+  [N],
+  [1],
   [U (V)],
   [#LOW / #HIGH\ KO / OK],
-  [\< 1~Hz],
-  [0~V (bloquant)],
+  [$<$ 1~Hz],
+  [#LOW (bloquant)],
   [N~/~A],
   [N~/~A],
   table.cell(colspan: 9)[
     Bloque l’alimentation de l’aérateur à 0, laisse passer l’alimentation de
     l’aérateur à 1.
   ],
+))[Description des signaux numériques]
+
+#fig(table(
+  columns: 10,
+  table.header(
+    table.cell(rowspan: 2)[*Signal*],
+    [*Fonctions concernées*],
+    [*Nature du signal\ (A/N/GP)*],
+    [*@taille-entite*],
+    [*Grandeur et unité\ (U, I…)*],
+    [*Plage de variation - Niveaux*],
+    [*Excursion en fréquence*],
+    [*Valeur au repos*],
+    [*Contraintes temporelles*],
+    [*Conformité à une norme*],
+    table.cell(colspan: 9)[*Description*],
+  ),
   table.cell(rowspan: 2)[IAeration],
   [FP5→FP6],
   [A],
-  [2],
+  [1],
   [I (A)],
   [0 / 230~V\ KO / OK],
-  [\< 1~Hz],
+  [$<$ 1~Hz],
   [#LOW],
   [N~/~A],
   [N~/~A],
@@ -789,12 +773,12 @@ sur breadboard.
   [N~/~A],
   [N~/~A],
   table.cell(colspan: 9)[Alimentation en énergie électrique des composants.],
-  table.cell(rowspan: 2)[Vcc5-25],
+  table.cell(rowspan: 2)[Vcc5-#ALIM_HIGH],
   [FA1, FP5],
   [A],
   [1],
   [U (V)],
-  [5~V à 25~V],
+  [5~V à #ALIM_HIGH~V],
   [N~/~A],
   [N~/~A],
   [N~/~A],
@@ -803,6 +787,17 @@ sur breadboard.
     Courant continu fourni par une alimentation générique, à adapter à notre
     circuit précisément.
   ],
+  table.cell(rowspan: 2)[Ondes RF],
+  [FP3],
+  [A],
+  [1],
+  [N~/~A],
+  [N~/~A],
+  [N~/~A],
+  [Absent],
+  [N~/~A],
+  [N~/~A],
+  table.cell(colspan: 9)[Communications sans fil entre les deux modules.],
   table.cell(rowspan: 2)[Température @réf],
   [FP2 (réf)],
   [GP],
@@ -814,17 +809,6 @@ sur breadboard.
   [N~/~A],
   [N~/~A],
   table.cell(colspan: 9)[Température de la @réf (climatisée).],
-  table.cell(rowspan: 2)[Ondes RF],
-  [FP3],
-  [A],
-  [1],
-  [N~/~A],
-  [N~/~A],
-  [N~/~A],
-  [Absent],
-  [N~/~A],
-  [N~/~A],
-  table.cell(colspan: 9)[Communications sans-fils entre les deux modules.],
   table.cell(rowspan: 2)[Température @cible],
   [FP2 (cib)],
   [GP],
@@ -840,10 +824,10 @@ sur breadboard.
   table.cell(rowspan: 2)[Choix mode utilisateur],
   [FP4],
   [GP],
-  [2],
+  [1],
   [N~/~A],
   [Haut / Bas],
-  [< 1 Hz],
+  [$<$ 1 Hz],
   [N~/~A],
   [N~/~A],
   [N~/~A],
@@ -862,7 +846,7 @@ sur breadboard.
   [N~/~A],
   table.cell(colspan: 9)[Flux d’air entrainé par l’aérateur depuis la pièce
     référence vers la pièce cible.],
-))[Description des signaux (2~/~2)]
+))[Description des signaux analogiques et physiques]
 
 // LTeX: enabled=true // Réactive la correction orthographique
 
