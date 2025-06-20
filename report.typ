@@ -84,13 +84,13 @@
 #bibliography("bib.yml") // Typst’s bibliography
 
 // Inclut les fichiers multisim dans le PDF
-#pdf.embed(
-  "./cible.v1.ms14",
-  relationship: "data",
-  description: "Schéma multisim du module côté cible",
-)
-#pdf.embed(
-  "./reference.v1.ms14",
-  relationship: "data",
-  description: "Schéma multisim du module côté reference",
-)
+// #pdf.embed(
+//   "./cible.v1.ms14",
+//   relationship: "data",
+//   description: "Schéma multisim du module côté cible",
+// )
+// #pdf.embed(
+//   "./reference.v1.ms14",
+//   relationship: "data",
+//   description: "Schéma multisim du module côté reference",
+// )

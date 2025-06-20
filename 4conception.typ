@@ -79,25 +79,15 @@ Réduction de fréquence d’horloge via PLL/OSCCON.
 Remplacement pull-up 4,7 kΩ par 10–47 kΩ, suppression de condensateurs
 "superflus".
 
-=== Schéma structurel
+=== Schémas structurels
 
-// #fig(image("./carte1.230.png"))[Schéma électronique du module @réf avec aération
-//   en 230~V (NI Multisim)]
-
-// #fig(image("./carte1.png"))[Schéma électronique alternatif du module @réf avec
-//   ventilation en 12~V (NI Multisim)]
-
-// #fig(image("./carte2.2.png"))[Schéma électronique du module @cible (NI
-//   Multisim)]
-
-// #fig(image("./carte2.1.png"))[Schéma électronique alternatif du module @cible
-//   avec alimentation protégée (NI Multisim)]
-
-#fig(muchpdf(read("./cible.pdf", encoding: none)))[Schéma structurel du module
+#fig(image("./cible.png"))[Schéma structurel du module
   @cible]
 
-#fig(muchpdf(read("./reference.pdf", encoding: none)))[Schéma structurel du
-  module
+#fig(image("./reference.ventilateur.png"))[Schéma structurel du module @réf avec
+  un ventilateur 12~V]
+
+#fig(image("./reference.relais.png"))[Schéma structurel du module
   @réf]
 
 #set page(flipped: false)
