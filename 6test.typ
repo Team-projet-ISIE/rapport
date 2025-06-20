@@ -24,6 +24,8 @@
 
 #fig(image("./test/fa1.png"))[Test de FA1]
 
+#xlsx-parser(read("test/fichesTest.xlsx", encoding: none))
+
 // == Protocoles de test logiciel
 == Test unitaires logiciels
 
