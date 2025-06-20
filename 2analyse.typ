@@ -1,7 +1,7 @@
 #import "report/report.typ": * // Import all report symbols
 #import fletcher.shapes: rect
 #let HIGH = $3.3 V$ // Définition du niveau électrique HAUT
-#let ALIM_HIGH = [25]
+#let ALIM_HIGH = [15]
 #let LOW = $0 V$ // Définition du niveau électrique BAS
 #let presentFig(f, c, body) = {
   grid(
@@ -382,7 +382,7 @@ rendre l’utilisation plus aisée.
   [*Signaux d’entrée*],
   table.cell(colspan: 2)[
     - CmdAeration
-    - Vcc5-25 (5~V à 25~V)
+    - Vcc5-#ALIM_HIGH (5~V à #ALIM_HIGH~V)
   ],
   [*Signaux de sortie*],
   table.cell(colspan: 2)[IAeration],
@@ -519,11 +519,11 @@ rendre l’utilisation plus aisée.
   table.cell(colspan: 2)[
     Fournir un courant continu de #HIGH au circuit incluant le @mcu, à partir
     d’une alimentation générique fournissant du courant continu entre $5 V$ et
-    $25 V$.
+    #ALIM_HIGH $V$.
   ],
   [*Signaux d’entrée*],
   table.cell(colspan: 2)[
-    - Vcc5-25 (5~V à 25~V)
+    - Vcc5-#ALIM_HIGH (5~V à #ALIM_HIGH~V)
   ],
   [*Signaux de sortie*],
   table.cell(colspan: 2)[
@@ -539,11 +539,11 @@ rendre l’utilisation plus aisée.
   table.cell(colspan: 2)[
     Fournir un courant continu de $approx 12 V$ à la structure d’alimentation en
     puissance, à partir d’une alimentation générique fournissant du courant
-    continu entre $5 V$ et $25 V$.
+    continu entre $5 V$ et #ALIM_HIGH $V$.
   ],
   [*Signaux d’entrée*],
   table.cell(colspan: 2)[
-    - Vcc5-25 (5~V à 25~V)
+    - Vcc5-#ALIM_HIGH (5~V à #ALIM_HIGH~V)
   ],
   [*Signaux de sortie*],
   table.cell(colspan: 2)[
