@@ -11,8 +11,6 @@
   parse-table-style: false,
 )
 
-=== @mcu
-
 #xlsx-parser(
   read("test.xlsx", encoding: none),
   sheet-index: 1,

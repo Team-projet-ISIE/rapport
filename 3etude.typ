@@ -370,6 +370,30 @@ performance, intégration et budget.
 
 === Communication sans-fil (faible consommation)
 
+À notre stade du cursus, nous nous concentrons sur les @mcu se programmant
+directement en bas niveau (registres…), en particulier 16~bit, et nos cours et
+travaux-pratiques se concentrent sur l’architecture PIC24@pic24-ds de Microchip,
+que l’on privilégiera probablement. De plus, ce projet ne requiert à priori pas
+d’importantes capacités d’entrées-sorties et de puissance de calcul qui
+justifieraient un @mcu plus performant.
+
+Ayant comme consigne préalable d’employer un @mcu 16 bit, notre choix ne se
+portera pas sur des @mcu embarquant des fonctionnalités sans fil tels que les
+`STM32WBxxxx` ou les `nRF5xxx`, qui s’avèrent tous en 32 bit. Nous devrons donc
+employer des modules apportant une connectivité sans-fil faible consommation à
+notre @mcu 16 bit, s’interfaçant idéalement avec des protocoles connus tels
+qu’I#super[2]C ou SPI.
+
+// #link(
+//   "https://fr.digi.com/products/embedded-systems/digi-xbee/rf-modules",
+// )[XBee] fournissant une interface pour communiquer en @802-15@802-15-doc, à
+// priori au travers d’un protocole de plus haut niveau tel que @zigbee@xbee3-ds.
+
+Aussi, n’ayant pas la possibilité de produire un circuit avec composants soudés
+en surface, tous nos composants sont sélectionnés montables en trou-traversant
+(ou connectables tel qu’en Grove). Cela sera d’autant plus simple pour tester
+sur breadboard.
+
 Pour transmettre la température sans fil entre nos deux cartes, on a choisi
 d’utiliser un module Zigbee, le XB3-24Z8PT-J. Ce choix est lié au fait que notre
 carte est alimentée en 3,3 V, et ce module communique aussi en 3,3 V, ce qui

@@ -92,7 +92,7 @@ Remplacement pull-up 4,7 kΩ par 10–47 kΩ, suppression de condensateurs
 
 #set page(flipped: false)
 
-=== Conception du circuit imprimé
+// === Conception du circuit imprimé
 
 == Conception logicielle
 

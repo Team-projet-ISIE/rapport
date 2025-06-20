@@ -74,8 +74,8 @@
 // #pagebreak() // Saut de page
 #include "./7conclusion.typ"
 #pagebreak() // Saut de page
-#include "./8annexes.typ"
-#pagebreak() // Saut de page
+// #include "./8annexes.typ"
+// #pagebreak() // Saut de page
 
 // Glossaire et Bibliographie
 #heading(numbering: none, i18n("glossary"))
