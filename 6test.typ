@@ -1,44 +1,79 @@
 #import "report/report.typ": * // Import all report symbols
+#set par(justify: false)
+
 = Validation et test
 
-== Validation à priori des fonctions et interfaçages
+== Traitements numériques pièce référence (FP0)
 
-== Protocoles de test matériel
+#xlsx-parser(
+  read("test.xlsx", encoding: none),
+  sheet-index: 0,
+  parse-table-style: false,
+)
 
-// === Tests unitaires
+=== @mcu
 
-// === Test des composants
+#xlsx-parser(
+  read("test.xlsx", encoding: none),
+  sheet-index: 1,
+  parse-table-style: false,
+)
 
-// === Test des fonctions
+== Captage température (FP2)
 
-// (système complet)
-// === Test d’intégration
+#xlsx-parser(
+  read("test.xlsx", encoding: none),
+  sheet-index: 2,
+  parse-table-style: false,
+)
 
-// === FA0 (Programmation)
+== Interfaçage RF (FP3)
 
-#fig(image("./test/fa0.png"))[Test de FA0]
+#xlsx-parser(
+  read("test.xlsx", encoding: none),
+  sheet-index: 3,
+  parse-table-style: false,
+)
 
-// === FA1 (Alimentation)
+#pagebreak()
+== Interfaçage humain-machine (FP4)
 
-#fig(image("./test/regulateur.png"))[Test individuel du régulateur]
+#xlsx-parser(
+  read("test.xlsx", encoding: none),
+  sheet-index: 4,
+  parse-table-style: false,
+)
 
-#fig(image("./test/fa1.png"))[Test de FA1]
+#pagebreak()
+== Commande en puissance (FP5)
 
-#xlsx-parser(read("test/fichesTest.xlsx", encoding: none))
+#xlsx-parser(
+  read("test.xlsx", encoding: none),
+  sheet-index: 5,
+  parse-table-style: false,
+)
 
-// == Protocoles de test logiciel
-== Test unitaires logiciels
+#pagebreak()
+== Interfaçage machine humain (FP7)
 
-// === Tests unitaires
-// Test fonctions individuelles.
+#xlsx-parser(
+  read("test.xlsx", encoding: none),
+  sheet-index: 6,
+  parse-table-style: false,
+)
 
-// === Test d’intégration
-// Test du programme entier.
+== Programmation in-situ (FA0)
 
-== Test de performance global
-// Efficacité du système.
+#xlsx-parser(
+  read("test.xlsx", encoding: none),
+  sheet-index: 7,
+  parse-table-style: false,
+)
 
-// == Résultats des tests
+== Alimentation (FA1)
 
-== Analyse et interprétation
-
+#xlsx-parser(
+  read("test.xlsx", encoding: none),
+  sheet-index: 8,
+  parse-table-style: false,
+)
