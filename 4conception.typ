@@ -113,14 +113,28 @@ Remplacement pull-up 4,7 kΩ par 10–47 kΩ, suppression de condensateurs
 
 // === Interfaçage humain-machine ?
 
+L’algorithme d’aération du système dans son ensemble est relativement simple,
+constitué principalement de deux tests pouvant mener à deux actions,
+l’activation ou la désactivation de l’aération.
+
+Le temps d’attente entre chaque test de température peut être réduit à quelques
+secondes pour augmenter la réactivité du système, ou allongé à plusieurs
+dizaines de secondes pour diminuer la consommation énergétique. Mais, il s’agit
+déjà d’une considération plus bas niveau, qu’il convient de mettre en
+perspective avec la nécessité de communiquer des informations sans fil entre
+deux modules distants.
+
 #fig(pseudo[
   + *Boucler Indéfiniment*
-    + tempRef $arrow.l$ lire(capteur température pièce référence)
-    + tempCib $arrow.l$ lire(capteur température pièce cible)
+    + temp_ref $arrow.l$ lire(température pièce référence)
+    + temp_cib $arrow.l$ lire(température pièce cible)
     + mode $arrow.l$ lire(mode sélectionné)
-    + *Si* ( mode $=$ CHAUFFAGE *Et* tempRef $>$ ( tempCib $+ 1°C$ ) )
-      + *Ou* ( mode $=$ REFROIDISSEMENT *Et* tempCib $>$ ( tempRef $+ 1°C$ ) )
-      + activer(mode chauffage)
+    + *Si* ( mode $=$ CHAUFFAGE *Et* temp_ref $>$ temp_cib $+ 1°C$ )
+      + *Ou* ( mode $=$ REFROIDISSEMENT *Et* temp_cib $>$ temp_ref $+ 1°C$ )
+      + activer_aération()
+    + *Sinon*
+      + désactiver_aération()
+    + *Fin Si*
     + dormir(N secondes)
   + *Fin Boucle*
 ])[Algorithme d’aération haut niveau]
