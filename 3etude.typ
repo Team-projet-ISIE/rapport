@@ -1,6 +1,10 @@
 // LTeX: language=fr
 = Veille technologique
 
+// WARNING
+#align(center, text(size: 16pt, fill: red)[Brouillon encore. Des trucs à
+  ajouter/modifier ?])
+
 == Captage
 
 === Température
@@ -327,7 +331,7 @@ bits plus puissante que les microcontrôleurs 8 bits classiques, maintenant
 obsolète. Cette caractéristique est essentielle pour gérer efficacement les
 tâches temps réel, notamment la lecture des capteurs de température, la gestion
 des entrées utilisateurs (boutons, interrupteurs) et la communication sans fil
-via le module Zigbee.
+via le module Zigbee @802-15-doc.
 
 La consommation énergétique est également un critère important. Le PIC24F04KA200
 dispose de modes basse consommation (Sleep, Idle) qui permettent de limiter la

@@ -11,6 +11,7 @@
   parse-table-style: false,
 )
 
+#pagebreak()
 #xlsx-parser(
   read("test.xlsx", encoding: none),
   sheet-index: 1,
