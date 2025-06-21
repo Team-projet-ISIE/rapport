@@ -1,5 +1,5 @@
 // LTeX: language=fr
-= Étude de l'existant
+= Veille technologique
 
 == Captage
 

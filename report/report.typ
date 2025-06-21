@@ -14,7 +14,7 @@
   // Main body pages’ header and footer outputting functions (taking meta arg)
   header: header,
   footer: footer,
-  nb: "1.1.A.a.1.1.A.a", // Headings numbering template
+  nb: "1.1.A.a", // Headings numbering template
   paper: "a4", // Page geometry
   margin: 2cm,
   body, // Main content

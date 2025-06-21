@@ -1,7 +1,7 @@
 #import "report/report.typ": * // Import all report symbols
 #set par(justify: false)
 
-= Validation et test
+= Test
 
 == Traitements numériques pièce référence (FP0)
 

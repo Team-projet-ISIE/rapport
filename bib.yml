@@ -29,3 +29,11 @@ xbee3-doc:
   author: Institute of Electrical and Electronics Engineers
   url: https://www.ieee802.org/15/pub/TG4.html
   date: 2025-05-30
+
+dht20-ds:
+  type: reference
+  language: en
+  title: datasheet DHT20
+  author: ASAIR
+  url: https://cdn-shop.adafruit.com/product-files/5183/5193_DHT20.pdf
+  date: 2025-06-03
