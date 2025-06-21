@@ -141,27 +141,74 @@ interface fiable pour la communication I2C. Il est important d’utiliser des
 résistances de pull-up adaptées sur les lignes SDA et SCL pour garantir la
 stabilité des signaux.
 
+==== @mcu
+
+#coll(
+  align(horizon)[
+    "Recommended Minimum Connections" @pic24-ds illustre les connexions
+    minimales nécessaires pour assurer le bon fonctionnement du @mcu
+    `PIC24FV16KM204`. Voici une explication des principaux composants et de leur
+    rôle :
+  ],
+  fig(image("datasheet/miniConnPic24.png"))[Extrait de la datasheet du @mcu
+    @pic24-ds sur les connexions minimales recommandées],
+)
+
+*Résistances (R1 et R2)*
+
+- *R1* : Cette résistance relie la broche MCLR (Master Clear) à la tension
+  d’alimentation VDD afin d’éviter des réinitialisations intempestives du
+  microcontrôleur. Une valeur typique pour R1 est 10 kΩ.
+- *R2* : Placée en série avec la broche MCLR, cette résistance limite le courant
+  en cas de décharge électrostatique ou de surtension. Sa valeur recommandée est
+  généralement de 470 Ω ou moins.
+
+*Condensateurs (C1 à C7)*
+- *C1* : Connecté entre la broche MCLR et la masse, ce condensateur filtre les
+  perturbations et stabilise la tension appliquée sur MCLR.
+- *C2* et *C3* : Ces condensateurs sont placés entre VDD et VSS pour découpler
+  l’alimentation et réduire le bruit électrique sur la ligne d’alimentation.
+- *C6* et *C7* : Ces condensateurs assurent un filtrage supplémentaire pour
+  améliorer la stabilité globale de l’alimentation.
+
+*Connexions pour la programmation*
+
+La programmation du @mcu s’effectue via l’interface ICSP (In-Circuit Serial
+Programming). Les broches principales utilisées sont :
+- *PGC* (Programming Clock) : Broche fournissant le signal d’horloge pour
+  synchroniser la communication entre le programmeur et le microcontrôleur.
+- *PGD* (Programming Data) : Broche servant au transfert bidirectionnel des
+  données entre le programmeur et le microcontrôleur.
+
+Ces broches PGC et PGD sont connectées aux broches correspondantes du
+programmeur, ce qui permet d’envoyer les instructions et les données nécessaires
+à la programmation et au débogage.
+
 === Écoconception
+
+// WARNING
+#align(center, text(size: 16pt, fill: red)[Rien à ajouter ?])
 
 ==== Alimentation
 
-Remplacement du LM2574 (rendement 75–80 %) par un #link(
-  "https://www.mouser.fr/c/?q=MP1584&srsltid=AfmBOoomZs3Ve2X_ggsdSyUf4NPJ5ALkqRL-gmh70By6GHsim0H8emv",
-)[MP1584] (rendement 90–95 %) pour un gain de rendement de 15 à 20~%.
+- Remplacement du régulateur de tension linéaire par un modèle au meilleur
+  rendement. Par exemple, LM2574 (rendement 75–80 %) par un #link(
+    "https://www.mouser.fr/c/?q=MP1584&srsltid=AfmBOoomZs3Ve2X_ggsdSyUf4NPJ5ALkqRL-gmh70By6GHsim0H8emv",
+  )[MP1584] (rendement 90–95 %) pour un gain de rendement de 15 à 20~%.
 
-Ajout d’un MOSFET pour couper l’alimentation des périphériques (LCD, XBee)
-lorsqu’ils ne sont pas utilisés.
+- Ajout d’un MOSFET pour couper l’alimentation des périphériques (LCD,
+  XBee)lorsqu’ils ne sont pas utilisés.
 
 ==== Microcontrôleur
 
-Utilisation des modes Sleep du PIC24.
+- Utilisation des modes Sleep du PIC24.
 
-Réduction de fréquence d’horloge via PLL/OSCCON.
+- Réduction de fréquence d’horloge via PLL/OSCCON.
 
 ==== Passifs
 
-Remplacement pull-up 4,7 kΩ par 10–47 kΩ, suppression de condensateurs
-"superflus".
+- Remplacement pull-up 4,7 kΩ par 10–47 kΩ, suppression de condensateurs
+  "superflus".
 
 === Schémas structurels
 
