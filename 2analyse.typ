@@ -86,6 +86,10 @@ Nous commençons aussi par définir les attendus, la portée du projet au sein
 d’une matrice MOSCOW. Cela permettra de focaliser les efforts sur ce qui est
 important, de ne pas disperser l’énergie inutilement vers des non-objectifs.
 
+#set table(fill: (x, y) => if calc.even(y) {
+  rgb("EAF2F5")
+} else { none })
+
 #fig(table(
   columns: 2,
   align: (left, left),
@@ -299,6 +303,10 @@ rendre l’utilisation plus aisée.
 == Description des fonctions
 
 === Fonctions principales
+
+#set table(fill: (x, y) => if x == 0 or y == 0 {
+  rgb("EAF2F5")
+} else { none })
 
 ==== Fonctions captage
 
@@ -609,7 +617,6 @@ rendre l’utilisation plus aisée.
     center + horizon
   },
 )
-
 
 #fig(table(
   columns: 10,

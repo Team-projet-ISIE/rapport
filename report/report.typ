@@ -32,9 +32,6 @@
   show heading: set text(font: meta.sans) // Write headings with sans font
   show heading.where(level: 1): h => align(center, h) // Center top headings
 
-  set table(fill: (_, y) => if calc.odd(y) {
-    rgb("EAF2F5") // Gray odd lines in tables
-  })
   // Emphasizes tables title cells TODO when possible
   // show table.header.cell: c => align(center, strong(c))
   // Emphasizes tables first line TODO remove when above is done
