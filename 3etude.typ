@@ -223,6 +223,16 @@ inefficace. Un régulateur à découpage ne chauffe quasiment pas.
 
 Peut permettre de maximiser l'efficacité énergétique.
 
+== Numérique
+
+=== Microcontrôleur
+
+==== PIC24FJ256GA702 28 broches #link("https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24FJ256GA702-I-SP/6562000")[DigiKey]
+
+==== PIC24F08KL301 20 broches #link("https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24F08KL301-I-P/2835112ç")[DigiKey]
+
+==== PIC24F04KA200 14 broches #link("https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24F04KA200-I-P/2125573")[DigiKey]
+
 == Communication
 
 ==== Digi XB3-24Z8PT-J (#link("https://www.digikey.fr/fr/products/detail/digi/XB3-24Z8PT-J/8130934")[DigiKey])

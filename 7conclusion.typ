@@ -26,12 +26,12 @@ détails et améliorer au fur et à mesure.
 Le projet de déclencheur d’aération n’est toujours pas concrétisé, et pour ce
 faire plusieurs étapes doivent être réalisées :
 
-- Ajouter une isolation galvanique
-- Vérifier la capacité du système à traiter avec du 230 V
+- Ajouter une isolation galvanique au schéma structurel, s’assurer du contact
+  sec avec du 230~V
 - Finaliser le schéma structurel avec les bonnes empreintes de composants
-- Peut-être vérifier celui-ci à l’aide de simulations
+- Idéalement, vérifier celui-ci à l’aide de simulations
 - Router le PCB
-- Assembler le système, souder les composants
+- Assembler le système fonctions par fonctions en testant à chaque ajout de
+  composant
 - Coder le @mcu en se basant sur l’algorithme de déclenchement d’aération
-- Tester le tout
-- Éventuellement créer un boitier imprimé en 3D
+- Idéalement, créer un boitier (par ex. imprimé en 3D)

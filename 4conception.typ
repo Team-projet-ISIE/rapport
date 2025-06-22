@@ -8,35 +8,40 @@
 
 === Choix des composants
 
+N’ayant pas la possibilité de produire un circuit avec composants soudés en
+surface, tous nos composants sont sélectionnés montables en trou-traversant (ou
+connectables avec connecteur type Grove). Cela sera d’autant plus simple pour
+tester sur breadboard.
+
 ==== Capteur de température
 
 Pour la mesure de température et d'humidité dans notre système, le choix s'est
 porté sur le capteur DHT20, principalement pour ses performances améliorées par
 rapport à son prédécesseur le DHT11, ainsi que pour sa compatibilité avec les
-microcontrôleurs via une interface I²C standard. Ce capteur fonctionne avec une
-tension d'alimentation comprise entre 2.2V et 5.5V, ce qui le rend adaptable
-aussi bien aux systèmes en 3.3V qu’en 5V. En plus d’une large plage de
-fonctionnement, il présente une consommation très faible : seulement 250 nA en
-veille et 980 µA en fonctionnement, ce qui est particulièrement avantageux pour
-les applications alimentées sur batterie ou nécessitant une faible consommation
-énergétique. Il présente une plage de mesure pour la température allant de -40
-°C à +80 °C, avec une résolution de 0.01 °C.
+microcontrôleurs via une interface I#super[2]C standard.
 
-Le DHT20 offre une précision de ±0.5°C pour la température, ce qui est suffisant
-pour notre usage puisque la précision est demande au dégrée près. Ce capteur
-communique via le protocole I²C, avec une adresse esclave par défaut de 0x38. Il
-est recommandé d’utiliser des résistances de pull-up (typiquement 4.7 kΩ) sur
-les lignes SDA et SCL, et de placer un condensateur de découplage de 100 nF
-entre VDD et GND, au plus près du capteur.
+Ce capteur fonctionne avec une tension d'alimentation comprise entre 2.2~V et
+5.5~V, ce qui le rend adaptable aussi bien aux systèmes en 3.3~V qu’en 5~V. En
+plus d’une large plage de fonctionnement, il présente une consommation faible~:
+seulement 250~nA en veille et 980~µA en fonctionnement, ce qui est
+particulièrement avantageux pour les applications alimentées sur batterie ou
+nécessitant une faible consommation énergétique. Il présente une plage de mesure
+pour la température allant de -40~°C à +80~°C, avec une résolution de 0.01~°C.
+
+Le DHT20 offre une précision de ±0.5~°C pour la température, ce qui est
+suffisant pour notre usage. Ce capteur communique via le protocole I²C, avec une
+adresse esclave par défaut de 0x38. Il est recommandé d’utiliser des résistances
+de pull-up (typiquement 4.7 kΩ) sur les lignes SDA et SCL, et de placer un
+condensateur de découplage de 100~nF entre VDD et GND, au plus près du capteur.
 
 ==== Communication sans-fil (faible consommation)
 
 À notre stade du cursus, nous nous concentrons sur les @mcu se programmant
 directement en bas niveau (registres…), en particulier 16~bit, et nos cours et
 travaux-pratiques se concentrent sur l’architecture PIC24@pic24-ds de Microchip,
-que l’on privilégiera probablement. De plus, ce projet ne requiert à priori pas
+que l’on privilégiera donc. De plus, ce projet ne requiert à priori pas
 d’importantes capacités d’entrées-sorties et de puissance de calcul qui
-justifieraient un @mcu plus performant.
+justifieraient des exigences de performances.
 
 Ayant comme consigne préalable d’employer un @mcu 16 bit, notre choix ne se
 portera pas sur des @mcu embarquant des fonctionnalités sans fil tels que les
@@ -50,20 +55,13 @@ qu’I#super[2]C ou SPI.
 // )[XBee] fournissant une interface pour communiquer en @802-15@802-15-doc, à
 // priori au travers d’un protocole de plus haut niveau tel que @zigbee@xbee3-ds.
 
-Aussi, n’ayant pas la possibilité de produire un circuit avec composants soudés
-en surface, tous nos composants sont sélectionnés montables en trou-traversant
-(ou connectables tel qu’en Grove). Cela sera d’autant plus simple pour tester
-sur breadboard.
+Pour transmettre la température sans fil entre nos deux cartes, nous choisissons
+un module Zigbee, le XB3-24Z8PT-J. Il s’agit du seul module Zigbee que nous
+ayons trouvés qui correspond à nos critères, qui est alimenté en 3.3~V et qui
+est facile à intégrer avec notre microcontrôleur via une liaison UART.
 
-Pour transmettre la température sans fil entre nos deux cartes, on a choisi
-d’utiliser un module Zigbee, le XB3-24Z8PT-J. Ce choix est lié au fait que notre
-carte est alimentée en 3,3 V, et ce module communique aussi en 3,3 V, ce qui
-évite d’avoir à ajouter des convertisseurs de niveau. De plus, c’est le seul
-module Zigbee que l’on a trouvé qui correspond à ces critères et qui est facile
-à intégrer avec notre microcontrôleur via une liaison UART.
-
-On a comparé ce choix avec d’autres technologies comme la radio 433 MHz ou le
-Bluetooth. La radio 433 MHz peut avoir une portée similaire, mais elle est
+Nous avons comparé ce choix avec d’autres technologies comme la radio 433~MHz ou
+le Bluetooth. La radio 433~MHz peut avoir une portée similaire, mais elle est
 souvent plus compliquée à gérer en termes de protocole et de fiabilité. Le
 Bluetooth, lui, consomme plus d’énergie et a une portée généralement plus
 courte, environ 10 à 30 mètres, ce qui peut poser problème si les cartes sont un
@@ -71,15 +69,15 @@ peu éloignées.
 
 Le Zigbee offre une bonne portée, jusqu’à 100 mètres en champ libre, ce qui est
 un vrai plus pour la fiabilité de la communication. En plus, la communication se
-fait simplement via UART, ce qui est possible sur notre microcontroleur. Enfin
-il s’agissait du modele le moins évoluer ce qui évite d’utiliser des modules
-trop complexes ou trop « boîte noire ».
+fait simplement via UART, ce qui est possible sur notre @mcu. Enfin, il
+s’agissait du modèle le moins évolué, ce qui évite d’utiliser des modules trop
+complexes s’apparentant à une "boîte noire".
 
 ==== Afficheur
 
 L’interface visuelle avec l’utilisateur repose sur un écran LCD 16x2 connecté
 via le bus I#super[2]C. Ce choix permet une économie significative de broches
-sur le microcontrôleur, ce qui est essentiel car le projet mets en place
+sur le microcontrôleur, ce qui est essentiel, car le projet mets en place
 plusieurs périphériques comme des capteurs, des boutons, des LED et un module
 Zigbee. L’affichage sera utilisé pour indiquer la température mesurée ainsi que
 la température cible, et pourra, à terme, afficher d’autres informations comme
@@ -90,55 +88,48 @@ fiabilité de la communication avec le microcontrôleur.
 
 ==== Microcontrôleur
 
-- PIC24FJ256GA702-I/SP 28 broches #link(
-    "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24FJ256GA702-I-SP/6562000",
-  )[DigiKey]
-
-- PIC24F08KL301-I/P-ND 20 broches #link(
-    "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24F08KL301-I-P/2835112ç",
-  )[DigiKey]
-
-Nous avons sélectionne le microcontrôleur PIC24F04KA200 pour notre projet en
-raison de son excellent compromis entre performances, consommation énergétique,
-et facilité d’intégration, et son prix.
+Nous avons sélectionné le microcontrôleur #link(
+  "https://www.digikey.fr/fr/products/detail/microchip-technology/PIC24F04KA200-I-P/2125573",
+)[PIC24F04KA200] pour notre projet en raison de son bon compromis entre
+performances, consommation énergétique, facilité d’intégration, et son prix.
 
 Le PIC24F04KA200 appartient à la famille des PIC24, avec une architecture 16
-bits plus puissante que les microcontrôleurs 8 bits classiques, maintenant
-obsolète. Cette caractéristique est essentielle pour gérer efficacement les
-tâches temps réel, notamment la lecture des capteurs de température, la gestion
-des entrées utilisateurs (boutons, interrupteurs) et la communication sans fil
-via le module Zigbee @802-15-doc.
+bits plus puissante que les microcontrôleurs 8 bits classiques, tendant vers
+l’obsolescence. Cette caractéristique est essentielle pour gérer efficacement
+les tâches temps réel, notamment la lecture des capteurs de température, la
+gestion des entrées utilisateur (boutons, interrupteurs) et la communication
+sans fil via le module Zigbee @802-15-doc.
 
 La consommation énergétique est également un critère important. Le PIC24F04KA200
 dispose de modes basse consommation (Sleep, Idle) qui permettent de limiter la
 consommation lors des périodes d’inactivité, un atout essentiel pour un système
-fonctionnant en continu, notamment lorsqu’il communique via Zigbee. Cette
+fonctionnant en continu, particulièrement lorsqu’il communique via Zigbee. Cette
 gestion fine de l’énergie contribue à optimiser l’autonomie, surtout dans un
 contexte d’optimisation énergétique.
 
 Le microcontrôleur intègre des périphériques adaptés facilitant la gestion de
-nombreuses entrées/ sorties numériques permet de contrôler sans difficulté les
+nombreuses entrées~/~sorties numériques permet de contrôler sans difficulté les
 boutons poussoirs, LEDs, ainsi que le ventilateur via des transistors. De plus,
 ses interfaces série comme l’I#super[2]C, l’UART ou le SPI simplifient la
 communication avec le module Zigbee et l’écran LCD, et le capteur de
-temperature, réduisant la complexité matérielle et logicielle du projet.
+température, réduisant la complexité matérielle et logicielle du projet.
 
 La facilité de programmation est un autre point fort. En effet, la programmation
 In-Circuit (ICSP), permet le développement et la mise à jour rapides ce qui
 facilite le prototypage et la maintenance.
 
 Enfin, pour notre projet, la mémoire Flash et la RAM du PIC24F04KA200 sont
-adaptées car la complexité du programme reste modérée. En effet, le
-microcontrôleur doit gérer la lecture des capteurs de température, le contrôle
-de l’affichage LCD, la gestion des boutons poussoirs, ainsi que la communication
-Zigbee, tâches qui ne nécessitent pas un volume important de mémoire. Cette
+adaptées, car la complexité du programme reste modérée. En effet, l’essentiel du
+travail du @mcu réside dans la lecture des capteurs de température, la lecture
+de l’interrupteur et le contrôle de l’aération, ce qui ne demande pas énormément
+de puissance. La communication Zigbee est gérée par le module dédié. Cette
 capacité mémoire permet d’assurer un fonctionnement fluide tout en gardant une
 marge pour l’optimisation du code. Ainsi, le choix de ce microcontrôleur
 correspond parfaitement aux besoins fonctionnels et à la simplicité relative du
 logiciel à développer dans ce projet.
 
 Le PIC24F04KA200 se distingue comme le microcontrôleur le plus adapté à notre
-projet. Il offre une puissance supérieure et plus d’interfaces que les PIC16F 8
+projet. Il offre une puissance supérieure et plus d’interfaces que les @mcu 8
 bits, tout en restant plus simple à programmer, moins énergivore et moins
 coûteux que les ARM Cortex-M comme le STM32. Familiarisés avec la famille PIC
 grâce à notre formation, nous bénéficions d’un développement facilité. Ce
