@@ -1,7 +1,7 @@
 = Conclusion
 
 // WARNING
-#align(center, text(size: 16pt, fill: red)[Trucs à ajouter ?])
+// #align(center, text(size: 16pt, fill: red)[Trucs à ajouter ?])
 
 Si nous n’avons pas atteint l’objectif premier de réaliser le déclencheur
 d’aération fonctionnel, nous sortons de ce projet d’électronique grandis et tout
