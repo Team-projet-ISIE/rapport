@@ -1,4 +1,9 @@
 # Contexte général
+- key: clim
+  short: climatiser
+  description: Maintenir (un lieu) à une température agréable / Créer ou
+               maintenir dans un local ou un véhicule un ensemble de conditions
+               déterminées de température, d'humidité, etc.
 - key: isie
   short: ISIE
   long: Informatique et Systèmes Intelligents Embarqués

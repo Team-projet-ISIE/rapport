@@ -37,3 +37,11 @@ dht20-ds:
   author: ASAIR
   url: https://cdn-shop.adafruit.com/product-files/5183/5193_DHT20.pdf
   date: 2025-06-03
+
+lcd-ds:
+  type: reference
+  language: en
+  title: datasheet AMC0802BR-B-Y6WFDY-I2C
+  author: Orient Display
+  url: https://www.orientdisplay.com/wp-content/uploads/2019/10/AMC0802BR-B-Y6WFDY-I2C.pdf
+  date: 2025-06-03

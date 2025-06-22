@@ -34,7 +34,7 @@ garantit une compatibilité totale avec le module LCD et une communication
 I#super[2]C sans erreurs.
 
 #fig(image("datasheet/startStopI2C.png", height: 20em))[Extrait de la datasheet
-  @dht20-ds du DHT20 sur les conditions de Start et de Stop I#super[2]C]
+  @dht20-ds du DHT20 : Conditions de Start et Stop I#super[2]C]
 
 De plus, la documentation rappelle que chaque communication I#super[2]C débute
 par une condition Start (la ligne SDA passe de l’état haut à bas pendant que SCL
@@ -64,7 +64,7 @@ indécisions de la tension.
   (70~% de VDD) imposée par le protocole I2C.
 
 #fig(image("datasheet/pic24OutSpecs.png", height: 25em))[Extrait de la datasheet
-  @pic24-ds du PIC24 sur les spécifications des sorties]
+  @pic24-ds du PIC24 : Spécifications des sorties]
 
 ===== Entrées du capteur (depuis le @mcu)
 
@@ -76,7 +76,7 @@ indécisions de la tension.
   ramenant la ligne à 3,3 V, ce seuil est largement atteint.
 
 #fig(image("datasheet/dht20OutSpecs.png", height: 20em))[Extrait de la datasheet
-  @dht20-ds du DHT20 sur les spécifications des entrées/sorties]
+  @dht20-ds du DHT20 : Spécifications des entrées/sorties]
 
 ===== Conclusion
 
@@ -133,7 +133,7 @@ provenance de l’écran LCD :
 ===== Conclusion
 
 #fig(image("datasheet/lcdInOutSpecs.png", height: 16em))[Extrait de la datasheet
-  de l’écran LCD sur les spécifications des entrées/sorties]
+  @lcd-ds de l’écran LCD : Spécifications des entrées/sorties]
 
 Les caractéristiques électriques d’entrée et de sortie de l’écran LCD sont
 globalement compatibles avec celles du microcontrôleur, ce qui assure une
@@ -150,8 +150,8 @@ stabilité des signaux.
     `PIC24FV16KM204`. Voici une explication des principaux composants et de leur
     rôle :
   ],
-  fig(image("datasheet/miniConnPic24.png"))[Extrait de la datasheet du @mcu
-    @pic24-ds sur les connexions minimales recommandées],
+  fig(image("datasheet/miniConnPic24.png"))[Extrait de la datasheet @pic24-ds du
+    PIC24~: Connexions minimales recommandées],
 )
 
 *Résistances (R1 et R2)*

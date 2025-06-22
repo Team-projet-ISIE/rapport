@@ -6,15 +6,16 @@
 Réaliser ce déclencheur d’aération, en étant responsables du recueil de besoin
 jusqu’à la réalisation, en passant par l’analyse et la conception, représente
 une opportunité de consolider les nombreux apprentissages effectués en cette
-première année en @isie à @polytech, les mettant en pratique. Mais, ce projet,
-pour nous le premier de cette envergure, représente aussi un important défi.
+première année en @isie à @polytech en les mettant en pratique. Mais, ce projet
+qui pour nous est le premier de cette envergure, représente aussi un important
+défi.
 
 N’ayant pas d’expérience préalable sur un projet de cet acabit, nous ne savions
 pas à priori par quelles étapes passer, quelle méthodologie adopter. Si nous
 avons pu nous en référer aux enseignements théoriques de l’année, la tâche est
-tout autre lorsqu’il s’agit de la diriger. Nous avons donc exploré plusieurs
-pistes et fait demi-tour à plusieurs reprises. Si ce processus peut apparaître
-comme fastidieux, il n’en a pas moins constitué une expérience riche en
+tout autre lorsqu’il s’agit de la diriger. Nous explorons donc plusieurs pistes,
+quitte à faire demi-tour à plusieurs reprises. Si ce processus peut apparaître
+comme fastidieux, il peut aussi constituer une expérience riche en
 enseignements.
 
 == Problématiques à résoudre
@@ -27,17 +28,21 @@ réaliser.
 
 L’idée est de réaliser un système composé de deux modules communicants, de
 préférence sans-fil, étant capable de déclencher un échange d’air entre deux
-pièces reliées par une gaine d’aération.
+pièces reliées par une gaine d’aération (125 mm).
 
 == Objectifs du projet
 
-L’objectif du projet est de pouvoir profiter de la climatisation d’une pièce
-dans une autre pièce, limitant ainsi le nombre d’unités de climatisation
-nécessaires dans le bâtiment.
+L’objectif du projet est de pouvoir profiter de la #gls(
+  "clim",
+  display: "climatisation",
+) d’une pièce dans une autre pièce, limitant ainsi le nombre d’unités de
+climatisation nécessaires dans le bâtiment.
 
 Il doit être possible de choisir entre deux modes : chauffage ou
-refroidissement. En fonction du choix utilisateur, il faut utiliser l’air
-climatisé de la @réf pour aérer la @cible aux moments opportuns.
+refroidissement. En fonction du choix utilisateur, il faut utiliser l’air #gls(
+  "clim",
+  display: "climatisé",
+) de la @réf pour aérer la @cible aux moments opportuns.
 
 #fig(image("./schemaPiecesAeration.excalidraw.svg"))[Croquis du système
   d’aération dans son ensemble]

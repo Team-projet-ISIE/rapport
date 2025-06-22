@@ -25,10 +25,13 @@ Notre objectif est de réaliser un système permettant d’équilibrer intellige
 la température entre deux pièces via une gaine d’aération de diamètre 125~mm les
 reliant.
 
-Plus précisément, le système doit aérer la @cible qui n’est pas climatisée avec
-l’air de la @réf qui l’est. Le but étant de réduire la nécessité en équipement
-de climatisation, et potentiellement la consommation énergétique, tout en
-fournissant un confort thermique aux occupants de la @cible.
+Plus précisément, le système doit aérer la @cible qui n’est pas #gls(
+  "clim",
+  display: "climatisée",
+) avec l’air de la @réf qui l’est. Le but étant de réduire la nécessité en
+équipement de #gls("clim", display: "climatisation"), et potentiellement la
+consommation énergétique, tout en fournissant un confort thermique aux occupants
+de la @cible.
 
 Nous pouvons commencer par condenser la capture du besoin et faire ressortir
 l’essence du projet dans un diagramme de bête à cornes.
@@ -139,8 +142,11 @@ différence de température.
 
 Nous identifions donc directement le besoin de mesurer la température dans les
 deux pièces, donc la nécessité de composer le système en deux modules distincts,
-un à destination de la @réf (climatisée) et l’autre à destination de la @cible
-qui bénéficiera de la climatisation de l’autre pièce.
+un à destination de la @réf #gls("clim", display: "(climatisée)") et l’autre à
+destination de la @cible qui bénéficiera de la #gls(
+  "clim",
+  display: "climatisation",
+) de l’autre pièce.
 
 Le but ultime du déclencheur d’aération est de rendre la température de la
 @cible plus agréable pour ses occupants, on ne veut donc pas que l’aération se
